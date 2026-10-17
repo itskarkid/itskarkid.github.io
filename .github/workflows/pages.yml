@@ -1,0 +1,73 @@
+name: Deploy Garden
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build static site and note index
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          fs.mkdirSync('_site', { recursive: true });
+          for (const filename of ['index.html', 'styles.css', 'bio.md', 'now.md', 'cv_dheeraj_karki.pdf']) {
+            fs.copyFileSync(filename, path.join('_site', filename));
+          }
+          if (fs.existsSync('notes')) {
+            fs.cpSync('notes', '_site/notes', { recursive: true });
+          }
+
+          function listNotes(directory, prefix = '') {
+            if (!fs.existsSync(directory)) return [];
+            return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+              const relativePath = prefix + entry.name;
+              if (entry.isDirectory()) {
+                return listNotes(path.join(directory, entry.name), relativePath + '/');
+              }
+              return entry.isFile() && /\.md$/i.test(entry.name) ? [relativePath] : [];
+            });
+          }
+
+          const notes = listNotes('_site/notes').sort();
+          fs.writeFileSync('_site/notes_index.json', JSON.stringify(notes, null, 2) + '\n');
+          console.log(`Indexed ${notes.length} notes.`);
+          NODE
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

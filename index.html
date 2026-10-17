@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dheeraj Karki (@itskarkid) — Software to Robotics & Digital Garden</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ================= MASTHEAD ================= -->
+  <header class="masthead">
+    <div class="brand-group" onclick="switchView('home')">
+      <div class="brand-avatar">DK</div>
+      <div>
+        <span class="brand-title">Dheeraj Karki</span>
+        <span class="brand-handle">@itskarkid</span>
+      </div>
+    </div>
+
+    <!-- Center Views Tabs -->
+    <nav class="nav-tabs">
+      <button onclick="switchView('home')" id="tab-home" class="nav-btn active">Home & Bio</button>
+      <button onclick="switchView('garden')" id="tab-garden" class="nav-btn">Digital Garden & Graph</button>
+      <button onclick="switchView('now')" id="tab-now" class="nav-btn">Now</button>
+    </nav>
+
+    <!-- Right Controls -->
+    <div class="actions-group">
+      <!-- Search Modal (⌘K) -->
+      <button onclick="openSearchModal()" class="btn-action" title="Search notes [⌘K]">
+        <span>Search</span>
+        <span style="opacity:0.6;">⌘K</span>
+      </button>
+
+      <button onclick="openSyncModal()" class="btn-action" title="Obsidian to GitHub Sync Workflow" style="display:none;">
+        <span>Obsidian Sync</span>
+      </button>
+
+      <!-- CV / Resume Download Button -->
+      <a href="cv_dheeraj_karki.pdf" id="navCvLink" download="cv_dheeraj_karki.pdf" class="btn-action" title="Download Dheeraj's CV / Resume" style="gap: 5px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>CV</span>
+      </a>
+
+      <!-- GitHub Icon Link -->
+      <a href="https://github.com/itskarkid" id="navGithubLink" target="_blank" rel="noopener noreferrer" class="btn-action" title="GitHub (@itskarkid)" style="padding: 5px 8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+
+      <!-- LinkedIn Icon Link -->
+      <a href="https://www.linkedin.com/in/itskarkid/" id="navLinkedinLink" target="_blank" rel="noopener noreferrer" class="btn-action" title="LinkedIn Profile" style="padding: 5px 8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>
+
+      <!-- Local Time Status -->
+      <span class="zone-status" id="zoneStatus" role="status" aria-live="polite" aria-atomic="true">
+        <span class="season-icon" id="seasonIcon" aria-hidden="true"></span>
+        <span id="themeLabel" style="font-weight:600;">Night</span>
+      </span>
+    </div>
+  </header>
+
+  <div class="season-preview" hidden>
+    <label class="preview-row" for="seasonPreview">
+      <span>Season preview</span>
+      <select id="seasonPreview" onchange="previewSeason()">
+        <option value="auto">Auto</option>
+        <option value="spring">Spring</option>
+        <option value="summer">Summer</option>
+        <option value="autumn">Autumn</option>
+        <option value="winter">Winter</option>
+      </select>
+    </label>
+    <label class="preview-row" for="zonePreview">
+      <span>State preview</span>
+      <select id="zonePreview" onchange="previewSeason()">
+        <option value="auto">Auto</option>
+        <option value="Day">Day</option>
+        <option value="Night">Night</option>
+        <option value="Sleeping">Sleeping</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- ================= VIEW 1: HOME & BIO ================= -->
+  <section id="view-home" class="view-container home-wrapper active">
+    
+    <div class="bio-hero-container">
+      <!-- Profile Picture Frame with Line-Art Fallback -->
+      <div class="profile-avatar-frame" title="Dheeraj Karki (@itskarkid)">
+        <img 
+          src="https://media.licdn.com/dms/image/v2/D5603AQFn3GsmP9iZlg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718274640105?e=1735171200&v=beta&t=example" 
+          alt="Dheeraj Karki" 
+          id="profileImage"
+          style="width: 100%; height: 100%; object-fit: cover; display: block;"
+          onerror="this.onerror=null; this.style.display='none'; document.getElementById('avatarSvgFallback').style.display='block';"
+        />
+        <svg id="avatarSvgFallback" role="img" aria-label="Seasonal cartoon portrait of Dheeraj Karki" style="display:none; width:100%; height:100%;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="var(--surface)"/>
+          <line x1="0" y1="20" x2="100" y2="20" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="0" y1="40" x2="100" y2="40" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="0" y1="60" x2="100" y2="60" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="0" y1="80" x2="100" y2="80" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="20" y1="0" x2="20" y2="100" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="40" y1="0" x2="40" y2="100" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="60" y1="0" x2="60" y2="100" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="80" y1="0" x2="80" y2="100" stroke="var(--border)" stroke-width="0.5"/>
+          <g class="portrait-day">
+            <circle cx="84" cy="15" r="6" fill="#b68b41"/>
+            <path d="M84 4V2M84 28V26M73 15H71M97 15H95M76 7L74 5M92 23L94 25M76 23L74 25M92 7L94 5" stroke="#b68b41" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g class="portrait-night" fill="#d3e4f0">
+            <path d="M88 5A9 9 0 1 0 94 20A10 10 0 0 1 88 5Z"/>
+            <path d="M15 12V18M12 15H18M83 35V39M81 37H85" stroke="#d3e4f0" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="23" cy="31" r="1"/><circle cx="73" cy="8" r="1"/>
+          </g>
+          <path d="M18 100V94C20 78 32 68 50 68C68 68 80 78 82 94V100Z" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" fill="var(--card)"/>
+          <path d="M42 68L38 88M58 68L62 88" stroke="var(--border-strong)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M42 56V68M58 56V68" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="50" cy="42" rx="17" ry="20" stroke="var(--portrait-ink)" stroke-width="2" fill="var(--portrait-skin)"/>
+          <rect x="37" y="38" width="10" height="7" rx="2" stroke="var(--accent)" stroke-width="2"/>
+          <rect x="53" y="38" width="10" height="7" rx="2" stroke="var(--accent)" stroke-width="2"/>
+          <line x1="47" y1="41" x2="53" y2="41" stroke="var(--accent)" stroke-width="2"/>
+          <path d="M33 39C32 27 40 21 50 21C60 21 68 27 67 39C63 26 55 24 50 24C45 24 37 26 33 39Z" fill="var(--portrait-hair)"/>
+          <path d="M46 52C48 54 52 54 54 52" stroke="var(--portrait-ink)" stroke-width="1.5" stroke-linecap="round"/>
+          <g class="season-accessory spring">
+            <path d="M22 85Q29 72 41 70L50 80L59 70Q71 72 78 85L82 100H18Z" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+            <path d="M41 71L38 85L50 80L62 85L59 71M50 80V100" stroke="var(--accent)" stroke-width="1.5"/>
+            <path d="M65 88L68 78M66 84Q59 80 62 78Q68 77 66 84" stroke="var(--accent)" stroke-width="1.5"/>
+            <g fill="var(--season-detail)">
+              <circle cx="68" cy="73" r="3"/><circle cx="64" cy="77" r="3"/>
+              <circle cx="72" cy="77" r="3"/><circle cx="68" cy="81" r="3"/>
+            </g>
+            <circle cx="68" cy="77" r="2" fill="var(--bg)"/>
+          </g>
+          <g class="season-accessory summer">
+            <path d="M34 27L38 13Q50 9 62 13L66 27Z" fill="var(--card)" stroke="var(--season-detail)" stroke-width="1.5"/>
+            <path d="M36 22H64V28H36Z" fill="var(--accent)"/>
+            <path d="M25 29Q50 23 75 29L72 33Q50 29 28 33Z" fill="var(--card)" stroke="var(--season-detail)" stroke-width="1.5"/>
+            <g class="portrait-day">
+              <rect x="36" y="37" width="12" height="9" rx="3" fill="var(--portrait-hair)" stroke="var(--accent)" stroke-width="1.5"/>
+              <rect x="52" y="37" width="12" height="9" rx="3" fill="var(--portrait-hair)" stroke="var(--accent)" stroke-width="1.5"/>
+              <path d="M48 40H52M39 39L42 43M55 39L58 43" stroke="var(--bg)" stroke-width="1.5"/>
+            </g>
+            <path d="M39 71L50 80L61 71" stroke="var(--season-detail)" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="season-accessory autumn">
+            <path d="M21 85Q28 73 40 71L50 80L60 71Q72 73 79 85L84 100H16Z" fill="var(--card)" stroke="var(--text)" stroke-width="2"/>
+            <path d="M40 72L35 86L45 83L50 91L55 83L65 86L60 72M50 91V100" stroke="var(--accent)" stroke-width="1.8"/>
+            <path d="M38 61Q50 68 62 61L63 69Q50 77 37 69Z" fill="var(--accent)" stroke="var(--text)" stroke-width="1.2"/>
+            <path d="M43 70L40 89L49 91L53 72Z" fill="var(--accent)" stroke="var(--text)" stroke-width="1.2"/>
+            <path d="M41 65L42 71M49 67V73M57 65L58 71M42 82L49 84" stroke="var(--season-detail)" stroke-width="2"/>
+          </g>
+          <g class="season-accessory winter">
+            <path d="M32 27Q34 11 50 11Q66 11 68 27Z" fill="var(--accent)" stroke="var(--text)" stroke-width="1.5"/>
+            <circle cx="50" cy="10" r="5" fill="var(--season-detail)" stroke="var(--text)" stroke-width="1"/>
+            <path d="M40 17L39 25M47 15V25M54 15V25M61 18L62 25" stroke="var(--bg)" stroke-width="1.5"/>
+            <rect x="30" y="25" width="40" height="7" rx="3" fill="var(--card)" stroke="var(--text)" stroke-width="1.5"/>
+            <path d="M36 27V30M43 27V30M50 27V30M57 27V30M64 27V30" stroke="var(--accent)" stroke-width="1.5"/>
+            <path d="M38 61Q50 68 62 61L63 71Q50 78 37 71Z" fill="var(--accent)" stroke="var(--text)" stroke-width="1.2"/>
+            <path d="M43 72L39 93H49L54 74Z" fill="var(--accent)" stroke="var(--text)" stroke-width="1.2"/>
+            <path d="M41 65L42 72M49 67V74M57 65L58 72M41 83H51M40 89H50" stroke="var(--bg)" stroke-width="2"/>
+          </g>
+          <g class="portrait-sleep">
+            <rect width="100" height="100" fill="#192329"/>
+            <path d="M19 6A7 7 0 1 0 25 18A8 8 0 0 1 19 6Z" fill="#82949e"/>
+            <text x="58" y="19" fill="#9babb2" font-family="var(--font-mono)" font-size="16" font-weight="500">Zzz</text>
+            <rect x="9" y="26" width="82" height="64" rx="3" fill="#202d33" stroke="#61747d" stroke-width="2"/>
+            <rect x="13" y="30" width="35" height="56" rx="1" fill="#35454c" stroke="#51656e"/>
+            <rect x="52" y="30" width="35" height="56" rx="1" fill="#35454c" stroke="#51656e"/>
+            <path d="M17 42H44M17 58H44M17 74H44M56 42H83M56 58H83M56 74H83" stroke="#52666f" stroke-width="2"/>
+            <path d="M45 53V62M55 53V62" stroke="#899ba3" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 92H94" stroke="#61747d" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <div style="flex: 1;">
+        <div class="hero-meta" id="homeHeadline">
+          MSc Robotics &middot; Univ. of Bristol &middot; 10 Years Software Industry (India)
+        </div>
+        <h1 class="hero-heading" id="homeName" style="margin-bottom: 4px;">Dheeraj Karki</h1>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 6px; flex-wrap:wrap;">
+          <button onclick="copyEmailToClipboard(event)" title="Click to copy email" style="font-family:var(--font-mono); font-size:12px; color:var(--text); text-decoration:none; display:inline-flex; align-items:center; gap:5px; border:1px solid var(--border); padding:2px 8px; border-radius:4px; background:var(--surface); cursor:pointer; transition:all 0.12s;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span id="emailDisplayLabel">itskarkid@gmail.com</span>
+            <span style="font-size:10px; color:var(--text-muted); opacity:0.8;">[copy]</span>
+          </button>
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-muted);">&middot;</span>
+          <span class="brand-handle" id="homeHandle">@itskarkid</span>
+        </div>
+        <p style="font-family:var(--font-mono); font-size:12px; color:var(--text-muted);" id="homeRole">
+          Software Systems Engineer &rarr; Robotics Researcher
+        </p>
+      </div>
+    </div>
+
+    <!-- Length Toggle Bar with Optional Reload -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <div class="bio-length-control">
+        <span style="opacity:0.7;">Bio Length:</span>
+        <button onclick="setBioLength('short')" id="bio-btn-short" class="bio-length-btn active">Short</button>
+        <button onclick="setBioLength('medium')" id="bio-btn-medium" class="bio-length-btn">Medium</button>
+        <button onclick="setBioLength('long')" id="bio-btn-long" class="bio-length-btn">Long</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);" id="bioReadTime">~15 sec read</span>
+        <button onclick="fetchBioMarkdown()" class="btn-action" title="Reload from bio.md" style="padding:2px 6px; font-size:10px;">↻ bio.md</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Bio Text Container -->
+    <div id="bioTextContainer" class="hero-desc"></div>
+
+    <div style="display:flex; gap:10px; margin-bottom: 24px; flex-wrap:wrap;">
+      <button onclick="switchView('garden')" class="btn-action" style="background:var(--text); color:var(--bg); padding:8px 16px; font-weight:600;">
+        Open Digital Garden & Graph &rarr;
+      </button>
+      <a href="cv_dheeraj_karki.pdf" id="homeCvBtn" download="cv_dheeraj_karki.pdf" class="btn-action" style="padding:8px 16px; display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="12" y1="18" x2="12" y2="12"></line>
+          <line x1="9" y1="15" x2="12" y2="18"></line>
+          <line x1="15" y1="15" x2="12" y2="18"></line>
+        </svg>
+        <span>Download CV</span>
+      </a>
+      <button onclick="switchView('now')" class="btn-action" style="padding:8px 16px;">
+        Read /now
+      </button>
+      <button onclick="toggleTeddyChat()" class="btn-action highlight" style="padding:8px 16px;">
+        <span>🧸 Chat with Barnaby</span>
+      </button>
+    </div>
+
+    <!-- NOW DISPATCH SNAPSHOT -->
+    <div class="now-card">
+      <div class="now-card-header">
+        <span style="font-weight:600; color:var(--text);">&#9679; CURRENT LAB FOCUS &middot; OCTOBER 2026</span>
+        <span>Bristol Robotics Laboratory (BRL)</span>
+      </div>
+      <div class="now-card-grid" id="homeNowGrid">
+        <div class="now-subitem">
+          <div class="now-subitem-title">State Determinism</div>
+          <p>ROS 2 managed lifecycle transitions under high CPU load on single-board computers.</p>
+        </div>
+        <div class="now-subitem">
+          <div class="now-subitem-title">State Estimation</div>
+          <p>Kalman filter covariance tuning to handle wheel odometry slippage on linoleum floors.</p>
+        </div>
+        <div class="now-subitem">
+          <div class="now-subitem-title">Manipulator Kinematics</div>
+          <p>Jacobian velocities and singularity avoidance in multi-DOF serial arms.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOPIC CLUSTERS -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
+      <h2 style="font-family:var(--font-serif); font-size:18px;">Core Topic Clusters</h2>
+      <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Click to browse notes</span>
+    </div>
+
+    <!-- Container is now completely empty in HTML; 100% generated dynamically from bio.md -->
+    <div class="cluster-grid" id="homeClustersGrid"></div>
+
+  </section>
+
+  <!-- ================= VIEW 2: 3-COLUMN DIGITAL GARDEN & GRAPH ================= -->
+  <section id="view-garden" class="view-container garden-layout">
+    
+    <!-- LEFT RAIL: INDEX & STAGE FILTER -->
+    <aside class="garden-sidebar">
+      <div style="padding:12px; border-bottom:1px solid var(--border);">
+        <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-bottom:8px; display:flex; justify-content:space-between;">
+          <span>GROWTH STAGE</span>
+          <span style="cursor:pointer;" onclick="filterStage('all')">Reset</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+          <button onclick="filterStage('seedling')" id="f-seedling" class="btn-action" style="justify-content:center; padding:4px 0;">🌱 Seed</button>
+          <button onclick="filterStage('budding')" id="f-budding" class="btn-action" style="justify-content:center; padding:4px 0;">🌿 Bud</button>
+          <button onclick="filterStage('evergreen')" id="f-evergreen" class="btn-action" style="justify-content:center; padding:4px 0;">🌳 Tree</button>
+        </div>
+      </div>
+
+      <div style="padding:8px 12px; border-bottom:1px solid var(--border); display:flex; gap:6px;">
+        <input type="text" id="sidebarSearch" placeholder="Filter notes..." oninput="renderSidebarNotes()" style="flex:1; background:var(--bg); border:1px solid var(--border); padding:5px 8px; font-family:var(--font-mono); font-size:11px; color:var(--text); border-radius:3px; outline:none;">
+      </div>
+
+      <div id="sidebarNotesContainer" style="flex:1; overflow-y:auto; padding:8px;"></div>
+
+      <div style="padding:10px; border-top:1px solid var(--border); font-family:var(--font-mono); font-size:10px; color:var(--text-muted); display:flex; justify-content:space-between;">
+        <span id="noteCountLabel">7 notes</span>
+        <span style="display:none; cursor:pointer;" onclick="openSyncModal()">Obsidian Sync</span>
+      </div>
+    </aside>
+
+    <!-- CENTER CANVAS: READING PANE -->
+    <main class="garden-reader">
+      <div style="max-width: 680px; margin: 0 auto;">
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:20px; font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">
+          <div>
+            <span>notes / </span><span id="crumbFolder">robotics</span><span> / </span><span id="crumbFile">note.md</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button onclick="toggleRawView()" class="btn-action" style="padding:2px 6px;">
+              <span id="rawToggleLabel">&lt;/&gt; Raw .md</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Note Header -->
+        <header style="margin-bottom:24px;">
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px; font-family:var(--font-mono); font-size:11px;">
+            <span id="noteStageBadge" style="border:1px solid var(--border); padding:1px 6px; border-radius:3px;">🌳 Evergreen</span>
+            <span id="noteConfidenceBadge" style="border:1px solid var(--border); padding:1px 6px; border-radius:3px; color:var(--text-muted);">Confidence: High</span>
+            <span id="noteTendedBadge" style="color:var(--text-muted); margin-left:auto;">Tended Oct 2026</span>
+          </div>
+
+          <h1 id="noteTitle" style="font-family:var(--font-serif); font-size:28px; font-weight:400; line-height:1.3; margin-bottom:8px;">
+            Note Title
+          </h1>
+
+          <div id="noteTags" style="display:flex; gap:4px; flex-wrap:wrap;"></div>
+        </header>
+
+        <!-- Prose Content -->
+        <article id="noteBody" class="prose"></article>
+
+        <!-- Raw Markdown Inspector -->
+        <div id="rawMdBox" style="display:none; margin-top:24px; background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:14px; font-family:var(--font-mono); font-size:11px; white-space:pre-wrap; color:var(--text-muted); line-height:1.5;"></div>
+
+      </div>
+    </main>
+
+    <!-- RIGHT RAIL: GRAPH & BACKLINKS -->
+    <aside class="garden-rightpane">
+      <div style="padding:12px; border-bottom:1px solid var(--border);">
+        <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-bottom:6px; display:flex; justify-content:space-between;">
+          <span>CONNECTION GRAPH</span>
+          <span>Click to Navigate</span>
+        </div>
+        <div style="border:1px solid var(--border); border-radius:4px; overflow:hidden;">
+          <canvas id="graphCanvas"></canvas>
+        </div>
+      </div>
+
+      <div style="flex:1; overflow-y:auto; padding:14px;">
+        <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-bottom:8px; display:flex; justify-content:space-between;">
+          <span>MENTIONED IN (BACKLINKS)</span>
+          <span id="backlinksBadge">0</span>
+        </div>
+        <div id="backlinksContainer" style="display:flex; flex-direction:column; gap:6px;"></div>
+
+        <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin:18px 0 8px 0; display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:14px;">
+          <span>OUTGOING WIKILINKS</span>
+          <span id="outgoingBadge">0</span>
+        </div>
+        <div id="outgoingContainer" style="display:flex; flex-direction:column; gap:4px;"></div>
+      </div>
+    </aside>
+
+  </section>
+
+  <!-- ================= MOBILE GARDEN BOTTOM BAR ================= -->
+  <div class="mobile-garden-bar" id="mobileGardenBar">
+    <button onclick="openMobileDrawer('index')" class="btn-action" style="flex:1; justify-content:center; padding:8px 12px; margin-right:6px;">
+      📑 Notes Index
+    </button>
+    <button onclick="openMobileDrawer('graph')" class="btn-action" style="flex:1; justify-content:center; padding:8px 12px; margin-left:6px;">
+      🕸 Knowledge Graph
+    </button>
+  </div>
+
+  <!-- ================= MOBILE DRAWER MODAL ================= -->
+  <div class="mobile-drawer" id="mobileDrawer" onclick="closeMobileDrawer(event)">
+    <div class="mobile-drawer-sheet" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:12px;">
+        <span id="mobileDrawerTitle" style="font-weight:600; font-size:13px; font-family:var(--font-serif);">Browse Notes</span>
+        <button onclick="closeMobileDrawer()" class="btn-action" style="padding:3px 8px;">✕ Close</button>
+      </div>
+
+      <!-- Mobile Notes List Content -->
+      <div id="mobileDrawerNotesView">
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; margin-bottom:10px;">
+          <button onclick="filterStage('seedling')" class="btn-action" style="justify-content:center; padding:4px 0;">🌱 Seed</button>
+          <button onclick="filterStage('budding')" class="btn-action" style="justify-content:center; padding:4px 0;">🌿 Bud</button>
+          <button onclick="filterStage('evergreen')" class="btn-action" style="justify-content:center; padding:4px 0;">🌳 Tree</button>
+        </div>
+        <div id="mobileNotesListContainer" style="max-height:55vh; overflow-y:auto;"></div>
+      </div>
+
+      <!-- Mobile Graph View Content -->
+      <div id="mobileDrawerGraphView" style="display:none;">
+        <div style="border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <canvas id="mobileGraphCanvas" style="width:100%; height:260px; display:block; background:var(--bg);"></canvas>
+        </div>
+        <p style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-top:8px; text-align:center;">
+          Tap any node to jump to that entry.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VIEW 3: NOW (BRISTOL LAB) ================= -->
+  <section id="view-now" class="view-container home-wrapper">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+      <div>
+        <div class="hero-meta" id="nowMetaTag">/now &middot; Personal Laboratory Record</div>
+        <h1 class="hero-heading" id="nowHeaderTitle" style="margin-bottom:4px;">What I am doing now</h1>
+        <p class="hero-desc" id="nowHeaderDesc" style="margin-bottom:0;">
+          Bristol Robotics Laboratory &middot; University of Bristol &middot; Autumn 2026
+        </p>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button onclick="toggleNowRawView()" class="btn-action" style="padding:4px 10px; font-family:var(--font-mono); font-size:11px;">
+          <span id="nowRawToggleLabel">&lt;/&gt; Raw .md</span>
+        </button>
+        <button onclick="fetchNowMarkdown()" class="btn-action" title="Reload from now.md" style="padding:4px 8px;">
+          ↻
+        </button>
+      </div>
+    </div>
+
+    <!-- Structured Card Grid dynamically populated from Markdown -->
+    <div id="nowCardsContainer" style="display:flex; flex-direction:column; gap:16px;"></div>
+
+    <!-- Raw Markdown Read-Only Inspector (Matching Garden styling) -->
+    <div id="nowRawBox" style="display:none; margin-top:20px; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:16px; font-family:var(--font-mono); font-size:11px; white-space:pre-wrap; color:var(--text-muted); line-height:1.6; user-select:text;"></div>
+
+    <div style="margin-top:24px;">
+      <button onclick="switchView('garden')" class="btn-action" style="padding:8px 16px;">
+        &larr; Return to Notes & Knowledge Graph
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= HOVER TOOLTIP ================= -->
+  <div id="hoverPopover">
+    <div style="font-weight:600; margin-bottom:4px; font-family:var(--font-serif);" id="popTitle">Title</div>
+    <div style="color:var(--text-muted); line-height:1.4;" id="popSummary">Summary</div>
+    <div style="margin-top:8px; padding-top:6px; border-top:1px solid var(--border); display:flex; justify-content:space-between; color:var(--text-muted); font-family:var(--font-mono); font-size:9px;">
+      <span>Click to open</span>
+      <span id="popStage">🌱 Seedling</span>
+    </div>
+  </div>
+
+  <!-- ================= CLIPBOARD TOAST NOTIFICATION ================= -->
+  <div id="copyToast" style="position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:8px 16px; border-radius:6px; font-family:var(--font-mono); font-size:12px; font-weight:500; box-shadow:0 6px 20px rgba(0,0,0,0.25); z-index:110; opacity:0; pointer-events:none; transition:opacity 0.18s ease, transform 0.18s ease; display:flex; align-items:center; gap:8px;">
+    <span>✓</span>
+    <span id="toastMessage">Copied itskarkid@gmail.com to clipboard!</span>
+  </div>
+
+  <!-- ================= SEARCH MODAL (CMD+K) ================= -->
+  <div id="searchModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div style="padding:12px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px;">
+        <input type="text" id="modalSearchInput" placeholder="Search notes, ROS 2, kinematics, Bristol..." style="flex:1; background:transparent; border:none; outline:none; font-family:var(--font-sans); font-size:13px; color:var(--text);">
+        <button onclick="closeSearchModal()" class="btn-action" style="padding:2px 6px;">ESC</button>
+      </div>
+      <div id="modalResults" style="max-height:300px; overflow-y:auto; padding:8px;"></div>
+    </div>
+  </div>
+
+  <!-- ================= FLOATING TEDDY BEAR COMPANION ================= -->
+  <!-- Floating speech bubble teaser -->
+  <div class="teddy-speech-bubble-hint" id="teddyHint">
+    <span>🧸</span>
+    <span>Ask me anything about Dheeraj!</span>
+    <span style="cursor:pointer; opacity:0.5; margin-left:4px;" onclick="dismissTeddyHint(event)">✕</span>
+  </div>
+
+  <!-- Floating Teddy Trigger Button -->
+  <button class="teddy-companion-btn" id="teddyBtn" onclick="toggleTeddyChat()" title="Chat with Barnaby, Dheeraj's teddy bear assistant" aria-label="Open Teddy Bear Chat">
+    <span class="teddy-badge-dot"></span>
+    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="27" cy="28" r="14" fill="#a27b5c"/>
+      <circle cx="27" cy="28" r="8" fill="#e8a598"/>
+      <circle cx="73" cy="28" r="14" fill="#a27b5c"/>
+      <circle cx="73" cy="28" r="8" fill="#e8a598"/>
+      <ellipse cx="50" cy="54" rx="34" ry="30" fill="#b08968"/>
+      <path d="M68 18C64 12 60 17 65 21L70 21C75 17 71 12 67 18Z" fill="#e57373"/>
+      <path d="M72 21C77 17 82 20 78 26L73 23C77 28 72 31 68 25Z" fill="#e57373"/>
+      <circle cx="70" cy="22" r="3.5" fill="#d32f2f"/>
+      <ellipse cx="50" cy="62" rx="14" ry="11" fill="#ddb892"/>
+      <path d="M46 58C46 56 54 56 54 58C54 61 51 63 50 63C49 63 46 61 46 58Z" fill="#3e2723"/>
+      <path d="M50 63V67" stroke="#3e2723" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M45 66C47 69 53 69 55 66" stroke="#3e2723" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="31" cy="61" r="5" fill="#f48fb1" opacity="0.6"/>
+      <circle cx="69" cy="61" r="5" fill="#f48fb1" opacity="0.6"/>
+      <circle cx="38" cy="48" r="4.2" fill="#2b1810"/>
+      <circle cx="36.5" cy="46.5" r="1.3" fill="#ffffff"/>
+      <path d="M34 44L31 42" stroke="#2b1810" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="62" cy="48" r="4.2" fill="#2b1810"/>
+      <circle cx="60.5" cy="46.5" r="1.3" fill="#ffffff"/>
+      <path d="M66 44L69 42" stroke="#2b1810" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <!-- Teddy Interactive Chat Window -->
+  <div class="teddy-chat-drawer" id="teddyChatDrawer">
+    <div class="teddy-chat-header">
+      <div class="teddy-chat-title-group">
+        <div class="teddy-mini-avatar">
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+            <circle cx="27" cy="28" r="14" fill="#a27b5c"/>
+            <circle cx="73" cy="28" r="14" fill="#a27b5c"/>
+            <ellipse cx="50" cy="54" rx="34" ry="30" fill="#b08968"/>
+            <circle cx="70" cy="22" r="4" fill="#e57373"/>
+            <ellipse cx="50" cy="62" rx="14" ry="11" fill="#ddb892"/>
+            <circle cx="38" cy="48" r="4" fill="#2b1810"/>
+            <circle cx="62" cy="48" r="4" fill="#2b1810"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight:600; font-size:12px; display:flex; align-items:center; gap:6px;">
+            <span>Barnaby 🧸</span>
+            <span id="companionSeason" style="font-size:9px; background:var(--card); border:1px solid var(--border); padding:1px 5px; border-radius:10px; font-family:var(--font-mono); color:var(--text-muted);">Companion</span>
+          </div>
+          <div style="font-size:10px; color:var(--text-muted); font-family:var(--font-mono);">
+            Dheeraj's Lab Bear &middot; Ask me about him!
+          </div>
+        </div>
+      </div>
+      <button onclick="toggleTeddyChat()" class="btn-action" style="padding:2px 7px;">✕</button>
+    </div>
+
+    <!-- Message History -->
+    <div class="teddy-messages-list" id="teddyMessagesList">
+      <div class="teddy-msg companion">
+        Hello! I'm <strong>Barnaby</strong>, Dheeraj's companion here in the digital garden. 🧸🎀
+      </div>
+    </div>
+
+    <!-- Quick Prompt Chips -->
+    <div class="teddy-quick-prompts">
+      <button class="teddy-chip" onclick="askTeddyPrompt('Tell me about Dheeraj\'s transition from Arden Software to Bristol.')">From Arden to Bristol</button>
+      <button class="teddy-chip" onclick="askTeddyPrompt('What is he researching at the Bristol Robotics Lab?')">Current Bristol research?</button>
+      <button class="teddy-chip" onclick="askTeddyPrompt('What are his favorite topics in the digital garden?')">Top garden topics?</button>
+    </div>
+
+    <!-- Input Bar -->
+    <div class="teddy-chat-input-bar">
+      <input type="text" id="teddyInput" class="teddy-input" placeholder="Ask Barnaby about Dheeraj..." onkeydown="if(event.key==='Enter') sendTeddyMessage();">
+      <button onclick="sendTeddyMessage()" class="btn-action highlight" style="padding:6px 12px; font-weight:600;">
+        Send
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= OBSIDIAN SYNC MODAL ================= -->
+  <div id="syncModal" class="modal-backdrop">
+    <div class="modal-box" style="padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:14px;">
+        <h3 style="font-family:var(--font-serif); font-size:16px;">Obsidian to GitHub Pages Architecture</h3>
+        <button onclick="closeSyncModal()" class="btn-action" style="padding:2px 6px;">✕</button>
+      </div>
+      <div style="font-size:12px; color:var(--text-muted); line-height:1.7; display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <strong style="color:var(--text);">1. Keep Private Notes Private:</strong><br>
+          Create a dedicated <code>Garden/</code> folder in your Obsidian vault. Only sync that folder to GitHub, leaving personal journals safely on your local computer.
+        </div>
+        <div>
+          <strong style="color:var(--text);">2. Push with Obsidian Git (Free):</strong><br>
+          Use the free community plugin <code>Obsidian Git</code>. Set it to auto-commit and push your public notes to your GitHub repository.
+        </div>
+        <div>
+          <strong style="color:var(--text);">3. Free Static Hosting:</strong><br>
+          GitHub Pages automatically builds your files into static HTML with full <code>[[wikilink]]</code> resolution.
+        </div>
+      </div>
+      <div style="margin-top:18px; display:flex; justify-content:flex-end;">
+        <button onclick="closeSyncModal()" class="btn-action" style="padding:6px 14px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT VAULT & ENGINE ================= -->
+  <script>
+    let bioMarkdownSource = '';
+
+    let bioTexts = {
+      short: '',
+      medium: '',
+      long: ''
+    };
+
+    const bioReadTimes = {
+      short: '~15 sec read',
+      medium: '~1 min read',
+      long: '~3 min read'
+    };
+
+    let activeBioLength = 'short';
+
+    // PARSE & RENDER BIO MARKDOWN
+    function parseAndRenderBioMarkdown(md) {
+      bioMarkdownSource = md;
+      let cleanMd = md;
+
+      // 1. Parse Frontmatter
+      const fmMatch = md.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+/);
+      if (fmMatch) {
+        cleanMd = md.slice(fmMatch[0].length);
+        const fmLines = fmMatch[1].split('\n');
+        const fm = {};
+        fmLines.forEach(line => {
+          const parts = line.split(':');
+          if (parts.length >= 2) {
+            const key = parts[0].trim().toLowerCase();
+            const val = parts.slice(1).join(':').trim().replace(/^['"](.*)['"]$/, '$1');
+            fm[key] = val;
+          }
+        });
+
+        if (fm.name) document.getElementById('homeName').textContent = fm.name;
+        if (fm.handle) document.getElementById('homeHandle').textContent = fm.handle;
+        if (fm.role) document.getElementById('homeRole').textContent = fm.role;
+        if (fm.headline) document.getElementById('homeHeadline').textContent = fm.headline;
+        if (fm.email) {
+          const lbl = document.getElementById('emailDisplayLabel');
+          if (lbl) lbl.textContent = fm.email;
+        }
+        configureLocationTheme(fm);
+      }
+
+      // 2. Extract Sections by ##
+      const sections = cleanMd.split(/(?=^##\s+)/gm);
+      sections.forEach(sec => {
+        const trimmed = sec.trim();
+        if (!trimmed) return;
+        const match = trimmed.match(/^##\s+(.+)$/m);
+        if (!match) return;
+        const heading = match[1].trim().toLowerCase();
+        const content = trimmed.replace(/^##\s+.+$/m, '').trim();
+
+        if (heading.includes('short')) {
+          bioTexts.short = renderMarkdown(content);
+        } else if (heading.includes('medium')) {
+          bioTexts.medium = renderMarkdown(content);
+        } else if (heading.includes('long')) {
+          bioTexts.long = renderMarkdown(content);
+        } else if (heading.includes('clusters')) {
+          // Parse dynamic clusters from bio.md
+          const clusterLines = content.split('\n').filter(l => l.trim().startsWith('*') || l.trim().startsWith('-'));
+          if (clusterLines.length > 0) {
+            const clusterGrid = document.getElementById('homeClustersGrid');
+            if (clusterGrid) {
+              clusterGrid.innerHTML = clusterLines.map(line => {
+                const cleanLine = line.replace(/^[\*\-]\s+/, '').trim();
+                const parts = cleanLine.split('|').map(p => p.trim());
+                if (parts.length >= 3) {
+                  const targetMatch = parts[0].match(/\[\[(.*?)\]\]/);
+                  if (!targetMatch) return '';
+                  const targetId = targetMatch[1].trim().toLowerCase().replace(/\s+/g, '-');
+                  const tag = parts[1];
+                  const rawDesc = parts.slice(2).join('|');
+                  const colonSplit = rawDesc.split(':');
+                  const title = colonSplit[0].trim();
+                  const desc = colonSplit.slice(1).join(':').trim() || '';
+                  return `
+                    <div class="cluster-card" onclick="openNoteInGarden('${targetId}')">
+                      <div class="cluster-tag">${tag}</div>
+                      <div class="cluster-title">${title}</div>
+                      <p>${desc}</p>
+                    </div>
+                  `;
+                }
+                return '';
+              }).join('');
+            }
+          }
+        } else if (heading.includes('now snapshot')) {
+          // Parse bullets into 3 items
+          const lines = content.split('\n').filter(l => l.trim().startsWith('*') || l.trim().startsWith('-'));
+          if (lines.length > 0) {
+            const grid = document.getElementById('homeNowGrid');
+            if (grid) {
+              grid.innerHTML = lines.slice(0, 3).map(l => {
+                const raw = l.replace(/^[\*\-]\s+/, '').trim();
+                const boldMatch = raw.match(/^\*\*(.*?)\*\*:?\s*(.*)$/);
+                const title = boldMatch ? boldMatch[1] : 'Focus';
+                const desc = boldMatch ? boldMatch[2] : raw;
+                return `
+                  <div class="now-subitem">
+                    <div class="now-subitem-title">${title}</div>
+                    <p>${renderMarkdown(desc).replace(/<\/?p>/g, '')}</p>
+                  </div>
+                `;
+              }).join('');
+            }
+          }
+        }
+      });
+
+      setBioLength(activeBioLength);
+      setupHoverTooltips();
+    }
+
+    async function fetchBioMarkdown() {
+      try {
+        const res = await fetch('./bio.md');
+        if (!res.ok) throw new Error(`bio.md: HTTP ${res.status}`);
+        parseAndRenderBioMarkdown(await res.text());
+      } catch (err) {
+        console.error('Unable to load bio.md', err);
+        document.getElementById('bioTextContainer').textContent = 'Bio unavailable.';
+      }
+    }
+
+    function setBioLength(len) {
+      activeBioLength = len;
+      document.querySelectorAll('.bio-length-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`bio-btn-${len}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const container = document.getElementById('bioTextContainer');
+      if (container && bioTexts[len]) {
+        container.innerHTML = bioTexts[len];
+      }
+      const timeLabel = document.getElementById('bioReadTime');
+      if (timeLabel && bioReadTimes[len]) {
+        timeLabel.textContent = bioReadTimes[len];
+      }
+      setupHoverTooltips();
+    }
+
+    // Clipboard Copy Helper for Email
+    function copyEmailToClipboard(e) {
+      if (e) e.preventDefault();
+      const email = 'itskarkid@gmail.com';
+      
+      const tempInput = document.createElement('input');
+      tempInput.style.position = 'absolute';
+      tempInput.style.left = '-9999px';
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('Copy fallback failed', err);
+      }
+      document.body.removeChild(tempInput);
+
+      const toast = document.getElementById('copyToast');
+      const toastMsg = document.getElementById('toastMessage');
+      if (toast && toastMsg) {
+        toastMsg.textContent = `Copied ${email} to clipboard!`;
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(-50%) translateY(20px)';
+        }, 2200);
+      }
+    }
+
+    const vault = {};
+
+    async function fetchAllGardenNotes() {
+      try {
+        const response = await fetch('./notes_index.json');
+        if (!response.ok) throw new Error(`Note index: HTTP ${response.status}`);
+        const filenames = await response.json();
+        if (!Array.isArray(filenames) || !filenames.every(filename => typeof filename === 'string')) {
+          throw new Error('Note index must be an array of paths');
+        }
+        for (const filename of filenames) {
+          try {
+            const res = await fetch(`./notes/${filename}`);
+            if (!res.ok) throw new Error(`${filename}: HTTP ${res.status}`);
+            const raw = await res.text();
+            const frontmatter = raw.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+/);
+            const metadata = {};
+            if (frontmatter) {
+              frontmatter[1].split('\n').forEach(line => {
+                const separator = line.indexOf(':');
+                if (separator < 0) return;
+                const key = line.slice(0, separator).trim().toLowerCase();
+                const value = line.slice(separator + 1).trim();
+                metadata[key] = value.startsWith('[') && value.endsWith(']')
+                  ? value.slice(1, -1).split(',').map(tag => tag.trim().replace(/^['"](.*)['"]$/, '$1')).filter(Boolean)
+                  : value.replace(/^['"](.*)['"]$/, '$1');
+              });
+            }
+            if (metadata.publish === 'false') continue;
+            const content = (frontmatter ? raw.slice(frontmatter[0].length) : raw).trim();
+            const id = filename.replace(/\.md$/i, '').toLowerCase();
+            vault[id] = {
+              id,
+              title: metadata.title || filename.replace(/\.md$/i, ''),
+              folder: metadata.folder || filename.split('/').slice(0, -1).join('/') || 'general',
+              stage: metadata.stage || 'budding',
+              confidence: metadata.confidence || 'Unspecified',
+              lastTended: metadata.lasttended || metadata.updated || '',
+              tags: Array.isArray(metadata.tags) ? metadata.tags : (metadata.tags ? [metadata.tags] : []),
+              summary: metadata.summary || content.slice(0, 140),
+              content
+            };
+          } catch (err) {
+            console.error('Unable to load note', filename, err);
+          }
+        }
+      } catch (err) {
+        console.error('Unable to load note index', err);
+      }
+      activeNoteId = Object.keys(vault)[0] || null;
+      renderSidebarNotes();
+      if (activeNoteId) loadGardenNote(activeNoteId);
+      else document.getElementById('noteTitle').textContent = 'No notes available';
+    }
+
+    // State
+    let activeNoteId = null;
+    let currentStageFilter = 'all';
+    let isRawMd = false;
+    let isNowRawMd = false;
+
+    let nowMarkdownSource = '';
+
+    // NOW MARKDOWN CARD PARSER & RENDERER
+    function parseAndRenderNowMarkdown(md) {
+      nowMarkdownSource = md;
+      const cardsContainer = document.getElementById('nowCardsContainer');
+      const headerTitle = document.getElementById('nowHeaderTitle');
+      const headerDesc = document.getElementById('nowHeaderDesc');
+      const metaTag = document.getElementById('nowMetaTag');
+
+      if (!cardsContainer) return;
+
+      // 1. Parse Frontmatter if present
+      let cleanMd = md;
+      const frontmatterMatch = md.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+/);
+      if (frontmatterMatch) {
+        cleanMd = md.slice(frontmatterMatch[0].length);
+        const fmLines = frontmatterMatch[1].split('\n');
+        const fm = {};
+        fmLines.forEach(line => {
+          const parts = line.split(':');
+          if (parts.length >= 2) {
+            const key = parts[0].trim().toLowerCase();
+            const val = parts.slice(1).join(':').trim();
+            fm[key] = val;
+          }
+        });
+        if (fm.title && headerTitle) headerTitle.textContent = fm.title;
+        if (fm.subtitle && headerDesc) headerDesc.textContent = fm.subtitle;
+        if (fm.updated && metaTag) metaTag.innerHTML = `/now &middot; Updated ${fm.updated} &middot; ${fm.location || 'Bristol Robotics Lab'}`;
+      }
+
+      // 2. Split content into card sections by ## headings
+      const sections = cleanMd.split(/(?=^##\s+)/gm);
+      let cardsHtml = '';
+
+      sections.forEach(section => {
+        const trimmed = section.trim();
+        if (!trimmed) return;
+
+        const headingMatch = trimmed.match(/^##\s+(.+)$/m);
+        const cardTitle = headingMatch ? headingMatch[1].trim() : 'Laboratory Dispatch';
+        
+        // Remove heading line from body
+        const bodyContent = headingMatch ? trimmed.replace(/^##\s+.+$/m, '').trim() : trimmed;
+
+        cardsHtml += `
+          <div class="now-card" style="margin: 0;">
+            <h3 style="font-family:var(--font-serif); font-size:16px; margin-bottom:12px; color:var(--text);">${cardTitle}</h3>
+            <div class="prose" style="font-size:13px; color:var(--text-muted); line-height:1.7;">
+              ${renderMarkdown(bodyContent)}
+            </div>
+          </div>
+        `;
+      });
+
+      cardsContainer.innerHTML = cardsHtml;
+      setupHoverTooltips();
+    }
+
+    // Toggle raw / card view for Now page
+    function toggleNowRawView() {
+      isNowRawMd = !isNowRawMd;
+      const rawBox = document.getElementById('nowRawBox');
+      const cardsBox = document.getElementById('nowCardsContainer');
+      const label = document.getElementById('nowRawToggleLabel');
+
+      if (isNowRawMd) {
+        rawBox.style.display = 'block';
+        cardsBox.style.display = 'none';
+        label.textContent = 'View Cards';
+        rawBox.textContent = nowMarkdownSource;
+      } else {
+        rawBox.style.display = 'none';
+        cardsBox.style.display = 'flex';
+        label.textContent = '</> Raw .md';
+      }
+    }
+
+    async function fetchNowMarkdown() {
+      try {
+        const res = await fetch('./now.md');
+        if (!res.ok) throw new Error(`now.md: HTTP ${res.status}`);
+        parseAndRenderNowMarkdown(await res.text());
+      } catch (err) {
+        console.error('Unable to load now.md', err);
+        document.getElementById('nowCardsContainer').textContent = 'Now unavailable.';
+      }
+    }
+
+    // TEDDY BEAR LOGIC
+    function toggleTeddyChat() {
+      const drawer = document.getElementById('teddyChatDrawer');
+      const hint = document.getElementById('teddyHint');
+      if (drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+      } else {
+        drawer.classList.add('open');
+        if (hint) hint.style.display = 'none';
+        const input = document.getElementById('teddyInput');
+        if (input) setTimeout(() => input.focus(), 80);
+      }
+    }
+
+    function dismissTeddyHint(e) {
+      if (e) e.stopPropagation();
+      const hint = document.getElementById('teddyHint');
+      if (hint) hint.style.display = 'none';
+    }
+
+    function askTeddyPrompt(question) {
+      document.getElementById('teddyInput').value = question;
+      sendTeddyMessage();
+    }
+
+    function sendTeddyMessage() {
+      const input = document.getElementById('teddyInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const list = document.getElementById('teddyMessagesList');
+
+      // User message
+      const userBubble = document.createElement('div');
+      userBubble.className = 'teddy-msg user';
+      userBubble.textContent = text;
+      list.appendChild(userBubble);
+      input.value = '';
+
+      // Companion response based on Dheeraj's real background
+      const companionBubble = document.createElement('div');
+      companionBubble.className = 'teddy-msg companion';
+      
+      const lower = text.toLowerCase();
+      let response = "";
+
+      if (lower.includes('arden') || lower.includes('transition') || lower.includes('switch') || lower.includes('why')) {
+        response = `Dheeraj spent a decade in India developing software, notably as a Staff Software Developer at <strong>Arden Software</strong> working on high-precision CAD/CAM geometry and packaging software, and building consumer products at <strong>Frido</strong>.<br><br>He chose the <strong>University of Bristol</strong> for his MSc in Robotics to take those spatial and geometric algorithms into physical actuators and autonomous machines! 🧸🎀`;
+      } else if (lower.includes('research') || lower.includes('bristol') || lower.includes('lab') || lower.includes('brl')) {
+        response = `At the <strong>Bristol Robotics Laboratory (BRL)</strong>, Dheeraj is currently investigating ROS 2 managed lifecycle determinism, Kalman filter covariance calibration under motor vibration, and robotic manipulator dynamics. You can check his [[bristol-robotics-lab-reflections]] note in the garden!`;
+      } else if (lower.includes('garden') || lower.includes('topic') || lower.includes('notes')) {
+        response = `His favorite clusters are <strong>From CAD/CAM to Arm Kinematics</strong> ([[cad-cam-to-robotics-kinematics]]), <strong>ROS 2 Lifecycles</strong> ([[ros2-lifecycle-nodes]]), and the reality gaps of physical robots ([[simulation-vs-physical-hardware]]). Have a wander through the graph! 🌿`;
+      } else {
+        response = `Dheeraj is currently in Bristol combining his 10 years of software engineering (Arden Software, Frido, BITS Pilani) with hands-on robotics at the University of Bristol. You can explore his full notes in the <strong>Digital Garden & Graph</strong> tab! 🧸`;
+      }
+
+      companionBubble.innerHTML = parseWikilinks(response);
+      list.appendChild(companionBubble);
+      list.scrollTop = list.scrollHeight;
+    }
+
+    const themeLocation = {
+      name: '',
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      hemisphere: 'northern'
+    };
+
+    function configureLocationTheme(metadata) {
+      themeLocation.name = metadata.location || '';
+      if (metadata.timezone) {
+        try {
+          new Intl.DateTimeFormat('en-GB', { timeZone: metadata.timezone });
+          themeLocation.timeZone = metadata.timezone;
+        } catch (err) {
+          console.warn('Invalid bio timezone; keeping the current timezone.', err);
+        }
+      }
+      if (metadata.hemisphere === 'northern' || metadata.hemisphere === 'southern') {
+        themeLocation.hemisphere = metadata.hemisphere;
+      }
+      refreshLocationTheme();
+    }
+
+    function getLocationTime(date = new Date()) {
+      const parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: themeLocation.timeZone,
+        month: 'numeric',
+        hour: 'numeric',
+        hourCycle: 'h23'
+      }).formatToParts(date);
+      return {
+        month: Number(parts.find(part => part.type === 'month').value) - 1,
+        hour: Number(parts.find(part => part.type === 'hour').value)
+      };
+    }
+
+    function getSeason(date = new Date()) {
+      let month = getLocationTime(date).month;
+      if (themeLocation.hemisphere === 'southern') month = (month + 6) % 12;
+      if (month >= 2 && month <= 4) return 'spring';
+      if (month >= 5 && month <= 7) return 'summer';
+      if (month >= 8 && month <= 10) return 'autumn';
+      return 'winter';
+    }
+
+    function getZoneState(date = new Date()) {
+      const debug = new URLSearchParams(window.location.search).get('debug') === '1';
+      const preview = document.getElementById('zonePreview').value;
+      if (debug && ['Day', 'Night', 'Sleeping'].includes(preview)) return preview;
+      const hour = getLocationTime(date).hour;
+      if (hour >= 22 || hour < 6) return 'Sleeping';
+      return hour < 18 ? 'Day' : 'Night';
+    }
+
+    function getDefaultTheme(date = new Date()) {
+      return getZoneState(date) === 'Day' ? 'light' : 'dark';
+    }
+
+    function updatePortraitState(date = new Date()) {
+      const sleeping = getZoneState(date) === 'Sleeping';
+      const portrait = document.getElementById('avatarSvgFallback');
+      portrait.setAttribute('data-sleeping', String(sleeping));
+      portrait.setAttribute('aria-label', sleeping
+        ? 'Dheeraj Karki is sleeping; window closed until 06:00 local time'
+        : 'Seasonal cartoon portrait of Dheeraj Karki');
+    }
+
+    function applyDayNight(date = new Date()) {
+      const theme = getDefaultTheme(date);
+      const html = document.documentElement;
+      html.setAttribute('data-theme', theme);
+      html.classList.toggle('dark', theme === 'dark');
+      updateThemeLabel(date);
+      updatePortraitState(date);
+    }
+
+    function applySeason() {
+      const preview = document.getElementById('seasonPreview').value;
+      const season = preview === 'auto' ? getSeason() : preview;
+      document.documentElement.setAttribute('data-season', season);
+      const names = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter' };
+      const icons = { spring: '\u{1f338}', summer: '\u2600', autumn: '\u{1f342}', winter: '\u2744' };
+      document.getElementById('seasonIcon').textContent = icons[season];
+      document.getElementById('companionSeason').textContent = names[season];
+      document.getElementById('teddyBtn').title = `Chat with Barnaby (${names[season]})`;
+      applyDayNight();
+    }
+
+    function refreshLocationTheme() {
+      applySeason();
+      drawGraph();
+      if (document.getElementById('mobileDrawerGraphView').style.display === 'block') initMobileGraph();
+    }
+
+    function previewSeason() {
+      refreshLocationTheme();
+    }
+
+    function updateThemeLabel(date = new Date()) {
+      const state = getZoneState(date);
+      const season = document.documentElement.getAttribute('data-season');
+      document.getElementById('themeLabel').textContent = state;
+      const status = document.getElementById('zoneStatus');
+      const debugPreview = new URLSearchParams(window.location.search).get('debug') === '1'
+        && document.getElementById('zonePreview').value !== 'auto';
+      status.title = `${debugPreview ? 'Debug preview: ' : ''}${state}${themeLocation.name ? ' in ' + themeLocation.name : ''} (${themeLocation.timeZone}, ${season})`;
+      status.setAttribute('aria-label', status.title);
+    }
+
+    function addSeasonalAccessories() {
+      const artwork = `
+        <ellipse cx="60" cy="106" rx="32" ry="18" fill="#9b7153"/>
+        <circle cx="29" cy="36" r="17" fill="#a87957" stroke="#72503d" stroke-width="2"/>
+        <circle cx="29" cy="36" r="10" fill="#d8aa8c"/>
+        <circle cx="91" cy="36" r="17" fill="#a87957" stroke="#72503d" stroke-width="2"/>
+        <circle cx="91" cy="36" r="10" fill="#d8aa8c"/>
+        <ellipse cx="60" cy="65" rx="38" ry="33" fill="#bc9470" stroke="#72503d" stroke-width="2"/>
+        <path d="M34 49Q42 36 55 38" stroke="#d8b896" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="60" cy="77" rx="17" ry="13" fill="#ecd0ac"/>
+        <circle cx="46" cy="62" r="4.5" fill="#30251f"/>
+        <circle cx="74" cy="62" r="4.5" fill="#30251f"/>
+        <circle cx="44.5" cy="60.5" r="1.5" fill="#fff6e8"/>
+        <circle cx="72.5" cy="60.5" r="1.5" fill="#fff6e8"/>
+        <ellipse cx="36" cy="77" rx="6" ry="4" fill="#cc8e7c" opacity="0.65"/>
+        <ellipse cx="84" cy="77" rx="6" ry="4" fill="#cc8e7c" opacity="0.65"/>
+        <path d="M54 73Q60 69 66 73Q66 78 60 80Q54 78 54 73Z" fill="#443126"/>
+        <path d="M60 80V84M52 84Q60 91 68 84" stroke="#443126" stroke-width="2.5" stroke-linecap="round"/>
+        <g class="season-accessory spring">
+          <path d="M32 95Q60 103 88 95L76 111L60 104L44 111Z" class="season-fabric" stroke="#547d62" stroke-width="2"/>
+          <path d="M30 39Q58 22 89 38" stroke="#56795d" stroke-width="5" stroke-linecap="round"/>
+          <path d="M35 31Q22 16 23 34Q27 42 35 37M80 30Q96 16 94 34Q89 42 82 37" fill="#72996f"/>
+          <g fill="#edc9d8" stroke="#ad718e" stroke-width="1.5">
+            <circle cx="45" cy="26" r="6"/><circle cx="38" cy="33" r="6"/>
+            <circle cx="52" cy="33" r="6"/><circle cx="45" cy="39" r="6"/>
+            <circle cx="78" cy="27" r="6"/><circle cx="71" cy="34" r="6"/>
+            <circle cx="85" cy="34" r="6"/><circle cx="78" cy="40" r="6"/>
+          </g>
+          <circle cx="45" cy="33" r="4" fill="#d1a64d"/>
+          <circle cx="78" cy="34" r="4" fill="#d1a64d"/>
+        </g>
+        <g class="season-accessory summer">
+          <path d="M35 96L45 92Q60 101 75 92L85 96L89 119H31Z" class="season-fabric"/>
+          <path d="M35 37L41 14Q60 7 79 14L85 37Z" fill="#d8bc79" stroke="#98753f" stroke-width="2"/>
+          <path d="M37 29H83V38H37Z" class="season-fabric"/>
+          <path d="M21 39Q60 29 99 39L95 47Q60 41 25 47Z" fill="#e4ca8d" stroke="#98753f" stroke-width="2"/>
+          <path d="M31 58L37 57M83 57L89 58M55 61H65" stroke="#384f54" stroke-width="4"/>
+          <rect x="34" y="55" width="23" height="16" rx="6" fill="#253c42" stroke="#e1b968" stroke-width="2.5"/>
+          <rect x="63" y="55" width="23" height="16" rx="6" fill="#253c42" stroke="#e1b968" stroke-width="2.5"/>
+          <path d="M39 59L43 66M68 59L72 66" stroke="#a4c5c7" stroke-width="2" stroke-linecap="round"/>
+        </g>
+        <g class="season-accessory autumn">
+          <path d="M31 99Q60 88 89 99L94 120H26Z" fill="#63735b"/>
+          <path d="M28 36Q22 17 51 15Q82 8 94 28L88 39Z" fill="#798568" stroke="#4e6049" stroke-width="2"/>
+          <path d="M37 36Q60 30 84 35" stroke="#495944" stroke-width="7" stroke-linecap="round"/>
+          <path d="M69 15L67 8" stroke="#4e6049" stroke-width="4" stroke-linecap="round"/>
+          <path d="M81 25Q97 14 94 36Q83 41 81 25Z" fill="#c89354"/>
+          <path d="M32 92Q60 103 88 92L88 103Q60 114 32 103Z" fill="#c48b50" stroke="#9b6a38" stroke-width="2"/>
+          <path d="M42 103L37 119H51L57 105Z" fill="#c48b50" stroke="#9b6a38" stroke-width="2"/>
+          <path d="M45 99L48 108M58 101L60 109M72 100L74 107M40 113H51" stroke="#e5c596" stroke-width="2"/>
+        </g>
+        <g class="season-accessory winter">
+          <path d="M29 36Q31 11 60 12Q89 11 91 36Z" fill="#6194b6" stroke="#365e7c" stroke-width="2"/>
+          <path d="M41 19L39 34M53 16L52 34M66 16L67 34M78 20L80 34" stroke="#a5c8dc" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="60" cy="11" r="8" fill="#e3eaf0" stroke="#a0b7ca" stroke-width="2"/>
+          <rect x="26" y="32" width="68" height="12" rx="5" fill="#d4e2ec" stroke="#9ab7cc" stroke-width="2"/>
+          <path d="M36 35V41M46 35V41M56 35V41M66 35V41M76 35V41M86 35V41" stroke="#a0bbce" stroke-width="2"/>
+          <path d="M31 93Q60 104 89 93L89 105Q60 116 31 105Z" fill="#6194b6" stroke="#365e7c" stroke-width="2"/>
+          <path d="M41 105L37 120H51L56 108Z" fill="#6194b6" stroke="#365e7c" stroke-width="2"/>
+          <path d="M40 99L43 109M52 102L54 112M66 102L68 112M79 99L81 109M39 115H52" stroke="#d4e2ec" stroke-width="3"/>
+        </g>`;
+      document.querySelectorAll('#teddyBtn svg, .teddy-mini-avatar svg').forEach(avatar => {
+        avatar.setAttribute('viewBox', '0 0 120 120');
+        avatar.innerHTML = artwork;
+      });
+    }
+
+    (function initTheme() {
+      addSeasonalAccessories();
+      document.getElementById('seasonPreview').value = 'auto';
+      document.getElementById('zonePreview').value = 'auto';
+      document.querySelector('.season-preview').hidden = new URLSearchParams(window.location.search).get('debug') !== '1';
+      applySeason();
+    })();
+
+    window.addEventListener('focus', refreshLocationTheme);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) refreshLocationTheme();
+    });
+    window.setInterval(refreshLocationTheme, 60000);
+
+    // 3. VIEW SWITCHER
+    function switchView(viewName) {
+      document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      const target = document.getElementById(`view-${viewName}`);
+      const btn = document.getElementById(`tab-${viewName}`);
+      if (target) target.classList.add('active');
+      if (btn) btn.classList.add('active');
+
+      if (viewName === 'garden') {
+        renderSidebarNotes();
+        loadGardenNote(activeNoteId);
+        setTimeout(initGraph, 60);
+      } else if (viewName === 'now') {
+        fetchNowMarkdown();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Toggle mobile garden bottom bar visibility
+      const mobileBar = document.getElementById('mobileGardenBar');
+      if (mobileBar) {
+        mobileBar.style.display = (viewName === 'garden' && window.innerWidth <= 900) ? 'flex' : 'none';
+      }
+    }
+
+    // ================= MOBILE DRAWER LOGIC =================
+    function openMobileDrawer(mode) {
+      const drawer = document.getElementById('mobileDrawer');
+      const title = document.getElementById('mobileDrawerTitle');
+      const notesView = document.getElementById('mobileDrawerNotesView');
+      const graphView = document.getElementById('mobileDrawerGraphView');
+
+      drawer.classList.add('open');
+
+      if (mode === 'index') {
+        title.textContent = 'Browse Digital Garden Notes';
+        notesView.style.display = 'block';
+        graphView.style.display = 'none';
+        renderMobileNotesList();
+      } else {
+        title.textContent = 'Knowledge Graph Map';
+        notesView.style.display = 'none';
+        graphView.style.display = 'block';
+        setTimeout(initMobileGraph, 80);
+      }
+    }
+
+    function closeMobileDrawer(e) {
+      if (e && e.target !== e.currentTarget && e.target.tagName !== 'BUTTON') return;
+      document.getElementById('mobileDrawer').classList.remove('open');
+    }
+
+    function renderMobileNotesList() {
+      const container = document.getElementById('mobileNotesListContainer');
+      const filtered = Object.values(vault).filter(n => currentStageFilter === 'all' || n.stage === currentStageFilter);
+
+      container.innerHTML = filtered.length ? filtered.map(n => {
+        const isActive = n.id === activeNoteId;
+        return `
+          <div onclick="closeMobileDrawer(); loadGardenNote('${n.id}')" style="padding:10px 12px; border-radius:6px; margin-bottom:4px; cursor:pointer; font-size:13px; background:${isActive ? 'var(--card)' : 'var(--surface)'}; border-left:${isActive ? '3px solid var(--accent)' : '3px solid transparent'};">
+            <div style="font-family:var(--font-serif); font-weight:${isActive ? '600' : '500'}; color:var(--text);">${n.title}</div>
+            <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-top:2px;">${n.stage} &middot; ${n.folder}</div>
+          </div>
+        `;
+      }).join('') : '<p style="padding:10px; color:var(--text-muted);">No notes available.</p>';
+    }
+
+    function getGraphPalette() {
+      const styles = getComputedStyle(document.documentElement);
+      return {
+        accent: styles.getPropertyValue('--accent').trim(),
+        detail: styles.getPropertyValue('--season-detail').trim(),
+        muted: styles.getPropertyValue('--text-muted').trim(),
+        border: styles.getPropertyValue('--border-strong').trim()
+      };
+    }
+
+    function initMobileGraph() {
+      const canvas = document.getElementById('mobileGraphCanvas');
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.height = 260 * (window.devicePixelRatio || 1);
+
+      const keys = Object.keys(vault);
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const mNodes = keys.map((key, i) => {
+        const angle = (i / keys.length) * Math.PI * 2;
+        return {
+          id: key,
+          x: w / 2 + Math.cos(angle) * (w * 0.35),
+          y: h / 2 + Math.sin(angle) * (h * 0.35),
+          stage: vault[key].stage
+        };
+      });
+
+      const ctx = canvas.getContext('2d');
+      const palette = getGraphPalette();
+      const lineColor = palette.border;
+      const activeLineColor = palette.accent;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Edges
+      Object.keys(vault).forEach(sId => {
+        const sNode = mNodes.find(n => n.id === sId);
+        if (!sNode) return;
+        const matches = [...vault[sId].content.matchAll(/\[\[(.*?)\]\]/g)];
+        matches.forEach(m => {
+          const tId = m[1].trim().toLowerCase().replace(/\s+/g, '-');
+          const tNode = mNodes.find(n => n.id === tId);
+          if (tNode) {
+            const isConn = sId === activeNoteId || tId === activeNoteId;
+            ctx.beginPath();
+            ctx.moveTo(sNode.x, sNode.y);
+            ctx.lineTo(tNode.x, tNode.y);
+            ctx.strokeStyle = isConn ? activeLineColor : lineColor;
+            ctx.lineWidth = isConn ? 1.5 : 1;
+            ctx.stroke();
+          }
+        });
+      });
+
+      // Nodes
+      mNodes.forEach(n => {
+        const isCurrent = n.id === activeNoteId;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, isCurrent ? 8 * (window.devicePixelRatio || 1) : 5 * (window.devicePixelRatio || 1), 0, Math.PI * 2);
+        ctx.fillStyle = isCurrent ? palette.detail : (n.stage === 'evergreen' ? palette.accent : palette.border);
+        ctx.fill();
+
+        ctx.font = `${Math.round(10 * (window.devicePixelRatio || 1))}px "JetBrains Mono"`;
+        ctx.fillStyle = palette.muted;
+        ctx.textAlign = 'center';
+        const label = vault[n.id].title.length > 12 ? vault[n.id].title.slice(0, 10) + '…' : vault[n.id].title;
+        ctx.fillText(label, n.x, n.y + 14 * (window.devicePixelRatio || 1));
+      });
+
+      canvas.onclick = (e) => {
+        const cRect = canvas.getBoundingClientRect();
+        const clickX = (e.clientX - cRect.left) * (window.devicePixelRatio || 1);
+        const clickY = (e.clientY - cRect.top) * (window.devicePixelRatio || 1);
+
+        for (const n of mNodes) {
+          const dist = Math.hypot(n.x - clickX, n.y - clickY);
+          if (dist < 20 * (window.devicePixelRatio || 1)) {
+            closeMobileDrawer();
+            loadGardenNote(n.id);
+            break;
+          }
+        }
+      };
+    }
+
+    function openNoteInGarden(id) {
+      activeNoteId = id;
+      switchView('garden');
+      loadGardenNote(id);
+    }
+
+    // 4. PARSER & WIKILINKS
+    function parseWikilinks(text) {
+      return text.replace(/\[\[(.*?)\]\]/g, (match, slug) => {
+        const key = slug.trim().toLowerCase().replace(/\s+/g, '-');
+        const target = vault[key];
+        const label = target ? target.title : slug;
+        return `<a class="wikilink" data-target="${key}" onclick="loadGardenNote('${key}'); return false;">[[${label}]]</a>`;
+      });
+    }
+
+    function renderMarkdown(md) {
+      let html = parseWikilinks(md);
+      html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+      html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+      html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      html = html.replace(/^\* (.*$)/gim, '<li>$1</li>');
+      
+      const paragraphs = html.split('\n\n');
+      return paragraphs.map(p => {
+        p = p.trim();
+        if (p.startsWith('<h1>') || p.startsWith('<h2>') || p.startsWith('<h3>') || p.startsWith('<li>')) {
+          return p;
+        }
+        return `<p>${p}</p>`;
+      }).join('');
+    }
+
+    // 5. NOTE RENDERER
+    function loadGardenNote(id) {
+      if (!vault[id]) return;
+      activeNoteId = id;
+      const note = vault[id];
+
+      document.getElementById('crumbFolder').textContent = note.folder;
+      document.getElementById('crumbFile').textContent = `${note.id}.md`;
+      document.getElementById('noteTitle').textContent = note.title;
+
+      const stageLabels = { seedling: '🌱 Seedling', budding: '🌿 Budding', evergreen: '🌳 Evergreen' };
+      document.getElementById('noteStageBadge').textContent = stageLabels[note.stage] || note.stage;
+      document.getElementById('noteConfidenceBadge').textContent = `Certainty: ${note.confidence}`;
+      document.getElementById('noteTendedBadge').textContent = `Tended ${note.lastTended}`;
+
+      document.getElementById('noteTags').innerHTML = note.tags.map(t => 
+        `<span style="font-family:var(--font-mono); font-size:10px; border:1px solid var(--border); padding:1px 5px; border-radius:3px; color:var(--text-muted);">#${t}</span>`
+      ).join('');
+
+      document.getElementById('noteBody').innerHTML = renderMarkdown(note.content);
+      
+      // Build raw markdown output cleanly without unescaped fence collisions
+      const rawText = "---\n" +
+        "title: " + note.title + "\n" +
+        "folder: " + note.folder + "\n" +
+        "stage: " + note.stage + "\n" +
+        "lastTended: " + note.lastTended + "\n" +
+        "tags: [" + note.tags.join(', ') + "]\n" +
+        "publish: true\n" +
+        "---\n\n" +
+        note.content;
+
+      document.getElementById('rawMdBox').textContent = rawText;
+
+      // Backlinks
+      const backlinks = Object.values(vault).filter(n => n.id !== id && n.content.includes(`[[${id}]]`));
+      document.getElementById('backlinksBadge').textContent = backlinks.length;
+      document.getElementById('backlinksContainer').innerHTML = backlinks.length ? backlinks.map(b => `
+        <div onclick="loadGardenNote('${b.id}')" style="background:var(--bg); border:1px solid var(--border); padding:8px; border-radius:4px; cursor:pointer;">
+          <div style="font-size:12px; font-weight:600; font-family:var(--font-serif);">${b.title}</div>
+          <div style="font-size:10px; color:var(--text-muted); font-family:var(--font-mono); margin-top:2px;">${b.folder} &middot; ${b.stage}</div>
+        </div>
+      `).join('') : '<div style="font-size:11px; color:var(--text-muted); font-style:italic;">No incoming backlinks.</div>';
+
+      // Outgoing
+      const outgoing = [];
+      const matches = [...note.content.matchAll(/\[\[(.*?)\]\]/g)];
+      matches.forEach(m => {
+        const targetId = m[1].trim().toLowerCase().replace(/\s+/g, '-');
+        if (vault[targetId] && !outgoing.includes(targetId)) outgoing.push(targetId);
+      });
+      document.getElementById('outgoingBadge').textContent = outgoing.length;
+      document.getElementById('outgoingContainer').innerHTML = outgoing.length ? outgoing.map(o => `
+        <div onclick="loadGardenNote('${o}')" style="font-size:11px; cursor:pointer; color:var(--accent); text-decoration:underline;">
+          &rarr; ${vault[o].title}
+        </div>
+      `).join('') : '<div style="font-size:11px; color:var(--text-muted); font-style:italic;">No outgoing links.</div>';
+
+      setupHoverTooltips();
+      renderSidebarNotes();
+      drawGraph();
+    }
+
+    // 6. SIDEBAR LIST
+    function renderSidebarNotes() {
+      const query = (document.getElementById('sidebarSearch')?.value || '').toLowerCase();
+      const container = document.getElementById('sidebarNotesContainer');
+      const filtered = Object.values(vault).filter(n => {
+        const matchesStage = currentStageFilter === 'all' || n.stage === currentStageFilter;
+        const matchesQuery = n.title.toLowerCase().includes(query) || n.tags.some(t => t.toLowerCase().includes(query));
+        return matchesStage && matchesQuery;
+      });
+
+      document.getElementById('noteCountLabel').textContent = `${filtered.length} notes`;
+
+      container.innerHTML = filtered.length ? filtered.map(n => {
+        const isActive = n.id === activeNoteId;
+        return `
+          <div onclick="loadGardenNote('${n.id}')" style="padding:7px 10px; border-radius:4px; margin-bottom:3px; cursor:pointer; font-size:12px; background:${isActive ? 'var(--card)' : 'transparent'}; border-left:${isActive ? '2px solid var(--accent)' : '2px solid transparent'};">
+            <div style="font-family:var(--font-serif); font-weight:${isActive ? '600' : '400'}; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${n.title}</div>
+            <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-top:1px;">${n.stage} &middot; ${n.folder}</div>
+          </div>
+        `;
+      }).join('') : '<p style="padding:10px; color:var(--text-muted);">No notes available.</p>';
+    }
+
+    function filterStage(st) {
+      currentStageFilter = st;
+      document.querySelectorAll('#f-seedling, #f-budding, #f-evergreen').forEach(b => b.style.borderColor = 'var(--border)');
+      if (st !== 'all') {
+        const active = document.getElementById(`f-${st}`);
+        if (active) active.style.borderColor = 'var(--accent)';
+      }
+      renderSidebarNotes();
+    }
+
+    function toggleRawView() {
+      isRawMd = !isRawMd;
+      document.getElementById('rawMdBox').style.display = isRawMd ? 'block' : 'none';
+      document.getElementById('noteBody').style.display = isRawMd ? 'none' : 'block';
+      document.getElementById('rawToggleLabel').textContent = isRawMd ? 'Read Prose' : '</> Raw .md';
+    }
+
+    // 7. HOVER TOOLTIPS
+    function setupHoverTooltips() {
+      const pop = document.getElementById('hoverPopover');
+      document.querySelectorAll('.wikilink').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const target = vault[link.getAttribute('data-target')];
+          if (!target) return;
+          document.getElementById('popTitle').textContent = target.title;
+          document.getElementById('popSummary').textContent = target.summary;
+          document.getElementById('popStage').textContent = target.stage;
+
+          const rect = link.getBoundingClientRect();
+          pop.style.left = `${Math.min(window.innerWidth - 270, Math.max(10, rect.left))}px`;
+          pop.style.top = `${rect.bottom + 6}px`;
+          pop.classList.add('visible');
+        });
+        link.addEventListener('mouseleave', () => pop.classList.remove('visible'));
+      });
+    }
+
+    // 8. GRAPH CANVAS
+    let graphNodes = [];
+    function initGraph() {
+      const canvas = document.getElementById('graphCanvas');
+      if (!canvas || !canvas.parentElement) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.height = 220 * (window.devicePixelRatio || 1);
+
+      const keys = Object.keys(vault);
+      const w = canvas.width;
+      const h = canvas.height;
+
+      graphNodes = keys.map((key, i) => {
+        const angle = (i / keys.length) * Math.PI * 2;
+        return {
+          id: key,
+          x: w / 2 + Math.cos(angle) * (w * 0.35),
+          y: h / 2 + Math.sin(angle) * (h * 0.35),
+          stage: vault[key].stage
+        };
+      });
+
+      canvas.onclick = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = (e.clientX - rect.left) * (window.devicePixelRatio || 1);
+        const clickY = (e.clientY - rect.top) * (window.devicePixelRatio || 1);
+
+        for (const n of graphNodes) {
+          const dist = Math.hypot(n.x - clickX, n.y - clickY);
+          if (dist < 15 * (window.devicePixelRatio || 1)) {
+            loadGardenNote(n.id);
+            break;
+          }
+        }
+      };
+
+      drawGraph();
+    }
+
+    function drawGraph() {
+      const canvas = document.getElementById('graphCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const palette = getGraphPalette();
+      const lineColor = palette.border;
+      const activeLineColor = palette.accent;
+
+      // Draw connections
+      Object.keys(vault).forEach(sId => {
+        const sNode = graphNodes.find(n => n.id === sId);
+        if (!sNode) return;
+        const matches = [...vault[sId].content.matchAll(/\[\[(.*?)\]\]/g)];
+        matches.forEach(m => {
+          const tId = m[1].trim().toLowerCase().replace(/\s+/g, '-');
+          const tNode = graphNodes.find(n => n.id === tId);
+          if (tNode) {
+            const isConn = sId === activeNoteId || tId === activeNoteId;
+            ctx.beginPath();
+            ctx.moveTo(sNode.x, sNode.y);
+            ctx.lineTo(tNode.x, tNode.y);
+            ctx.strokeStyle = isConn ? activeLineColor : lineColor;
+            ctx.lineWidth = isConn ? 1.5 : 1;
+            ctx.stroke();
+          }
+        });
+      });
+
+      // Draw nodes
+      graphNodes.forEach(n => {
+        const isCurrent = n.id === activeNoteId;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, isCurrent ? 7 * (window.devicePixelRatio || 1) : 4 * (window.devicePixelRatio || 1), 0, Math.PI * 2);
+        
+        if (isCurrent) {
+          ctx.fillStyle = palette.detail;
+        } else if (n.stage === 'evergreen') {
+          ctx.fillStyle = palette.accent;
+        } else {
+          ctx.fillStyle = palette.border;
+        }
+        ctx.fill();
+
+        // Label
+        ctx.font = `${Math.round(9 * (window.devicePixelRatio || 1))}px "JetBrains Mono"`;
+        ctx.fillStyle = palette.muted;
+        ctx.textAlign = 'center';
+        const label = vault[n.id].title.length > 12 ? vault[n.id].title.slice(0, 10) + '…' : vault[n.id].title;
+        ctx.fillText(label, n.x, n.y + 12 * (window.devicePixelRatio || 1));
+      });
+    }
+
+    // 9. MODALS
+    function openSearchModal() {
+      document.getElementById('searchModal').classList.add('open');
+      const input = document.getElementById('modalSearchInput');
+      input.value = '';
+      input.focus();
+      renderSearchResults('');
+    }
+    function closeSearchModal() {
+      document.getElementById('searchModal').classList.remove('open');
+    }
+
+    function renderSearchResults(q) {
+      const res = document.getElementById('modalResults');
+      const filtered = Object.values(vault).filter(n => 
+        n.title.toLowerCase().includes(q) || n.content.toLowerCase().includes(q)
+      );
+      res.innerHTML = filtered.map(n => `
+        <div onclick="closeSearchModal(); openNoteInGarden('${n.id}')" style="padding:8px; border-bottom:1px solid var(--border); cursor:pointer;">
+          <div style="font-weight:600; font-size:13px; font-family:var(--font-serif);">${n.title}</div>
+          <div style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">${n.stage} &middot; ${n.folder}</div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('modalSearchInput')?.addEventListener('input', (e) => {
+      renderSearchResults(e.target.value.toLowerCase());
+    });
+
+    function openSyncModal() {
+      document.getElementById('syncModal').classList.add('open');
+    }
+    function closeSyncModal() {
+      document.getElementById('syncModal').classList.remove('open');
+    }
+
+    // Hotkey: Cmd+K / Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape') {
+        closeSearchModal();
+        closeSyncModal();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('graphCanvas');
+      if (canvas && canvas.parentElement) {
+        initGraph();
+      }
+    });
+
+    // Boot
+    window.onload = function() {
+      fetchBioMarkdown();
+      fetchNowMarkdown();
+      fetchAllGardenNotes();
+      switchView('home');
+    };
+  </script>
+</body>
+</html>
