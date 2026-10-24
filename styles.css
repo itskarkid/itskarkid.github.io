@@ -839,6 +839,12 @@ header.masthead {
   line-height: 1.6;
 }
 .prose pre code { padding: 0; border: 0; background: none; border-radius: 0; }
+.prose .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
 .prose img { display: block; max-width: 100%; height: auto; }
 .prose blockquote, .prose .callout {
   margin: 0 0 16px;

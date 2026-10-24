@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="__support/vendor/katex/katex.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -600,6 +601,8 @@
   <script src="__support/vendor/marked.umd.js"></script>
   <script src="__support/vendor/js-yaml.min.js"></script>
   <script src="__support/vendor/purify.min.js"></script>
+  <script src="__support/vendor/katex/katex.min.js"></script>
+  <script src="__support/vendor/marked-katex-extension/index.umd.js"></script>
   <script>
     let bioMarkdownSource = '';
 
@@ -1284,9 +1287,7 @@
       Object.keys(vault).forEach(sId => {
         const sNode = mNodes.find(n => n.id === sId);
         if (!sNode) return;
-        const matches = [...vault[sId].content.matchAll(/\[\[(.*?)\]\]/g)];
-        matches.forEach(m => {
-          const tId = m[1].trim().toLowerCase().replace(/\s+/g, '-');
+        getOutgoingNoteIds(vault[sId].content).forEach(tId => {
           const tNode = mNodes.find(n => n.id === tId);
           if (tNode) {
             const isConn = sId === activeNoteId || tId === activeNoteId;
@@ -1338,14 +1339,27 @@
     }
 
     // 4. PARSER & WIKILINKS
-    function parseWikilinks(text) {
-      return text.replace(/\[\[(.*?)\]\]/g, (match, slug) => {
-        const key = slug.trim().toLowerCase().replace(/\s+/g, '-');
-        const target = vault[key];
-        const label = target ? target.title : slug;
-        return `<a class="wikilink" data-target="${key}" onclick="loadGardenNote('${key}'); return false;">[[${label}]]</a>`;
-      });
+    function resolveNoteLink(link) {
+      const key = link.split('|')[0].split('#')[0].trim().replace(/\.md$/i, '').toLowerCase();
+      return vault[key] || Object.values(vault).find(note =>
+        note.title.toLowerCase() === key || note.id.split('/').pop() === key || note.id === key.replace(/\s+/g, '-'));
     }
+
+    function getOutgoingNoteIds(content) {
+      const outgoing = new Set();
+      marked.walkTokens(marked.lexer(content), token => {
+        if (token.type !== 'obsidianLink' || token.embed) return;
+        const target = resolveNoteLink(token.target);
+        if (target) outgoing.add(target.id);
+      });
+      return [...outgoing];
+    }
+
+    function parseWikilinks(text) {
+      return DOMPurify.sanitize(marked.parseInline(text));
+    }
+
+    marked.use(markedKatex({ throwOnError: false, trust: false }));
 
     marked.use({
       extensions: [{
@@ -1366,9 +1380,8 @@
             if (alias && /^\d+(x\d+)?$/.test(alias)) image.width = Number(alias.split('x')[0]);
             return image.outerHTML;
           }
-          const key = path.trim().replace(/\.md$/i, '').toLowerCase();
-          const target = vault[key] || Object.values(vault).find(note =>
-            note.title.toLowerCase() === key || note.id.split('/').pop() === key || note.id === key.replace(/\s+/g, '-'));
+          const key = path.split('#')[0].trim().replace(/\.md$/i, '').toLowerCase();
+          const target = resolveNoteLink(path);
           const link = document.createElement('a');
           link.className = 'wikilink';
           link.dataset.target = target ? target.id : key;
@@ -1446,7 +1459,7 @@
       document.getElementById('rawMdBox').textContent = rawText;
 
       // Backlinks
-      const backlinks = Object.values(vault).filter(n => n.id !== id && n.content.includes(`[[${id}]]`));
+      const backlinks = Object.values(vault).filter(n => n.id !== id && getOutgoingNoteIds(n.content).includes(id));
       document.getElementById('backlinksBadge').textContent = backlinks.length;
       document.getElementById('backlinksContainer').innerHTML = backlinks.length ? backlinks.map(b => `
         <div onclick="loadGardenNote('${b.id}')" style="background:var(--bg); border:1px solid var(--border); padding:8px; border-radius:4px; cursor:pointer;">
@@ -1456,12 +1469,7 @@
       `).join('') : '<div style="font-size:11px; color:var(--text-muted); font-style:italic;">No incoming backlinks.</div>';
 
       // Outgoing
-      const outgoing = [];
-      const matches = [...note.content.matchAll(/\[\[(.*?)\]\]/g)];
-      matches.forEach(m => {
-        const targetId = m[1].trim().toLowerCase().replace(/\s+/g, '-');
-        if (vault[targetId] && !outgoing.includes(targetId)) outgoing.push(targetId);
-      });
+      const outgoing = getOutgoingNoteIds(note.content);
       document.getElementById('outgoingBadge').textContent = outgoing.length;
       document.getElementById('outgoingContainer').innerHTML = outgoing.length ? outgoing.map(o => `
         <div onclick="loadGardenNote('${o}')" style="font-size:11px; cursor:pointer; color:var(--accent); text-decoration:underline;">
@@ -1592,9 +1600,7 @@
       Object.keys(vault).forEach(sId => {
         const sNode = graphNodes.find(n => n.id === sId);
         if (!sNode) return;
-        const matches = [...vault[sId].content.matchAll(/\[\[(.*?)\]\]/g)];
-        matches.forEach(m => {
-          const tId = m[1].trim().toLowerCase().replace(/\s+/g, '-');
+        getOutgoingNoteIds(vault[sId].content).forEach(tId => {
           const tNode = graphNodes.find(n => n.id === tId);
           if (tNode) {
             const isConn = sId === activeNoteId || tId === activeNoteId;

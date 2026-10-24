@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -59,9 +59,23 @@ jobs:
           }
 
           const notes = listNotes('_site/notes').sort();
-          fs.writeFileSync('_site/notes_index.json', JSON.stringify(notes, null, 2) + '\n');
+          const index = JSON.stringify(notes, null, 2) + '\n';
+          fs.writeFileSync('notes_index.json', index);
+          fs.writeFileSync('_site/notes_index.json', index);
           console.log(`Indexed ${notes.length} notes.`);
           NODE
+
+      - name: Commit updated note index
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          if ! git diff --quiet -- notes_index.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- notes_index.json
+            git commit -m "Update note index"
+            git push origin HEAD:main
+          fi
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
