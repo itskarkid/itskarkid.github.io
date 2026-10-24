@@ -43,6 +43,9 @@ jobs:
           if (fs.existsSync('notes')) {
             fs.cpSync('notes', '_site/notes', { recursive: true });
           }
+          if (fs.existsSync('__support')) {
+            fs.cpSync('__support', '_site/__support', { recursive: true });
+          }
 
           function listNotes(directory, prefix = '') {
             if (!fs.existsSync(directory)) return [];

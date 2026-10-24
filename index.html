@@ -597,6 +597,9 @@
   </div>
 
   <!-- ================= JAVASCRIPT VAULT & ENGINE ================= -->
+  <script src="__support/vendor/marked.umd.js"></script>
+  <script src="__support/vendor/js-yaml.min.js"></script>
+  <script src="__support/vendor/purify.min.js"></script>
   <script>
     let bioMarkdownSource = '';
 
@@ -794,19 +797,9 @@
             if (!res.ok) throw new Error(`${filename}: HTTP ${res.status}`);
             const raw = await res.text();
             const frontmatter = raw.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+/);
-            const metadata = {};
-            if (frontmatter) {
-              frontmatter[1].split('\n').forEach(line => {
-                const separator = line.indexOf(':');
-                if (separator < 0) return;
-                const key = line.slice(0, separator).trim().toLowerCase();
-                const value = line.slice(separator + 1).trim();
-                metadata[key] = value.startsWith('[') && value.endsWith(']')
-                  ? value.slice(1, -1).split(',').map(tag => tag.trim().replace(/^['"](.*)['"]$/, '$1')).filter(Boolean)
-                  : value.replace(/^['"](.*)['"]$/, '$1');
-              });
-            }
-            if (metadata.publish === 'false') continue;
+            const parsedMetadata = frontmatter ? jsyaml.load(frontmatter[1], { schema: jsyaml.JSON_SCHEMA }) : {};
+            const metadata = Object.fromEntries(Object.entries(parsedMetadata || {}).map(([key, value]) => [key.toLowerCase(), value]));
+            if (metadata.publish === false || metadata.publish === 'false') continue;
             const content = (frontmatter ? raw.slice(frontmatter[0].length) : raw).trim();
             const id = filename.replace(/\.md$/i, '').toLowerCase();
             vault[id] = {
@@ -1354,23 +1347,68 @@
       });
     }
 
-    function renderMarkdown(md) {
-      let html = parseWikilinks(md);
-      html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-      html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-      html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      html = html.replace(/^\* (.*$)/gim, '<li>$1</li>');
-      
-      const paragraphs = html.split('\n\n');
-      return paragraphs.map(p => {
-        p = p.trim();
-        if (p.startsWith('<h1>') || p.startsWith('<h2>') || p.startsWith('<h3>') || p.startsWith('<li>')) {
-          return p;
+    marked.use({
+      extensions: [{
+        name: 'obsidianLink',
+        level: 'inline',
+        start(source) { return source.search(/!?\[\[/); },
+        tokenizer(source) {
+          const match = /^(!?)\[\[([^\]\n]+)\]\]/.exec(source);
+          if (match) return { type: 'obsidianLink', raw: match[0], embed: Boolean(match[1]), target: match[2] };
+        },
+        renderer(token) {
+          const [path, alias] = token.target.split('|');
+          if (token.embed) {
+            const image = document.createElement('img');
+            const assetPath = path.includes('/') ? path.replace(/^\/?/, '') : `__support/${path}`;
+            image.src = assetPath.split('/').map(encodeURIComponent).join('/');
+            image.alt = alias && !/^\d+(x\d+)?$/.test(alias) ? alias : path;
+            if (alias && /^\d+(x\d+)?$/.test(alias)) image.width = Number(alias.split('x')[0]);
+            return image.outerHTML;
+          }
+          const key = path.trim().replace(/\.md$/i, '').toLowerCase();
+          const target = vault[key] || Object.values(vault).find(note =>
+            note.title.toLowerCase() === key || note.id.split('/').pop() === key || note.id === key.replace(/\s+/g, '-'));
+          const link = document.createElement('a');
+          link.className = 'wikilink';
+          link.dataset.target = target ? target.id : key;
+          link.href = '#';
+          link.textContent = alias || (target ? target.title : path);
+          return link.outerHTML;
         }
-        return `<p>${p}</p>`;
-      }).join('');
+      }]
+    });
+
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a.wikilink[data-target]');
+      if (!link) return;
+      event.preventDefault();
+      loadGardenNote(link.dataset.target);
+    });
+
+    function renderMarkdown(md) {
+      const container = document.createElement('div');
+      container.innerHTML = DOMPurify.sanitize(marked.parse(md));
+      container.querySelectorAll('blockquote').forEach(quote => {
+        const firstParagraph = quote.firstElementChild;
+        if (!firstParagraph || firstParagraph.tagName !== 'P') return;
+        const marker = /^\[!([\w-]+)\]([+-])?(?:[ \t]+([^\n]*))?(?:\n|$)/.exec(firstParagraph.textContent);
+        if (!marker) return;
+        const callout = document.createElement(marker[2] ? 'details' : 'aside');
+        callout.className = 'callout';
+        callout.dataset.callout = marker[1].toLowerCase();
+        if (marker[2] === '+') callout.open = true;
+        const title = document.createElement(marker[2] ? 'summary' : 'div');
+        title.className = 'callout-title';
+        title.textContent = marker[3] || marker[1];
+        const firstNode = firstParagraph.firstChild;
+        if (firstNode && firstNode.nodeType === Node.TEXT_NODE) {
+          firstNode.textContent = firstNode.textContent.slice(marker[0].length);
+        }
+        callout.append(title, ...quote.childNodes);
+        quote.replaceWith(callout);
+      });
+      return container.innerHTML;
     }
 
     // 5. NOTE RENDERER
