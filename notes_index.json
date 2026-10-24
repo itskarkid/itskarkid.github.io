@@ -1,3 +1,9 @@
 [
-  "machine-vision/Image.md"
+  "machine-vision/Blur.md",
+  "machine-vision/Convolution.md",
+  "machine-vision/Filtering Geometry.md",
+  "machine-vision/Image.md",
+  "machine-vision/Kernel.md",
+  "machine-vision/Padding.md",
+  "machine-vision/Stride.md"
 ]
