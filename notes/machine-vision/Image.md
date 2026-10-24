@@ -2,6 +2,7 @@
 title: Image
 folder: machine-vision
 stage: evergreen
+confidence: high
 created: 2026-10-24
 lastTended: 2026-10-24
 tags:

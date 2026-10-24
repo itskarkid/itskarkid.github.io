@@ -2,6 +2,7 @@
 title: Stride
 folder: machine-vision
 stage: evergreen
+confidence: high
 created: 2026-10-26
 lastTended: 2026-10-26
 tags:

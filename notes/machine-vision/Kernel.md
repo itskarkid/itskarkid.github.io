@@ -2,6 +2,7 @@
 title: Kernel
 folder: machine-vision
 stage: evergreen
+confidence: high
 created: 2026-10-25
 lastTended: 2026-10-25
 tags:

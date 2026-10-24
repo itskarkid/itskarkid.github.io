@@ -2,6 +2,7 @@
 title: Filtering Geometry
 folder: machine-vision
 stage: evergreen
+confidence: high
 created: 2026-10-26
 lastTended: 2026-10-26
 tags: [course-note, machine-vision, image-processing, convolution]

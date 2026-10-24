@@ -2,6 +2,7 @@
 title: Blur
 folder: machine-vision
 stage: evergreen
+confidence: high
 created: 2026-10-27
 lastTended: 2026-10-27
 tags:

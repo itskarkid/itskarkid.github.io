@@ -2,6 +2,7 @@
 title: Convolution
 folder: machine-vision
 stage: evergreen
+confidence: high
 created: 2026-10-25
 lastTended: 2026-10-25
 tags: [course-note, machine-vision, image-processing, convolution]
