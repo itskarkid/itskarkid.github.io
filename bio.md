@@ -20,9 +20,7 @@ Software engineer with 10+ years of experience developing high-performance C++ a
 Currently pursuing an MSc in Robotics at the University of Bristol, with the aim of applying this experience to autonomous and intelligent systems. Current interests include reinforcement learning, machine learning, robotic perception, continual learning, explainable AI, and decision-making for autonomous systems.
 
 Long-term interests lie at the intersection of robotics, AI, and software engineering, particularly in developing robotic systems that can learn from experience, adapt to changing environments, collaborate with other agents, and make interpretable decisions.
-
 ## Now Snapshot
 * **Epistemic FactKG:** A fact verification dataset and pipeline grounded in Indian Pramana epistemology.
-
 ## Clusters
 
