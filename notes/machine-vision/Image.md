@@ -9,12 +9,10 @@ tags:
   - opencv
 publish: true
 ---
-## **Image**
+An **image** is a matrix of number
 
 > [!summary]- Mental Model
 > ![[image_info.png]]
-
-An image is a matrix of number
 
 For a grayscale image:
 
