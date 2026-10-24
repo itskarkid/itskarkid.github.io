@@ -646,8 +646,11 @@ header.masthead {
 }
 .now-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+@media (max-width: 600px) {
+  .now-card-grid { grid-template-columns: minmax(0, 1fr); }
 }
 .now-subitem {
   background: var(--bg);
@@ -678,10 +681,11 @@ header.masthead {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 16px;
-  cursor: pointer;
+  text-align: left;
   transition: border-color 0.15s;
 }
-.cluster-card:hover {
+button.cluster-card { cursor: pointer; }
+button.cluster-card:hover {
   border-color: var(--border-strong);
 }
 .cluster-tag {
@@ -854,7 +858,10 @@ header.masthead {
 }
 .prose .callout-title { font-weight: 600; }
 .prose summary { cursor: pointer; }
-.prose .callout > p { margin-top: 12px; }
+.prose .callout > p {
+  margin-top: 12px;
+  white-space: pre-line;
+}
 
 /* MOBILE GARDEN DRAWER */
 .mobile-garden-bar {

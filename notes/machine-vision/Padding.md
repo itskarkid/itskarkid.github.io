@@ -1,12 +1,15 @@
 ---
 title: Padding
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-26
 lastTended: 2026-10-26
 tags:
+  - course-note
   - machine-vision
-  - opencv
+  - image-processing
+  - convolution
+  - padding
 publish: true
 ---
 **Padding** adds extra pixels around the border of an image so the kernel can also process edge pixels.

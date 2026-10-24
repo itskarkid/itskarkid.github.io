@@ -1,12 +1,14 @@
 ---
 title: Kernel
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-25
 lastTended: 2026-10-25
 tags:
+  - course-note
   - machine-vision
-  - opencv
+  - image-processing
+  - image-filtering
 publish: true
 ---
 A **kernel** is a small matrix used to calculate a new pixel value from a local neighborhood of an [[Image|image]].

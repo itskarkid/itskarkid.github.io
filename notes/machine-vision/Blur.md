@@ -1,11 +1,14 @@
 ---
 title: Blur
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-27
 lastTended: 2026-10-27
 tags:
+  - course-note
   - machine-vision
+  - image-processing
+  - image-filtering
   - opencv
 publish: true
 ---
@@ -55,9 +58,8 @@ So:
 ```
 
 > [!abstract]+ In Short:
-> 
-Averaging blur
-→ all neighbouring pixels are equally important
+> Averaging blur
+> → all neighbouring pixels are equally important
 
 This smooths the image, but it can blur edges and fine details.
 
@@ -115,11 +117,11 @@ The Gaussian result stays closer to the original centre value because the centre
 
 > [!abstract]+ In Short
 > Average blur
-→ equal weights
-Gaussian blur
-→ centre has more weight
-→ nearby pixels matter more
-→ distant pixels matter less
+> → equal weights
+> Gaussian blur
+> → centre has more weight
+> → nearby pixels matter more
+> → distant pixels matter less
 
 ### Why Gaussian Blur Is Common
 

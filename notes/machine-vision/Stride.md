@@ -1,12 +1,15 @@
 ---
 title: Stride
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-26
 lastTended: 2026-10-26
 tags:
+  - course-note
   - machine-vision
-  - opencv
+  - image-processing
+  - convolution
+  - stride
 publish: true
 ---
 **Stride** is the number of pixels the kernel moves each time. It controls **how far the [[Kernel|kernel]] jumps between calculations**.

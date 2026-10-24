@@ -1,11 +1,13 @@
 ---
 title: Image
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-24
 lastTended: 2026-10-24
 tags:
+  - course-note
   - machine-vision
+  - image-processing
   - opencv
 publish: true
 ---

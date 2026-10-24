@@ -278,7 +278,7 @@
     <!-- TOPIC CLUSTERS -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
       <h2 style="font-family:var(--font-serif); font-size:18px;">Core Topic Clusters</h2>
-      <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Click to browse notes</span>
+      <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Research interests</span>
     </div>
 
     <!-- Container is now completely empty in HTML; 100% generated dynamically from bio.md -->
@@ -673,28 +673,35 @@
           if (clusterLines.length > 0) {
             const clusterGrid = document.getElementById('homeClustersGrid');
             if (clusterGrid) {
-              clusterGrid.innerHTML = clusterLines.map(line => {
+              clusterGrid.replaceChildren(...clusterLines.map(line => {
                 const cleanLine = line.replace(/^[\*\-]\s+/, '').trim();
-                const parts = cleanLine.split('|').map(p => p.trim());
-                if (parts.length >= 3) {
-                  const targetMatch = parts[0].match(/\[\[(.*?)\]\]/);
-                  if (!targetMatch) return '';
-                  const targetId = targetMatch[1].trim().toLowerCase().replace(/\s+/g, '-');
-                  const tag = parts[1];
-                  const rawDesc = parts.slice(2).join('|');
-                  const colonSplit = rawDesc.split(':');
-                  const title = colonSplit[0].trim();
-                  const desc = colonSplit.slice(1).join(':').trim() || '';
-                  return `
-                    <div class="cluster-card" onclick="openNoteInGarden('${targetId}')">
-                      <div class="cluster-tag">${tag}</div>
-                      <div class="cluster-title">${title}</div>
-                      <p>${desc}</p>
-                    </div>
-                  `;
+                const legacy = cleanLine.match(/^\[\[([^\]]+)\]\]\s*\|\s*([^|]+)\|\s*(.*)$/);
+                const body = legacy ? legacy[3] : cleanLine;
+                const label = body.match(/^\*\*(.*?)\*\*:?[ \t]*(.*)$/);
+                const separator = body.indexOf(':');
+                const title = label ? label[1].replace(/:$/, '') : (separator < 0 ? body : body.slice(0, separator)).trim();
+                const desc = label ? label[2] : (separator < 0 ? '' : body.slice(separator + 1).trim());
+                const card = document.createElement(legacy ? 'button' : 'div');
+                card.className = 'cluster-card';
+                if (legacy) {
+                  card.type = 'button';
+                  card.addEventListener('click', () => {
+                    const target = resolveNoteLink(legacy[1]);
+                    if (target) openNoteInGarden(target.id);
+                  });
+                  const tag = document.createElement('div');
+                  tag.className = 'cluster-tag';
+                  tag.textContent = legacy[2].trim();
+                  card.append(tag);
                 }
-                return '';
-              }).join('');
+                const heading = document.createElement('div');
+                heading.className = 'cluster-title';
+                heading.textContent = title;
+                const description = document.createElement('div');
+                description.innerHTML = renderMarkdown(desc);
+                card.append(heading, description);
+                return card;
+              }));
             }
           }
         } else if (heading.includes('now snapshot')) {
@@ -703,15 +710,15 @@
           if (lines.length > 0) {
             const grid = document.getElementById('homeNowGrid');
             if (grid) {
-              grid.innerHTML = lines.slice(0, 3).map(l => {
+              grid.innerHTML = lines.map(l => {
                 const raw = l.replace(/^[\*\-]\s+/, '').trim();
                 const boldMatch = raw.match(/^\*\*(.*?)\*\*:?\s*(.*)$/);
-                const title = boldMatch ? boldMatch[1] : 'Focus';
+                const title = boldMatch ? boldMatch[1].replace(/:$/, '') : 'Focus';
                 const desc = boldMatch ? boldMatch[2] : raw;
                 return `
                   <div class="now-subitem">
                     <div class="now-subitem-title">${title}</div>
-                    <p>${renderMarkdown(desc).replace(/<\/?p>/g, '')}</p>
+                    <p>${parseWikilinks(desc)}</p>
                   </div>
                 `;
               }).join('');
@@ -1359,7 +1366,17 @@
       return DOMPurify.sanitize(marked.parseInline(text));
     }
 
-    marked.use(markedKatex({ throwOnError: false, trust: false }));
+    const mathExtension = markedKatex({ throwOnError: false, trust: false });
+    const blockMath = mathExtension.extensions.find(extension => extension.name === 'blockKatex');
+    blockMath.start = source => {
+      const match = /(?:^|\n)[ \t]{0,3}\$\$[ \t]*\r?\n/.exec(source);
+      return match ? match.index + (match[0].startsWith('\n') ? 1 : 0) : undefined;
+    };
+    blockMath.tokenizer = source => {
+      const match = /^[ \t]{0,3}\$\$[ \t]*\r?\n([\s\S]+?)\r?\n[ \t]{0,3}\$\$[ \t]*(?:\r?\n|$)/.exec(source);
+      if (match) return { type: 'blockKatex', raw: match[0], text: match[1].trim(), displayMode: true };
+    };
+    marked.use(mathExtension);
 
     marked.use({
       extensions: [{

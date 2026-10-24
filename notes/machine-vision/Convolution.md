@@ -1,12 +1,10 @@
 ---
 title: Convolution
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-25
 lastTended: 2026-10-25
-tags:
-  - machine-vision
-  - opencv
+tags: [course-note, machine-vision, image-processing, convolution]
 publish: true
 ---
 **Convolution** is the process of applying a [[Kernel|kernel]] across an [[Image|image]] to calculate new pixel values.

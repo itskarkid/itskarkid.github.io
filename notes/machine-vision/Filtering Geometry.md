@@ -1,12 +1,10 @@
 ---
 title: Filtering Geometry
 folder: machine-vision
-stage: budding
+stage: evergreen
 created: 2026-10-26
 lastTended: 2026-10-26
-tags:
-  - machine-vision
-  - opencv
+tags: [course-note, machine-vision, image-processing, convolution]
 publish: true
 ---
 **Filtering geometry** describes how the input [[Image|image]] size, [[Kernel|kernel]] size, [[Stride|stride]], and [[Padding|padding]] determine the size of the filtered output.  **Filtering geometry tells us how the spatial size of the image changes during filtering

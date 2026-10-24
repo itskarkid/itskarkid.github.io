@@ -21,6 +21,13 @@ Currently pursuing an MSc in Robotics at the University of Bristol, with the aim
 
 Long-term interests lie at the intersection of robotics, AI, and software engineering, particularly in developing robotic systems that can learn from experience, adapt to changing environments, collaborate with other agents, and make interpretable decisions.
 ## Now Snapshot
-* **Epistemic FactKG:** A fact verification dataset and pipeline grounded in Indian Pramana epistemology.
-## Clusters
 
+- **Focus:** Multi-agent autonomy with RL, AoI, and visual perception
+- **Building:** Robot image scanning and machine-vision experiments
+- **Learning:** Robotics foundations, perception, and decision-making
+- **Next:** MSc dissertation shaping toward PhD research
+## Clusters
+- **Autonomous Systems:** Multi-agent coordination and decision-making
+- **Perception:** Vision, sensing, and environmental understanding
+- **Adaptive Intelligence:** RL, continual learning, and exploration
+- **Trustworthy Robotics:** Information reliability, AoI, and explainability
