@@ -553,6 +553,11 @@ header.masthead {
   padding: 40px 24px 80px 24px;
   flex-direction: column;
 }
+#nowCardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .hero-meta {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -727,6 +732,10 @@ button.cluster-card:hover {
   padding: 40px 48px 80px 48px;
   background: var(--bg);
 }
+.garden-reader-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
 .garden-rightpane {
   border-left: 1px solid var(--border);
   background: var(--surface);
@@ -900,6 +909,19 @@ button.cluster-card:hover {
   padding: 16px;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 1280px) {
+  .home-wrapper {
+    width: calc(100% - 64px);
+    max-width: 1000px;
+  }
+  .hero-desc { max-width: 75ch; }
+  #view-now { max-width: 960px; }
+  .cluster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #nowCardsContainer .prose { max-width: 80ch; }
+  .garden-reader-content { max-width: 820px; }
+  #noteBody > :is(p, ul, ol, blockquote, .callout) { max-width: 80ch; }
 }
 
 @media (max-width: 900px) {

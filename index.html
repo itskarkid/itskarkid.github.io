@@ -317,7 +317,7 @@
 
     <!-- CENTER CANVAS: READING PANE -->
     <main class="garden-reader">
-      <div style="max-width: 680px; margin: 0 auto;">
+      <div class="garden-reader-content">
         
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:20px; font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">
           <div>
@@ -445,7 +445,7 @@
     </div>
 
     <!-- Structured Card Grid dynamically populated from Markdown -->
-    <div id="nowCardsContainer" style="display:flex; flex-direction:column; gap:16px;"></div>
+    <div id="nowCardsContainer"></div>
 
     <!-- Raw Markdown Read-Only Inspector (Matching Garden styling) -->
     <div id="nowRawBox" style="display:none; margin-top:20px; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:16px; font-family:var(--font-mono); font-size:11px; white-space:pre-wrap; color:var(--text-muted); line-height:1.6; user-select:text;"></div>
@@ -916,7 +916,7 @@
         rawBox.textContent = nowMarkdownSource;
       } else {
         rawBox.style.display = 'none';
-        cardsBox.style.display = 'flex';
+        cardsBox.style.removeProperty('display');
         label.textContent = '</> Raw .md';
       }
     }
