@@ -1,0 +1,59 @@
+.garden-widget {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.garden-widget-error {
+  padding: 12px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+}
+.garden-widget .garden-widget-title { margin: 0 0 16px; font-size: 16px; }
+.garden-widget-views {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+}
+.garden-widget-matrix { width: 100%; table-layout: fixed; border-spacing: 3px; }
+.garden-widget-matrix caption { text-align: left; padding-bottom: 8px; color: var(--text-muted); }
+.garden-widget-matrix td {
+  height: 40px;
+  padding: 2px;
+  text-align: center;
+  border: 1px solid var(--border);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.garden-widget-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+.garden-widget-control-range { grid-template-columns: auto minmax(0, 1fr) 5ch; }
+.garden-widget-control-checkbox { display: flex; gap: 8px; }
+.garden-widget-control :is(input, select) { min-width: 0; max-width: 100%; accent-color: var(--accent); }
+.garden-widget-control :is(input:not([type="checkbox"]), select) { width: 100%; }
+.garden-widget-control :is(input[type="number"], select) {
+  padding: 6px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font: inherit;
+}
+.garden-widget-control output { text-align: right; }
+.garden-widget-metric { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--text-muted); }
+.garden-widget-metric output { color: var(--text); }
+.garden-widget .garden-widget-message { margin: 12px 0 0; font-size: 12px; }
+.garden-widget-message[hidden] { display: none; }
+@media (max-width: 600px) {
+  .garden-widget-views { grid-template-columns: minmax(0, 1fr); }
+  .garden-widget-control-range { grid-template-columns: minmax(0, 1fr) 5ch; }
+  .garden-widget-control-range label { grid-column: 1 / -1; }
+}
