@@ -151,3 +151,5 @@ Convolution = applying the flipped kernel across the image
 ```
 
 The amount the kernel moves between positions is called the **[[Stride|stride]]**.
+
+See [[Filtering Geometry]] for how kernel size, stride, and [[Padding|padding]] affect the output dimensions.

@@ -44,6 +44,27 @@ Here, $Y$ is a luma value calculated from gamma-encoded RGB channels using BT.60
 
 Green has the largest weight; blue has the smallest.
 
+## Compare channel contributions
+
+With pure red, green, or blue at `255`, the simple average is always `85`. The weighted conversion gives different results because the channel weights differ. Equal red, green, and blue values produce the same result under both methods.
+
+```widget
+{
+  "title": "RGB to grayscale",
+  "controls": [
+    { "id": "red", "type": "range", "label": "Red", "min": 0, "max": 255, "value": 255 },
+    { "id": "green", "type": "range", "label": "Green", "min": 0, "max": 255, "value": 0 },
+    { "id": "blue", "type": "range", "label": "Blue", "min": 0, "max": 255, "value": 0 }
+  ],
+  "views": [
+    { "id": "average", "type": "metric", "label": "Simple average", "expression": "(red + green + blue) / 3", "precision": 2 },
+    { "id": "luma", "type": "metric", "label": "Weighted grayscale", "expression": "0.299 * red + 0.587 * green + 0.114 * blue", "precision": 2 }
+  ]
+}
+```
+
+These are unrounded calculations displayed to two decimal places. An 8-bit OpenCV output stores integer values.
+
 ## Grayscale conversion with OpenCV
 
 For a BGR image loaded with OpenCV:
@@ -53,3 +74,5 @@ gray = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
 ```
 
 **Grayscale reduces a color image to one channel, retaining brightness information but discarding color differences.**
+
+Inspect the resulting intensities with an [[Image Histogram|image histogram]], or use [[Thresholding|thresholding]] to separate pixels into foreground and background.

@@ -110,6 +110,8 @@ O = output size
 
 Apply the formula separately to height and width. These examples keep the image and kernel sizes fixed while changing only the stride.
 
+For the formula with padding included, see [[Filtering Geometry|filtering geometry]].
+
 Example:
 
 ```text

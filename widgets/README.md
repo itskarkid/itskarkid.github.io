@@ -39,6 +39,12 @@ JSON rather than an interactive widget.
 See [Thresholding](../notes/machine-vision/Thresholding.md) for a matrix comparison
 with a slider, checkbox, and calculated count, using exactly the same renderer.
 
+Other note experiments use the same schema without custom JavaScript:
+
+- [Grayscale](../notes/machine-vision/Grayscale.md): compare average and weighted conversion with RGB sliders.
+- [Kernel](../notes/machine-vision/Kernel.md): vary one pixel and observe a neighborhood's mean.
+- [Filtering Geometry](../notes/machine-vision/Filtering%20Geometry.md): explore how input, kernel, stride, and padding change output size.
+
 ## Configuration
 
 - `title`: optional visible title, at most 120 characters.

@@ -1445,6 +1445,18 @@
         callout.append(title, ...quote.childNodes);
         quote.replaceWith(callout);
       });
+      container.querySelectorAll('table').forEach(table => {
+        if (table.closest('.garden-widget')) return;
+        table.classList.add('markdown-table');
+        table.querySelectorAll('thead th').forEach(cell => { cell.scope = 'col'; });
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-scroll';
+        wrapper.tabIndex = 0;
+        wrapper.setAttribute('role', 'region');
+        wrapper.setAttribute('aria-label', table.caption?.textContent || 'Data table');
+        table.before(wrapper);
+        wrapper.append(table);
+      });
       return container.innerHTML;
     }
 

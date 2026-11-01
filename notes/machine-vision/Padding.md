@@ -13,7 +13,7 @@ tags:
   - padding
 publish: true
 ---
-**Padding** adds extra pixels around the border of an image so the kernel can also process edge pixels.
+**Padding** adds extra pixels around the border of an [[Image|image]] so the [[Kernel|kernel]] can also process edge pixels.
 
 > [!summary]- Mental Model
 > ![[padding.png]]
@@ -78,6 +78,8 @@ K = kernel size
 ```
 
 Apply the rule separately to image height and width. It does not generally preserve size when the stride is larger than 1.
+
+See [[Filtering Geometry]] for how [[Stride|stride]], kernel size, and padding together determine the output size.
 
 Examples:
 

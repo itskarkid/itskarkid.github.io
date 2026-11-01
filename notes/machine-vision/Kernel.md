@@ -79,6 +79,39 @@ The bright pixel becomes closer to its neighbors, which creates a smoothing effe
 
 Calculate each output from the original input image, not from already filtered neighbors.
 
+## Explore the center pixel
+
+The eight surrounding pixels stay at `10`. Only the center value changes. The output is the mean of all nine input values, so a center value of `100` gives `20`, while a uniform neighborhood of `10` stays at `10`.
+
+```widget
+{
+  "title": "3 by 3 averaging",
+  "data": {
+    "pixels": [[10, 10, 10], [10, 100, 10], [10, 10, 10]]
+  },
+  "controls": [
+    { "id": "center", "type": "range", "label": "Center intensity", "min": 0, "max": 255, "value": 100 }
+  ],
+  "views": [
+    {
+      "id": "neighborhood",
+      "type": "matrix",
+      "label": "Input neighborhood",
+      "source": "pixels",
+      "map": "row == 1 && column == 1 ? center : value",
+      "scale": [0, 255]
+    },
+    { "id": "averaged", "type": "metric", "label": "Output intensity", "expression": "mean(neighborhood)", "precision": 2 }
+  ]
+}
+```
+
+The displayed output is a floating-point mean; an 8-bit image stores a rounded integer result.
+
+See [[Convolution]] for the sliding calculation and [[Blur]] for averaging and Gaussian kernels.
+
+## Kernel size and effects
+
 Odd kernel sizes such as:
 
 ```text

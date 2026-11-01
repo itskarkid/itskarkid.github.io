@@ -15,7 +15,7 @@ publish: true
 ---
 A histogram shows how frequently each pixel intensity occurs in an [[Image|image]].
 
-For an 8-bit grayscale image:
+For an 8-bit [[Grayscale|grayscale]] image:
 
 - The horizontal axis represents intensity, from 0 (black) to 255 (white).
 - The vertical axis represents the number of pixels having that intensity.
@@ -28,7 +28,7 @@ Imagine a robot viewing a black line on a white floor.
 
 The [[Image|image]] might contain a large number of bright pixels (the floor) and a smaller number of dark pixels (the line).
 
-A histogram can help us select an intensity threshold to separate them.
+A histogram can help us select an intensity threshold for [[Thresholding|thresholding]] to separate them.
 
 ![[why_histogram.png]]
 

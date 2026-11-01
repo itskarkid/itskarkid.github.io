@@ -17,7 +17,7 @@ A digital **image** is an array of numbers. A grayscale image stores one intensi
 > [!summary]- Mental Model
 > ![[image_info.png]]
 
-For a grayscale image:
+For a [[Grayscale|grayscale]] image:
 
 ```text
 10   50   60

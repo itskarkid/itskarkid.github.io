@@ -13,3 +13,5 @@ tags:
 publish: false
 ---
 Image segmentation divides an [[Image|image]] into meaningful regions so that objects or areas can be **analyzed separately**.
+
+[[Thresholding]] is a simple starting point when regions can be separated by their pixel intensities.

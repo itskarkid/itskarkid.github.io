@@ -48,6 +48,28 @@ Padding
 Output size
 ```
 
+## Explore output size
+
+This example uses a square image, an odd square kernel, and the same stride and padding in both directions. Each valid kernel position produces one output pixel. The input is always at least as large as the kernel.
+
+```widget
+{
+   "title": "Filtering output size",
+   "controls": [
+      { "id": "inputSize", "type": "number", "label": "Input side length", "min": 5, "max": 15, "value": 5 },
+      { "id": "kernelSize", "type": "range", "label": "Kernel side length", "min": 1, "max": 5, "step": 2, "value": 3 },
+      { "id": "stride", "type": "range", "label": "Stride", "min": 1, "max": 4, "value": 1 },
+      { "id": "padding", "type": "range", "label": "Padding per side", "min": 0, "max": 3, "value": 0 }
+   ],
+   "views": [
+      { "id": "side", "type": "metric", "label": "Output side length", "expression": "floor((inputSize - kernelSize + 2 * padding) / stride) + 1", "precision": 0 },
+      { "id": "pixels", "type": "metric", "label": "Output pixels", "expression": "side ** 2", "precision": 0 }
+   ]
+}
+```
+
+With input `5` and kernel `3`, stride `1` and padding `0` give a `3×3` output. Padding `1` gives `5×5`; changing to stride `2` and padding `0` gives `2×2`. These are the worked examples below.
+
 ## No Padding
 
 Suppose:
