@@ -4,11 +4,15 @@ folder: machine-vision
 stage: evergreen
 confidence: high
 created: 2026-10-25
-lastTended: 2026-10-25
+lastTended: 2026-11-01
 tags: [course-note, machine-vision, image-processing, convolution]
 publish: true
 ---
 **Convolution** is the process of applying a [[Kernel|kernel]] across an [[Image|image]] to calculate new pixel values.
+
+Strictly, mathematical convolution flips the kernel by 180 degrees before multiplying and summing. Sliding the kernel without flipping it is **cross-correlation**, which is what OpenCV's `filter2D` computes.
+
+The averaging kernel in this example is symmetric, so flipping it does not change the result.
 
 > [!summary]- Mental Model
 > ![[convulation.png]]
@@ -34,7 +38,7 @@ repeat
 $$  
 \begin{bmatrix}  
 10&10&10\\  
-10&100&10\\ 
+10&100&10\\
 10&10&10  
 \end{bmatrix}  
 $$
@@ -45,14 +49,14 @@ $$
 K=\frac{1}{9}  
 \begin{bmatrix}  
 1&1&1\\
-1&1&1\\ 
+1&1&1\\
 1&1&1  
 \end{bmatrix}  
 $$
 
 At one position:
 
-```
+```text
 IMAGE              KERNEL
 
 10  10  10         1  1  1
@@ -62,7 +66,7 @@ IMAGE              KERNEL
 
 Multiply corresponding values:
 
-```
+```text
 10×1   10×1   10×1
 10×1  100×1   10×1
 10×1   10×1   10×1
@@ -74,7 +78,7 @@ $$
 10+10+10+10+100+10+10+10+10=180  
 $$
 
-Because this kernel has the factor $\frac{1}{9}$
+Because this kernel has the factor $\frac{1}{9}$:
 
 $$
 180/9=20  
@@ -82,7 +86,7 @@ $$
 
 So this kernel position produces:
 
-```
+```text
 one output value = 20
 ```
 
@@ -90,7 +94,7 @@ That value is placed at the output location corresponding to the current kernel 
 
 Then the kernel moves to the next position and repeats the calculation.
 
-```
+```text
 Position 1
 [ K K K ] . .
 [ K K K ] . .
@@ -106,7 +110,7 @@ Position 2
 
 So:
 
-```
+```text
 one kernel position
 → one calculation
 → one output pixel
@@ -114,13 +118,13 @@ one kernel position
 
 and:
 
-```
+```text
 many kernel positions
 → many output pixels
 → filtered image
 ```
 
-### Why the centre?
+## Why the centre?
 
 For an odd-sized kernel such as `3×3`, there is one clear centre.
 
@@ -130,7 +134,7 @@ Conceptually, the question is:
 
 So:
 
-```
+```text
 Neighbourhood
     ↓
 kernel calculation
@@ -140,10 +144,10 @@ new value for current position
 
 The key distinction is:
 
-```
+```text
 Kernel = the matrix / rule
 
-Convolution = the process of applying that rule across the image
+Convolution = applying the flipped kernel across the image
 ```
 
 The amount the kernel moves between positions is called the **[[Stride|stride]]**.

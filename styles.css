@@ -859,6 +859,10 @@ button.cluster-card:hover {
   padding: 4px 0;
 }
 .prose img { display: block; max-width: 100%; height: auto; }
+.prose img[src^="data:image/svg+xml"] {
+  background: #fff;
+  border-radius: 4px;
+}
 .prose blockquote, .prose .callout {
   margin: 0 0 16px;
   padding: 12px 16px;

@@ -4,7 +4,7 @@ folder: machine-vision
 stage: evergreen
 confidence: high
 created: 2026-10-27
-lastTended: 2026-10-27
+lastTended: 2026-11-01
 tags:
   - course-note
   - machine-vision
@@ -13,15 +13,14 @@ tags:
   - opencv
 publish: true
 ---
-The filters smooth an image by replacing a pixel with a value calculated from its neighborhood.
+**Blur filters** smooth an image by calculating each output pixel from a neighborhood in the input image.
 
 > [!summary]- Mental Model
 > ![[blur.png]]
 
-
 The difference is **how much importance each neighboring pixel receives**.
 
-### Averaging Blur
+## Averaging Blur
 
 An averaging filter gives every pixel in the neighborhood the same weight.
 
@@ -31,14 +30,14 @@ $$
 K=\frac{1}{9}  
 \begin{bmatrix}  
 1&1&1\\  
-1&1&1\\ 
+1&1&1\\
 1&1&1  
 \end{bmatrix}  
 $$
 
 Suppose the image neighbourhood is:
 
-$$ 
+$$
 \begin{bmatrix}  
 10&10&10\\  
 10&100&10\\  
@@ -54,7 +53,7 @@ $$
 
 So:
 
-```
+```text
 100 → 20
 ```
 
@@ -64,7 +63,7 @@ So:
 
 This smooths the image, but it can blur edges and fine details.
 
-### Gaussian Blur
+## Gaussian Blur
 
 A Gaussian filter gives more weight to pixels near the centre.
 
@@ -91,13 +90,13 @@ $$
 
 the weighted sum is:
 
-$$ 
+$$
 10(1)+10(2)+10(1)+10(2)+100(4)+10(2)+10(1)+10(2)+10(1)  = 520
 $$
 
 Then divide by the total weight:
 
-$$ 
+$$
 1+2+1+2+4+2+1+2+1=16  
 $$
 
@@ -109,12 +108,14 @@ $$
 
 Therefore:
 
-```
+```text
 Average blur  → 20
 Gaussian blur → 32.5
 ```
 
 The Gaussian result stays closer to the original centre value because the centre has more influence.
+
+These are unrounded calculations. An 8-bit output stores integer intensities, so fractional results such as `32.5` are rounded. Floating-point image arrays can retain fractional values.
 
 > [!abstract]+ In Short
 > Average blur
@@ -124,13 +125,13 @@ The Gaussian result stays closer to the original centre value because the centre
 > → nearby pixels matter more
 > → distant pixels matter less
 
-### Why Gaussian Blur Is Common
+## Why Gaussian Blur Is Common
 
 Gaussian blur usually gives more natural smoothing because nearby pixels influence the result more strongly than pixels farther away.
 
 It is commonly used for:
 
-```
+```text
 noise reduction
 ↓
 smoothing
@@ -138,13 +139,17 @@ smoothing
 pre-processing before edge detection
 ```
 
-In OpenCV:
+For an existing image array named `image`, the OpenCV calls are:
 
-```
+```python
+import cv2
+
 cv2.blur(image, (3, 3))
 
 cv2.GaussianBlur(image, (3, 3), 0)
 ```
+
+In `GaussianBlur`, `0` asks OpenCV to infer the standard deviation from the kernel size. Border handling and output data type also affect the final pixel values.
 
 > [!important] The key idea is:
 > Averaging blur treats all neighbours equally, while Gaussian blur gives more importance to pixels closer to the centre.

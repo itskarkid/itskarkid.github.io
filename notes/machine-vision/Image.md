@@ -4,7 +4,7 @@ folder: machine-vision
 stage: evergreen
 confidence: high
 created: 2026-10-24
-lastTended: 2026-10-24
+lastTended: 2026-11-01
 tags:
   - course-note
   - machine-vision
@@ -12,7 +12,7 @@ tags:
   - opencv
 publish: true
 ---
-An **image** is a matrix of number
+A digital **image** is an array of numbers. A grayscale image stores one intensity value per pixel; an RGB image stores three color-channel values per pixel.
 
 > [!summary]- Mental Model
 > ![[image_info.png]]
@@ -25,7 +25,7 @@ For a grayscale image:
 30  180  255
 ```
 
-Every number is one pixel intensity:
+For an 8-bit unsigned grayscale image, each number is one pixel intensity between 0 and 255:
 
 ```text
 0   : Black
@@ -35,22 +35,22 @@ Every number is one pixel intensity:
 255 : White
 ```
 
-A grey scale image has shape:
+A grayscale image has shape:
 
 ```text
 (rows, columns) or (height, width) // image.shape
 ```
 
-## Image Coordinate
+## Image coordinates
 
 ```text
 (row, column) = (y, x)
 ```
 
-So if you access:
+NumPy uses zero-based indexing. In a sufficiently large image, this access:
 
 ```text
-[10, 3]
+image[10, 3]
 ```
 
 That means:
@@ -60,15 +60,15 @@ row    = y = 10
 column = x = 3
 ```
 
-not x = 10, y =3
+means `x = 3` and `y = 10`, not the other way around.
 
-For color images, each pixel has three channels:
+For an RGB color image, each pixel has three channels:
 
 ```text
 [R G B]
 ```
 
-For example
+For example, using 8-bit RGB values:
 
 ```text
 [255, 0, 0] => Red
@@ -78,7 +78,7 @@ For example
 [0, 0, 0] => Black
 ```
 
-A color image usually has shape:
+An RGB image usually has shape:
 
 ```text
 (height, width, 3) => (rows, columns, channels)
@@ -90,13 +90,15 @@ OpenCV often uses
 BGR instead of RGB
 ```
 
-That is way we often use
+For a BGR array named `image_bgr`, convert its channel order before displaying it with Matplotlib:
 
 ```python
-cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+import cv2
+
+image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
 ```
 
-when displaying OpenCV images with Matplotlib.
+Matplotlib expects RGB order for a three-channel color image.
 
 ## Represent this image in Python
 
@@ -116,7 +118,7 @@ print("Data type:", image.dtype)
 
 **Expected output:**
 
-```
+```text
 [[  0  60 120]
  [180 240 100]
  [150 200 255]]
@@ -144,6 +146,7 @@ plt.title("My First Grayscale Image")
 plt.colorbar(label="Pixel intensity")
 plt.show()
 ```
+
 `imshow()` displays your array as an image. The arguments `vmin=0` and `vmax=255` ensure that the grayscale mapping uses the full range.
 
 ## Color Images, RGB/BGR and OpenCV
@@ -156,12 +159,18 @@ A grayscale pixel stores one intensity value. A color pixel typically stores thr
 
 ### Grayscale versus color image arrays
 
-**A Grey Scale has two dimensions** 
-<p align="left"><center>(Height, Width)</center></p>
-![[gray_parrot.png]]<center>Shape: (480, 640)</center>
+### Grayscale array
 
-**A Color Image has three dimensions** 
+`(Height, Width)`
 
-<p align="left"><center>(Height, Width, Channel)</center></p>
-![[color_parrot.png]]<center>Shape: (480, 640, 3)</center>
+![[gray_parrot.png]]
 
+Shape: `(480, 640)`
+
+### RGB color array
+
+`(Height, Width, Channel)`
+
+![[color_parrot.png]]
+
+Shape: `(480, 640, 3)`

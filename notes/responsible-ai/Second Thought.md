@@ -4,45 +4,48 @@ folder: responsible-ai
 stage: budding
 confidence: high
 created: 2026-10-25
-lastTended: 2026-10-25
+lastTended: 2026-11-01
 tags:
   - responsible-ai
 publish: true
 ---
-Second thought started during Synoptix Hackathon Responsible AI Hackathon 2026 from a question:
+Second Thought started during the Synoptix Responsible AI Hackathon 2026 with a question:
 
 > [!note] Question
-> How can we protect personal information leak in an LLM prompts while preserving enough context for the model to remain useful?
+> How can we prevent personal information from leaking through LLM prompts while preserving enough context for the model to remain useful?
 
-When interaction with an LLM, user may unintentionally include information such as names, addresses, account number, email address or financial details in their prompts. Removing all of this information can improve privacy, but it can also remove context that the model needs to understand the request.
+When interacting with an LLM, users may unintentionally include names, addresses, account numbers, email addresses, or financial details in their prompts. Removing this information can reduce exposure, but it can also remove context that the model needs to understand the request.
 
-Second Thought explore a privacy layer that sits between the user and an LLM. Its purpose is not simply to remove information, but to help the user what should leave their device while preserving the meaning of the original prompt.
+Second Thought explores a privacy layer between the user and an LLM. Its purpose is not simply to remove information, but to help users decide what should leave their device while preserving the meaning of the original prompt.
 
 ## Core Idea
 
-Instead of sending he original prompt to an LLM, Second Thought first analyses it for potentially sensitive information.
+Instead of sending the original prompt directly to an LLM, Second Thought first analyses it for potentially sensitive information.
 
-The user can then replace selected information with contextual placeholder such as:
-```
+The user can then replace selected information with contextual placeholders such as:
+
+```text
 [private_address]
 [account_number]
 [person_name]
 ```
-The mask prompt is sent to the LLM rather than the original text.
 
-When the LLM returns its response , Second Thought processes the response locally and restore the placeholders with the original values before displaying it to the user.
+The masked prompt is sent to the LLM rather than the original text.
+
+When the LLM returns its response, the intended workflow restores recognized placeholders locally before displaying the result to the user.
 
 The intended flow is:
 
 ![[second-thought-masking.png]]
-The external model therefore receives enough information to understand the structure and meaning of the request without necessarily receiving the underlying personal values.
+The goal is to preserve enough context for the request while withholding selected personal values. This depends on what is detected, what the user chooses to mask, and whether the remaining context reveals sensitive information indirectly.
 
 ## Privacy Detection Approaches
 
 Second Thought is an idea for introducing a privacy layer between the user and an LLM. Rather than depending on a single method, I explored several possible approaches for identifying and protecting personal information.
+
 ### Manual Masking
 
-One approach is to let the user decide directly what should be hidden. In a private interaction mode, the user could select words or phrases and mask or unmask them before sending the prompt. 
+One approach is to let the user decide directly what should be hidden. In a private interaction mode, the user could select words or phrases and mask or unmask them before sending the prompt.
 
 This provides the most direct form of user control, although it also depends on the user noticing all sensitive information themselves.
 
@@ -70,7 +73,7 @@ This keeps Second Thought centered on the idea of **assisted privacy rather than
 
 ## Human in the Loop
 
-A central idea behind Second Thought is **human-in-the-loop privacy**. Privacy can depend heavily on context. Information that one user considers sensitive may be acceptable for another user to share. 
+A central idea behind Second Thought is **human-in-the-loop privacy**. Privacy can depend heavily on context. Information that one user considers sensitive may be acceptable for another user to share.
 
 For this reason, the privacy detector acts as an assistant rather than the final decision maker.
 
@@ -136,7 +139,7 @@ The sensitive information therefore does not need to be exposed to the external 
 
 ## A Simple Example
 
-Consider this request: 
+Consider this request:
 
 **Original prompt**
 
@@ -146,9 +149,11 @@ A masked version could be:
 
 `Hi, I was double-charged on my electricity bill for my flat at [private_address]. My account number is [account_number] under the name Marcus Albright. I paid via my debit card ending in [card_number], but my statement shows two identical charges of £[payment_amount] on 12 October 2026. Draft an email for me.`
 
+This example demonstrates partial masking: the name and transaction date remain visible. It should not be treated as an anonymized prompt.
+
 **Llama 3.2 3B** model response
 
-```
+```text
 Here's a draft email you can use as a template:
 
 Subject: Dispute of Double Charge on Electricity Bill
@@ -177,7 +182,10 @@ Marcus Albright
 
 The model still understands that the request involves an electricity bill, an account, a payment card and a duplicated transaction.
 
-It does not need the original values to draft the email. You can have prototype version of [second-thought](https://github.com/itskarkid/second-thought).
+The response also exposes a limitation: the model replaces some specific placeholders with `[MASKED]`. Those values cannot be restored unambiguously from that token alone. Restoration should accept only exact, known placeholders and leave unknown ones for the user to review rather than guessing.
+
+The model does not need every original value to draft the email. The [Second Thought prototype](https://github.com/itskarkid/second-thought) explores this workflow.
+
 ## Privacy vs Utility
 
 Second Thought therefore leads to a broader question:
@@ -188,4 +196,3 @@ Second Thought therefore leads to a broader question:
 - Masking too much may prevent the model from understanding the request.
 
 The interesting problem lies somewhere between the two.
-

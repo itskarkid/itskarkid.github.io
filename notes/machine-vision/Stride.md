@@ -4,7 +4,7 @@ folder: machine-vision
 stage: evergreen
 confidence: high
 created: 2026-10-26
-lastTended: 2026-10-26
+lastTended: 2026-11-01
 tags:
   - course-note
   - machine-vision
@@ -22,7 +22,7 @@ publish: true
 
 The kernel moves one pixel at a time.
 
-```
+```text
 Position 1
 
 [ K K K ] . .
@@ -40,7 +40,7 @@ This gives many overlapping neighborhoods.
 
 So:
 
-```
+```text
 small stride
 → more kernel positions
 → more output pixels
@@ -50,7 +50,7 @@ small stride
 
 The kernel moves two pixels at a time.
 
-```
+```text
 Position 1
 
 [ K K K ] . .
@@ -68,7 +68,7 @@ This skips some possible kernel positions.
 
 So:
 
-```
+```text
 large stride
 → fewer kernel positions
 → fewer output pixels
@@ -78,19 +78,19 @@ Example:
 
 For a `5×5` image with a `3×3` kernel:
 
-```
+```text
 stride = 1
 → output size = 3×3
 ```
 
 With:
 
-```
+```text
 stride = 2
 → output size = 2×2
 ```
 
-The output-size formula with no [[Padding|padding]] is:
+With no [[Padding|padding]] and no kernel dilation, the output-size formula along one dimension is:
 
 $$
 O=  
@@ -101,16 +101,18 @@ $$
 
 where:
 
-```
+```text
 N = input size
 K = kernel size
 S = stride
 O = output size
 ```
 
+Apply the formula separately to height and width. These examples keep the image and kernel sizes fixed while changing only the stride.
+
 Example:
 
-```
+```text
 N = 5
 K = 3
 S = 2
@@ -126,7 +128,7 @@ $$
 
 So:
 
-```
+```text
 5×5 input
 3×3 kernel
 stride 2
@@ -136,7 +138,7 @@ stride 2
 
 For normal image filtering, stride is usually:
 
-```
+```text
 1
 ```
 

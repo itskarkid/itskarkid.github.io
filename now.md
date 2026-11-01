@@ -33,6 +33,6 @@ location: Bristol, UK
 - **Near-term boundary:** Build strong fundamentals in perception, robot motion, localization, mapping, and RL before attempting a fully integrated multi-robot learning system.
 - **Research boundary:** Keep the MSc dissertation realistically scoped around a small number of interacting components, especially visual perception, AoI-based information reliability, and RL-based exploration/exploitation decisions.
 - **Not a current priority:** Mechanical design, advanced electronics, and low-level hardware design are useful background areas but are not the main research direction.
-- **Conceptual reading interest:** Broader ideas around explain ability, epistemic reasoning, knowledge reliability, and how autonomous systems can justify what they know and why they act.
+- **Conceptual reading interest:** Broader ideas around explainability, epistemic reasoning, knowledge reliability, and how autonomous systems can justify what they know and why they act.
 - **Current learning strategy:** Use coursework and practical experiments to strengthen fundamentals first, then connect these ideas gradually into the dissertation architecture.
 - **Longer-term direction:** Use the MSc as a foundation for PhD-level research in adaptive, decentralized, explainable multi-agent autonomous systems.

@@ -4,7 +4,7 @@ folder: machine-vision
 stage: evergreen
 confidence: high
 created: 2026-10-26
-lastTended: 2026-10-26
+lastTended: 2026-11-01
 tags:
   - course-note
   - machine-vision
@@ -18,12 +18,11 @@ publish: true
 > [!summary]- Mental Model
 > ![[padding.png]]
 
-
 Without padding, the kernel cannot fully fit at the image boundary.
 
 Suppose the image is:
 
-```
+```text
 10 20 30
 40 50 60
 70 80 90
@@ -31,7 +30,7 @@ Suppose the image is:
 
 If a `3×3` kernel is centered on the top-left pixel, some values would lie outside the image:
 
-```
+```text
 ?  ?  ?
 ? 10 20
 ? 40 50
@@ -43,7 +42,7 @@ Padding provides values for those missing positions.
 
 Add zeros around the image:
 
-```
+```text
 0  0  0  0  0
 0 10 20 30  0
 0 40 50 60  0
@@ -55,7 +54,7 @@ Now the kernel can also be centred on edge pixels.
 
 So:
 
-```
+```text
 without padding
 → fewer valid kernel positions
 → smaller output
@@ -65,7 +64,7 @@ with padding
 → output size can be preserved
 ```
 
-For odd-sized kernels, a common rule for preserving image size is:
+For odd-sized kernels with stride 1 and no dilation, symmetric padding on each side preserves image size when:
 
 $$
 P=\frac{K-1}{2}  
@@ -73,14 +72,16 @@ $$
 
 where:
 
-```
+```text
 P = padding
 K = kernel size
 ```
 
+Apply the rule separately to image height and width. It does not generally preserve size when the stride is larger than 1.
+
 Examples:
 
-```
+```text
 3×3 kernel → padding 1
 
 5×5 kernel → padding 2
@@ -92,7 +93,7 @@ Padding is not always zero.
 
 Common padding types are:
 
-```
+```text
 Zero
 → add 0 outside the image
 
@@ -109,7 +110,7 @@ Because padded values are also used in the kernel calculation.
 
 For example:
 
-```
+```text
 zero padding
 → may make bright edges darker
 
@@ -122,14 +123,14 @@ reflect padding
 
 The key mental model is:
 
-```
+```text
 Padding
 → controls what the kernel sees outside the real image boundary
 ```
 
 And together:
 
-```
+```text
 Kernel size
 → how much area is seen
 
