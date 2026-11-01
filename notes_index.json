@@ -4,9 +4,11 @@
   "machine-vision/Filtering Geometry.md",
   "machine-vision/Grayscale.md",
   "machine-vision/Image Histogram.md",
+  "machine-vision/Image Segmentation.md",
   "machine-vision/Image.md",
   "machine-vision/Kernel.md",
   "machine-vision/Padding.md",
   "machine-vision/Stride.md",
+  "machine-vision/Thresholding.md",
   "responsible-ai/Second Thought.md"
 ]
