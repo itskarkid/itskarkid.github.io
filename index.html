@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" class="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,6 +70,13 @@
       </a>
 
       <!-- Local Time Status -->
+      <button id="themeToggle" class="btn-action theme-toggle" type="button" aria-label="Page light" aria-pressed="false" title="Turn on the light" onclick="toggleTheme()">
+        <svg class="lucide lucide-lightbulb" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+          <path d="M9 18h6" />
+          <path d="M10 22h4" />
+        </svg>
+      </button>
       <span class="zone-status" id="zoneStatus" role="status" aria-live="polite" aria-atomic="true">
         <span class="season-icon" id="seasonIcon" aria-hidden="true"></span>
         <span id="themeLabel" style="font-weight:600;">Night</span>
@@ -836,17 +843,51 @@
       }
       activeNoteId = Object.keys(vault)[0] || null;
       renderSidebarNotes();
-      if (activeNoteId) loadGardenNote(activeNoteId);
-      else document.getElementById('noteTitle').textContent = 'No notes available';
+      gardenNotesReady = true;
+      if (!activeNoteId) document.getElementById('noteTitle').textContent = 'No notes available';
+      restorePageFromUrl();
     }
 
     // State
     let activeNoteId = null;
+    let gardenNotesReady = false;
+    const siteTitle = document.title;
     let currentStageFilter = 'all';
     let isRawMd = false;
     let isNowRawMd = false;
 
     let nowMarkdownSource = '';
+
+    function writePageUrl(viewName) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('note');
+      url.searchParams.delete('view');
+      url.hash = '';
+      if (viewName === 'garden' && activeNoteId) url.searchParams.set('note', activeNoteId);
+      else if (viewName !== 'home') url.searchParams.set('view', viewName);
+      if (url.href !== window.location.href) window.history.pushState(null, '', url.href);
+    }
+
+    function restorePageFromUrl() {
+      if (!gardenNotesReady) return;
+      const url = new URL(window.location.href);
+      const noteId = url.searchParams.get('note');
+      let viewName = url.searchParams.get('view');
+      if (noteId) {
+        if (Object.prototype.hasOwnProperty.call(vault, noteId)) {
+          activeNoteId = noteId;
+          viewName = 'garden';
+        } else {
+          url.searchParams.delete('note');
+          url.searchParams.delete('view');
+          window.history.replaceState(null, '', url.href);
+          viewName = 'home';
+        }
+      }
+      switchView(['garden', 'now'].includes(viewName) ? viewName : 'home', false);
+    }
+
+    window.addEventListener('popstate', restorePageFromUrl);
 
     // NOW MARKDOWN CARD PARSER & RENDERER
     function parseAndRenderNowMarkdown(md) {
@@ -1050,13 +1091,26 @@
       return hour < 18 ? 'Day' : 'Night';
     }
 
+    let themeOverride = null;
+
     function getDefaultTheme(date = new Date()) {
       return getZoneState(date) === 'Day' ? 'light' : 'dark';
     }
 
+    function toggleTheme() {
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      themeOverride = theme === getDefaultTheme() ? null : theme;
+      refreshLocationTheme();
+    }
+
     function updatePortraitState(date = new Date()) {
-      const sleeping = getZoneState(date) === 'Sleeping';
+      const state = getZoneState(date);
+      const sleeping = state === 'Sleeping';
       const portrait = document.getElementById('avatarSvgFallback');
+      const frame = portrait.closest('.profile-avatar-frame');
+      frame.setAttribute('data-theme', getDefaultTheme(date));
+      frame.setAttribute('data-season', document.documentElement.getAttribute('data-season'));
+      portrait.setAttribute('data-zone', state === 'Day' ? 'day' : 'night');
       portrait.setAttribute('data-sleeping', String(sleeping));
       portrait.setAttribute('aria-label', sleeping
         ? 'Dheeraj Karki is sleeping; window closed until 06:00 local time'
@@ -1064,10 +1118,13 @@
     }
 
     function applyDayNight(date = new Date()) {
-      const theme = getDefaultTheme(date);
+      const theme = themeOverride ?? getDefaultTheme(date);
       const html = document.documentElement;
       html.setAttribute('data-theme', theme);
       html.classList.toggle('dark', theme === 'dark');
+      const toggle = document.getElementById('themeToggle');
+      toggle.setAttribute('aria-pressed', String(theme === 'light'));
+      toggle.title = theme === 'light' ? 'Turn off the light' : 'Turn on the light';
       updateThemeLabel(date);
       updatePortraitState(date);
     }
@@ -1077,8 +1134,13 @@
       const season = preview === 'auto' ? getSeason() : preview;
       document.documentElement.setAttribute('data-season', season);
       const names = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter' };
-      const icons = { spring: '\u{1f338}', summer: '\u2600', autumn: '\u{1f342}', winter: '\u2744' };
-      document.getElementById('seasonIcon').textContent = icons[season];
+      const icons = {
+        spring: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+        summer: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+        autumn: '<path class="season-leaf" d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+        winter: '<line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/>'
+      };
+      document.getElementById('seasonIcon').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${icons[season]}</svg>`;
       document.getElementById('companionSeason').textContent = names[season];
       document.getElementById('teddyBtn').title = `Chat with Barnaby (${names[season]})`;
       applyDayNight();
@@ -1187,7 +1249,7 @@
     window.setInterval(refreshLocationTheme, 60000);
 
     // 3. VIEW SWITCHER
-    function switchView(viewName) {
+    function switchView(viewName, updateUrl = true) {
       document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
 
@@ -1198,7 +1260,7 @@
 
       if (viewName === 'garden') {
         renderSidebarNotes();
-        loadGardenNote(activeNoteId);
+        loadGardenNote(activeNoteId, false);
         setTimeout(initGraph, 60);
       } else if (viewName === 'now') {
         fetchNowMarkdown();
@@ -1212,6 +1274,10 @@
       if (mobileBar) {
         mobileBar.style.display = (viewName === 'garden' && window.innerWidth <= 900) ? 'flex' : 'none';
       }
+      document.title = viewName === 'garden' && vault[activeNoteId]
+        ? `${vault[activeNoteId].title} | Dheeraj Karki`
+        : viewName === 'now' ? `Now | Dheeraj Karki` : siteTitle;
+      if (updateUrl) writePageUrl(viewName);
     }
 
     // ================= MOBILE DRAWER LOGIC =================
@@ -1346,7 +1412,6 @@
     function openNoteInGarden(id) {
       activeNoteId = id;
       switchView('garden');
-      loadGardenNote(id);
     }
 
     // 4. PARSER & WIKILINKS
@@ -1461,7 +1526,7 @@
     }
 
     // 5. NOTE RENDERER
-    function loadGardenNote(id) {
+    function loadGardenNote(id, updateUrl = true) {
       if (!vault[id]) return;
       activeNoteId = id;
       const note = vault[id];
@@ -1516,6 +1581,10 @@
       setupHoverTooltips();
       renderSidebarNotes();
       drawGraph();
+      if (document.getElementById('view-garden').classList.contains('active')) {
+        document.title = `${note.title} | Dheeraj Karki`;
+        if (updateUrl) writePageUrl('garden');
+      }
     }
 
     // 6. SIDEBAR LIST
@@ -1735,7 +1804,7 @@
       fetchBioMarkdown();
       fetchNowMarkdown();
       fetchAllGardenNotes();
-      switchView('home');
+      switchView('home', false);
     };
   </script>
 </body>

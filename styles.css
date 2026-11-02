@@ -1,16 +1,16 @@
-:root {
+:root, .profile-avatar-frame[data-theme="light"] {
   color-scheme: light;
-  --bg: #dce5df;
-  --surface: #d0ddd4;
-  --card: #c3d4c9;
-  --border: #b0c5b8;
-  --border-strong: #789884;
-  --text: #26362d;
-  --text-muted: #4d6356;
-  --accent: #315d48;
-  --accent-soft: rgba(65, 118, 86, 0.12);
-  --season-detail: #a04e71;
-  --code-bg: #c8d8ce;
+  --bg: #f4f5f3;
+  --surface: #e8ece9;
+  --card: #ffffff;
+  --border: #c5ceca;
+  --border-strong: #778780;
+  --text: #252d2a;
+  --text-muted: #53615b;
+  --accent: #236447;
+  --accent-soft: rgba(35, 100, 71, 0.08);
+  --season-detail: #785b24;
+  --code-bg: #e9eeeb;
   --glass: color-mix(in srgb, var(--surface) 86%, transparent);
   --glass-shadow: 0 8px 28px -18px color-mix(in srgb, var(--text) 35%, transparent);
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -20,101 +20,59 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0e1817;
-  --surface: #182623;
-  --card: #20332e;
-  --border: #30483e;
-  --border-strong: #618674;
-  --text: #e4eeea;
-  --text-muted: #9eafa8;
-  --accent: #85c7a2;
-  --accent-soft: rgba(116, 194, 148, 0.1);
-  --season-detail: #e9b5c8;
-  --code-bg: #1b2e27;
+  --bg: #181818;
+  --surface: #222222;
+  --card: #303030;
+  --border: #494949;
+  --border-strong: #8a8a8a;
+  --text: #eaeae7;
+  --text-muted: #b5b5b2;
+  --accent: #83c59b;
+  --accent-soft: rgba(131, 197, 155, 0.1);
+  --season-detail: #d3b675;
+  --code-bg: #262626;
 }
 
-:root[data-season="summer"][data-theme="light"] {
-  --bg: #dce8e4;
-  --surface: #d0e0dc;
-  --card: #bfd5ce;
-  --border: #aec9bf;
-  --border-strong: #769f95;
-  --text: #263330;
-  --text-muted: #4d6260;
-  --accent: #17656b;
-  --accent-soft: rgba(27, 117, 117, 0.12);
-  --season-detail: #92651c;
-  --code-bg: #c8dbd4;
+:root[data-season="summer"][data-theme="light"],
+.profile-avatar-frame[data-season="summer"][data-theme="light"] {
+  --accent: #006a70;
+  --accent-soft: rgba(0, 106, 112, 0.08);
+  --season-detail: #806018;
 }
 
-:root[data-season="summer"][data-theme="dark"] {
-  --bg: #101b1d;
-  --surface: #1a2b2d;
-  --card: #233a3b;
-  --border: #335254;
-  --border-strong: #638b89;
-  --text: #e6f0ed;
-  --text-muted: #a0b9b2;
-  --accent: #71d2cd;
-  --accent-soft: rgba(85, 199, 192, 0.1);
-  --season-detail: #e6c17d;
-  --code-bg: #1c3233;
+:root[data-season="summer"][data-theme="dark"],
+.profile-avatar-frame[data-season="summer"][data-theme="dark"] {
+  --accent: #68cdc9;
+  --accent-soft: rgba(104, 205, 201, 0.1);
+  --season-detail: #ddbd72;
 }
 
-:root[data-season="autumn"][data-theme="light"] {
-  --bg: #e2e3db;
-  --surface: #d7dacf;
-  --card: #c9cebf;
-  --border: #b9bfae;
-  --border-strong: #8c967a;
-  --text: #30352b;
-  --text-muted: #565f4e;
-  --accent: #805329;
-  --accent-soft: rgba(145, 101, 49, 0.1);
-  --season-detail: #45634b;
-  --code-bg: #d0d4c6;
+:root[data-season="autumn"][data-theme="light"],
+.profile-avatar-frame[data-season="autumn"][data-theme="light"] {
+  --accent: #954622;
+  --accent-soft: rgba(149, 70, 34, 0.08);
+  --season-detail: #526b35;
 }
 
-:root[data-season="autumn"][data-theme="dark"] {
-  --bg: #171a16;
-  --surface: #242a21;
-  --card: #30382c;
-  --border: #434e3c;
-  --border-strong: #7d8b6c;
-  --text: #e9ece2;
-  --text-muted: #b2bca6;
-  --accent: #dbb27a;
-  --accent-soft: rgba(206, 166, 104, 0.1);
-  --season-detail: #a7c4ac;
-  --code-bg: #293124;
+:root[data-season="autumn"][data-theme="dark"],
+.profile-avatar-frame[data-season="autumn"][data-theme="dark"] {
+  --accent: #e7a47b;
+  --accent-soft: rgba(231, 164, 123, 0.1);
+  --season-detail: #b2c58c;
 }
 
-:root[data-season="winter"][data-theme="light"] {
-  --bg: #dbe3ec;
-  --surface: #cdd9e5;
-  --card: #c0d0df;
-  --border: #adbfce;
-  --border-strong: #7993aa;
-  --text: #25323f;
-  --text-muted: #4a6073;
-  --accent: #1b5d83;
-  --accent-soft: rgba(35, 117, 158, 0.12);
-  --season-detail: #675d86;
-  --code-bg: #c6d5e2;
+:root[data-season="winter"][data-theme="light"],
+.profile-avatar-frame[data-season="winter"][data-theme="light"] {
+  --accent: #245f96;
+  --accent-soft: rgba(36, 95, 150, 0.08);
+  --season-detail: #526d7b;
 }
 
-:root[data-season="winter"][data-theme="dark"] {
-  --bg: #0c1219;
-  --surface: #14212b;
-  --card: #1c2d37;
-  --border: #2a4352;
-  --border-strong: #587e94;
-  --text: #e4eef5;
-  --text-muted: #9eb4c4;
-  --accent: #73cef1;
-  --accent-soft: rgba(56, 189, 248, 0.1);
-  --season-detail: #b8bedf;
-  --code-bg: #182934;
+:root[data-season="winter"][data-theme="dark"],
+.profile-avatar-frame[data-season="winter"][data-theme="dark"] {
+  --accent: #82bced;
+  --accent-soft: rgba(130, 188, 237, 0.1);
+  --season-detail: #afc4cf;
 }
 
 .season-icon {
@@ -123,9 +81,17 @@
   justify-content: center;
   width: 18px;
   height: 18px;
+  flex-shrink: 0;
   color: var(--accent);
-  font-size: 16px;
   line-height: 1;
+}
+.season-icon svg { display: block; width: 18px; height: 18px; }
+[data-season="summer"] .season-icon { color: var(--season-detail); }
+[data-season="autumn"] .season-icon { color: #806b29; }
+.season-icon .season-leaf { fill: #e8d99b; }
+:root[data-theme="dark"][data-season="autumn"] .season-icon { color: #e8d99b; }
+:root[data-theme="dark"] .season-icon .season-leaf {
+  fill: rgba(232, 217, 155, 0.12);
 }
 
 .zone-status {
@@ -188,24 +154,25 @@
   --portrait-ink: #34434b;
   --portrait-hair: #2f363d;
 }
-[data-theme="dark"] #avatarSvgFallback {
+#avatarSvgFallback[data-zone="night"] {
   --portrait-skin: #9a877a;
   --portrait-ink: #26353e;
   --portrait-hair: #202c34;
   filter: saturate(0.45) brightness(0.82);
 }
-[data-theme="dark"] #avatarSvgFallback .portrait-night { opacity: 0.5; }
+#avatarSvgFallback[data-zone="night"] .portrait-night { opacity: 0.5; }
 .portrait-sleep { display: none; }
 #avatarSvgFallback[data-sleeping="true"] .portrait-sleep { display: inline; }
 .portrait-day, .portrait-night { display: none; }
-[data-theme="light"] .portrait-day,
-[data-theme="dark"] .portrait-night { display: inline; }
+#avatarSvgFallback[data-zone="day"] .portrait-day,
+#avatarSvgFallback[data-zone="night"] .portrait-night { display: inline; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background-color: var(--bg);
-  background-image: linear-gradient(135deg, var(--accent-soft), transparent 55%, color-mix(in srgb, var(--season-detail) 5%, transparent));
+  background-image: linear-gradient(color-mix(in srgb, var(--text) 2%, transparent) 1px, transparent 1px);
+  background-size: 100% 48px;
   background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-sans);
@@ -306,8 +273,8 @@ header.masthead {
   color: var(--text);
 }
 .nav-btn.active {
-  background: var(--card);
-  color: var(--text);
+  background: var(--accent);
+  color: var(--bg);
   font-weight: 600;
   box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 }
@@ -339,6 +306,25 @@ header.masthead {
 .btn-action.highlight {
   border-color: var(--accent);
   color: var(--text);
+}
+
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.theme-toggle[aria-pressed="true"] {
+  color: #806018;
+  border-color: #806018;
+}
+.theme-toggle[aria-pressed="true"] svg {
+  fill: #f2cd70;
+  filter: drop-shadow(0 0 3px rgba(242, 205, 112, 0.45));
+}
+.garden-reader, .garden-sidebar, .garden-rightpane {
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 /* FLOATING TEDDY BEAR COMPANION (BOTTOM-RIGHT) */
@@ -730,7 +716,7 @@ button.cluster-card:hover {
 .garden-reader {
   overflow-y: auto;
   padding: 40px 48px 80px 48px;
-  background: var(--bg);
+  background: var(--card);
 }
 .garden-reader-content {
   max-width: 680px;

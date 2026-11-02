@@ -29,3 +29,11 @@ push index updates to `main`.
 
 Everything committed here is public, including the CV and note files.
 `publish: false` hides a note from the reader, not from the repository or hosting.
+
+## Sharing Notes
+
+Open a note and copy the browser address. Each note has a URL such as
+`?note=machine-vision%2Fblur`, relative to the site's published URL. Shared links
+open the note directly, including after refresh. Browser Back and Forward restore
+previous notes and views. Renaming or moving a note changes its link; unavailable
+note links return to Home. Localhost preview links only work on your own machine.
