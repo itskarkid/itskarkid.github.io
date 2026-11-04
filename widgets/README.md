@@ -36,14 +36,14 @@ JSON rather than an interactive widget.
 }
 ```
 
-See [Thresholding](../notes/machine-vision/Thresholding.md) for a matrix comparison
+See [Thresholding](Thresholding.md) for a matrix comparison
 with a slider, checkbox, and calculated count, using exactly the same renderer.
 
 Other note experiments use the same schema without custom JavaScript:
 
-- [Grayscale](../notes/machine-vision/Grayscale.md): compare average and weighted conversion with RGB sliders.
-- [Kernel](../notes/machine-vision/Kernel.md): vary one pixel and observe a neighborhood's mean.
-- [Filtering Geometry](../notes/machine-vision/Filtering%20Geometry.md): explore how input, kernel, stride, and padding change output size.
+- [Grayscale](Grayscale.md): compare average and weighted conversion with RGB sliders.
+- [Kernel](Kernel.md): vary one pixel and observe a neighborhood's mean.
+- [Filtering Geometry](Filtering%20Geometry.md): explore how input, kernel, stride, and padding change output size.
 
 ## Configuration
 
@@ -101,7 +101,7 @@ Expressions are limited to 512 characters, 128 syntax nodes, and depth 24.
   and delegated input handling.
 - [expressions.js](expressions.js): restricted expression evaluation.
 - [template.html](template.html): shared widget containers.
-- [styles.css](styles.css): shared responsive control, matrix, and metric styles.
+- [styles.css](05%20Garden/widgets/styles.css): shared responsive control, matrix, and metric styles.
 - [tests.cjs](tests.cjs): expression safety, schema, and documented-example checks.
 
 To add another experiment, add a `widget` block to its note. Extend the renderer
