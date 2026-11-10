@@ -1,0 +1,380 @@
+
+\documentclass[10pt,a4paper]{article}
+
+% --------------------------------------------------
+% Packages
+% --------------------------------------------------
+\usepackage[margin=1.75cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{xcolor}
+
+\definecolor{headingcolor}{HTML}{17324D}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{
+    leftmargin=1.2em,
+    topsep=2pt,
+    itemsep=1pt,
+    parsep=0pt
+}
+\pagestyle{empty}
+\urlstyle{same}
+
+% --------------------------------------------------
+% Section formatting
+% --------------------------------------------------
+\titleformat{\section}
+    {\large\bfseries\color{headingcolor}}
+    {}{0pt}{}
+    [\titlerule]
+
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+% --------------------------------------------------
+% Custom commands
+% --------------------------------------------------
+\newcommand{\cventry}[4]{
+    \textbf{#1}\hfill\textbf{#2}\\
+    \textit{#3}\hfill\textit{#4}
+    \par
+}
+
+\newcommand{\project}[2]{
+    \textbf{#1}\hfill\textit{#2}
+    \par
+}
+
+% --------------------------------------------------
+% Document
+% --------------------------------------------------
+\begin{document}
+
+% ==================================================
+% Header
+% ==================================================
+\begin{center}
+    {\LARGE\bfseries Dheeraj Karki}\\[5pt]
+    MSc Robotics, University of Bristol, United Kingdom\\[3pt]
+    \href{mailto:go26448@bristol.ac.uk}
+         {go26448@bristol.ac.uk}
+    \quad|\quad
+    \href{mailto:itskarkid@gmail.com}
+         {itskarkid@gmail.com}
+    \quad|\quad
+    \href{https://itskarkid.github.io/}
+         {https://itskarkid.github.io/}
+    \quad|\quad
+    +44 7741043900\\[3pt]
+\end{center}
+
+% ==================================================
+\section*{Education}
+% ==================================================
+
+\cventry
+    {MSc Robotics}
+    {Sep 2026 -- Sep 2027 (expected)}
+    {University of Bristol}
+    {United Kingdom}
+
+\begin{itemize}
+    \item Current postgraduate study in robotics,
+    robotic systems, machine vision and research
+    methodology.
+    \item Expected completion: 15 September 2027.
+\end{itemize}
+
+\vspace{3pt}
+
+\cventry
+    {M.Tech in Software Systems}
+    {Jan 2017 -- Jan 2019}
+    {Birla Institute of Technology and Science
+     (BITS Pilani)}
+    {India}
+
+\begin{itemize}
+    \item Specialisation: Embedded Systems.
+    \item CGPA: 8.6/10; First Division.
+    \item Dissertation: CAD in Cloud.
+\end{itemize}
+
+\vspace{3pt}
+
+\cventry
+    {B.Tech in Electronics and Communication}
+    {Aug 2008 -- May 2012}
+    {ICFAI University, Dehradun}
+    {India}
+
+\begin{itemize}
+    \item CGPA: 9.42/10; Distinction.
+    \item Thesis: Accelerated Parallel Processing
+    Using OpenCL.
+    \item Study project: Wireless Power Transmission.
+\end{itemize}
+
+% ==================================================
+\section*{Research Interest}
+% ==================================================
+
+Multi-agent robotic systems; decentralised planning and
+decision-making; reliable information sharing under
+uncertainty; reinforcement learning; adaptive and
+trustworthy robotic autonomy.
+
+% ==================================================
+\section*{Robotics and Academic Projects}
+% ==================================================
+
+\project
+    {Beyond Binary Trust: Evidence-Aware Decision-Making}
+    {Independent Research | 2026--Present}
+
+\begin{itemize}
+    \item Developed a synthetic multi-source
+    information benchmark to investigate
+    reliability and decision-making under uncertainty.
+
+    \item Implemented and evaluated majority voting,
+    global reliability weighting and domain-specific
+    reliability weighting using separate calibration
+    and test datasets.
+
+    \item Investigating evidence quality, provenance,
+    source dependence and justified abstention
+    as extensions to existing trust models.
+\end{itemize}
+
+\project
+    {Mobile Robot Raster-Scanning Project}
+    {MSc Robotics | 2026}
+
+\begin{itemize}
+    \item Working with an Arduino-based mobile robot
+    equipped with infrared reflectance sensors
+    and wheel encoders.
+    \item Investigating line-following behaviour,
+    rotation accuracy, wheel drift and positioning
+    during raster-scanning experiments.
+    \item Using sensor measurements, motion control
+    and odometry to investigate practical robotic
+    navigation and repeatability.
+\end{itemize}
+
+\vspace{3pt}
+
+\project
+    {Infrared Reflectance Sensor Characterisation}
+    {MSc Robotics | 2026}
+
+\begin{itemize}
+    \item Conducted experiments investigating
+    reflectance sensor responses to black and
+    white surfaces, strip width and boundary
+    effects.
+    \item Analysed measurements to investigate
+    sensor footprint and the implications of
+    calibration for reliable robot sensing.
+\end{itemize}
+
+\vspace{3pt}
+
+\project
+    {Machine Vision Experiments}
+    {MSc Robotics | 2026}
+
+\begin{itemize}
+    \item Practised image filtering, thresholding,
+    morphological operations and object detection
+    using Python and OpenCV.
+    \item Worked with annotated image datasets
+    and investigated machine-learning approaches
+    to visual object and colour identification.
+\end{itemize}
+
+
+% ==================================================
+\section*{Technical Skills}
+% ==================================================
+
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\textbf{Programming:} &
+C++, C, Python, JavaScript \\[3pt]
+
+\textbf{Algorithms:} &
+Computational geometry, spatial data structures,
+planar graph traversal, closed-boundary detection,
+geometry processing \\[3pt]
+
+\textbf{Robotics:} &
+Arduino-based robot experiments, infrared
+reflectance sensors, wheel odometry, motion
+control experiments \\[3pt]
+
+\textbf{Machine Vision:} &
+Python, OpenCV, image filtering, segmentation,
+thresholding, morphological operations \\[3pt]
+
+\textbf{Software Engineering:} &
+System architecture, performance optimisation,
+cross-platform development, debugging,
+code refactoring \\[3pt]
+
+\textbf{CAD and Graphics:} &
+ODA (Open Design Alliance), CAD systems,
+rendering, interactive graphics
+\end{tabularx}
+
+% ==================================================
+\section*{Professional Experience}
+% ==================================================
+
+% IMPORTANT:
+% Confirm current employment dates and designation.
+% The user reports continuing part-time work, but
+% formal contract details are still pending.
+
+\cventry
+    {Arden Software}
+    {Jan 2019 -- Sep 2026}
+    {Software Development}
+    {India / Remote, UK}
+
+\textbf{Staff Software Developer}
+\hfill Sep 2025 -- Sep 2026
+
+\begin{itemize}
+    \item Modernised a legacy desktop CAD
+    application through migration to a modern
+    engine, supporting feature parity across
+    web, desktop and cloud platforms.
+    \item Engineered quadtree-based spatial data
+    structures for polygon lookup,
+    point-in-polygon detection and nested
+    polygon-hierarchy resolution, improving
+    geometric query performance by approximately
+    35\%.
+    \item Collaborated across CAD, architecture
+    and UX teams while refactoring core modules
+    for maintainability.
+\end{itemize}
+
+\textbf{Senior Software Developer}
+\hfill Oct 2021 -- Sep 2025
+
+\begin{itemize}
+    \item Architected a reusable CAD annotation
+    framework supporting dimensions, text,
+    callouts and leaders.
+    \item Implemented import/export support for
+    DXF, DWG, IPD and internal JSON formats.
+    \item Improved rendering pipelines and
+    geometry-processing functionality for
+    interactive CAD systems.
+\end{itemize}
+
+\textbf{Software Developer}
+\hfill Jan 2019 -- Oct 2021
+
+\begin{itemize}
+    \item Optimised HTML5 canvas rendering by
+    intercepting render calls, caching geometry
+    and batching draw operations, reducing
+    rendering latency by approximately 90\%.
+\end{itemize}
+
+\vspace{5pt}
+
+\cventry
+    {Graebert GmbH}
+    {Feb 2016 -- Jan 2019}
+    {Software Engineering}
+    {Noida, India}
+
+\textbf{Senior Software Engineer}
+\hfill Jan 2018 -- Jan 2019
+
+\begin{itemize}
+    \item Designed extensible plugin frameworks
+    and drawing-property systems for CAD
+    applications.
+\end{itemize}
+
+\textbf{Software Engineer}
+\hfill Feb 2016 -- Jan 2018
+
+\begin{itemize}
+    \item Developed custom CAD entities, view
+    systems and interactive editing tools for
+    a cloud-based CAD editor.
+\end{itemize}
+
+\vspace{5pt}
+
+\cventry
+    {Sevya Multimedia Technology}
+    {Feb 2014 -- Jan 2016}
+    {Software Developer}
+    {Hyderabad, India}
+
+\begin{itemize}
+    \item Developed C/C++ automation tools for
+    enterprise clients, including
+    STMicroelectronics and Aristocrat.
+    \item Developed an embedded home-automation
+    prototype for customer demonstrations.
+\end{itemize}
+
+\vspace{5pt}
+
+\cventry
+    {Electronics Corporation of India Limited}
+    {Mar 2013 -- Jan 2014}
+    {Engineer Consultant}
+    {Dehradun, India}
+
+\begin{itemize}
+    \item Led a team of ten operators on a
+    National Population Register project,
+    coordinating daily processing and
+    data-protection procedures.
+\end{itemize}
+
+% ==================================================
+\section*{Other Projects and Ventures}
+% ==================================================
+
+\project
+    {Frido -- Productivity Application}
+    {Jul 2019 -- Jul 2022}
+
+\begin{itemize}
+    \item Co-owned and developed a productivity
+    application for Apple's software ecosystem,
+    collaborating with UI/UX designers.
+    \item Released the application publicly and
+    received recognition on Product Hunt.
+\end{itemize}
+
+% ==================================================
+\section*{Academic Achievements}
+% ==================================================
+
+\begin{itemize}
+    \item Silver Medalist (2nd Rank), B.Tech,
+    ICFAI University, 2012.
+    \item Merit Fellowship Recipient (50\%
+    tuition waiver), ICFAI University,
+    2008--2012.
+\end{itemize}
+
+\end{document}

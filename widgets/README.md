@@ -36,14 +36,14 @@ JSON rather than an interactive widget.
 }
 ```
 
-See [Thresholding](Thresholding.md) for a matrix comparison
+See [Thresholding](Archive/Machine%20Vision/Thresholding.md) for a matrix comparison
 with a slider, checkbox, and calculated count, using exactly the same renderer.
 
 Other note experiments use the same schema without custom JavaScript:
 
-- [Grayscale](Grayscale.md): compare average and weighted conversion with RGB sliders.
-- [Kernel](Kernel.md): vary one pixel and observe a neighborhood's mean.
-- [Filtering Geometry](Filtering%20Geometry.md): explore how input, kernel, stride, and padding change output size.
+- [Grayscale](Archive/Machine%20Vision/Grayscale.md): compare average and weighted conversion with RGB sliders.
+- [Kernel](Archive/Machine%20Vision/Kernel.md): vary one pixel and observe a neighborhood's mean.
+- [Filtering Geometry](Archive/Machine%20Vision/Filtering%20Geometry.md): explore how input, kernel, stride, and padding change output size.
 
 ## Configuration
 
