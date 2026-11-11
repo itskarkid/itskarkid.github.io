@@ -1,10 +1,10 @@
 
 \documentclass[10pt,a4paper]{article}
 
-% --------------------------------------------------
+% ==================================================
 % Packages
-% --------------------------------------------------
-\usepackage[margin=1.75cm]{geometry}
+% ==================================================
+\usepackage[margin=1.65cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -15,22 +15,24 @@
 \usepackage{tabularx}
 \usepackage{xcolor}
 
+% ==================================================
+% Formatting
+% ==================================================
 \definecolor{headingcolor}{HTML}{17324D}
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
+\setlength{\parskip}{2pt}
+
 \setlist[itemize]{
     leftmargin=1.2em,
     topsep=2pt,
     itemsep=1pt,
     parsep=0pt
 }
+
 \pagestyle{empty}
 \urlstyle{same}
 
-% --------------------------------------------------
-% Section formatting
-% --------------------------------------------------
 \titleformat{\section}
     {\large\bfseries\color{headingcolor}}
     {}{0pt}{}
@@ -38,9 +40,9 @@
 
 \titlespacing*{\section}{0pt}{8pt}{4pt}
 
-% --------------------------------------------------
-% Custom commands
-% --------------------------------------------------
+% ==================================================
+% Custom Commands
+% ==================================================
 \newcommand{\cventry}[4]{
     \textbf{#1}\hfill\textbf{#2}\\
     \textit{#3}\hfill\textit{#4}
@@ -52,9 +54,9 @@
     \par
 }
 
-% --------------------------------------------------
+% ==================================================
 % Document
-% --------------------------------------------------
+% ==================================================
 \begin{document}
 
 % ==================================================
@@ -76,6 +78,24 @@
 \end{center}
 
 % ==================================================
+\section*{Professional Profile}
+% ==================================================
+
+MSc Robotics student at the University of Bristol
+with over ten years of software engineering
+experience and an academic background in electronics
+and embedded systems. Currently undertaking practical
+experiments involving Arduino-based mobile robots,
+infrared sensor characterisation, motion control,
+odometry and machine vision.
+
+Experienced in CAD systems, computational geometry,
+experimental data analysis and technical
+problem-solving. Interested in applying engineering
+and programming skills to physical sensing,
+prototyping and experimental research.
+
+% ==================================================
 \section*{Education}
 % ==================================================
 
@@ -86,28 +106,23 @@
     {United Kingdom}
 
 \begin{itemize}
-    \item Current postgraduate study in robotics,
-    robotic systems, machine vision and research
-    methodology.
-    \item Expected completion: 15 September 2027.
+    \item Current study in robotic systems,
+    fundamentals of robotics, machine vision
+    and research methodology.
 \end{itemize}
-
-\vspace{3pt}
 
 \cventry
     {M.Tech in Software Systems}
     {Jan 2017 -- Jan 2019}
-    {Birla Institute of Technology and Science
-     (BITS Pilani)}
+    {BITS Pilani}
     {India}
 
 \begin{itemize}
     \item Specialisation: Embedded Systems.
+    Work Integrated Learning Programme.
     \item CGPA: 8.6/10; First Division.
     \item Dissertation: CAD in Cloud.
 \end{itemize}
-
-\vspace{3pt}
 
 \cventry
     {B.Tech in Electronics and Communication}
@@ -119,7 +134,6 @@
     \item CGPA: 9.42/10; Distinction.
     \item Thesis: Accelerated Parallel Processing
     Using OpenCL.
-    \item Study project: Wireless Power Transmission.
 \end{itemize}
 
 % ==================================================
@@ -136,22 +150,24 @@ trustworthy robotic autonomy.
 % ==================================================
 
 \project
-    {Beyond Binary Trust: Evidence-Aware Decision-Making}
-    {Independent Research | 2026--Present}
+    {Infrared Reflectance Sensor Characterisation}
+    {MSc Robotics | 2026}
 
 \begin{itemize}
-    \item Developed a synthetic multi-source
-    information benchmark to investigate
-    reliability and decision-making under uncertainty.
+    \item Designed and conducted experiments to
+    investigate infrared reflectance sensor
+    responses across different surfaces,
+    strip widths and boundary conditions.
 
-    \item Implemented and evaluated majority voting,
-    global reliability weighting and domain-specific
-    reliability weighting using separate calibration
-    and test datasets.
+    \item Collected and analysed measurements
+    to estimate effective sensor footprint
+    and identify limitations in assumptions
+    about sensor coverage.
 
-    \item Investigating evidence quality, provenance,
-    source dependence and justified abstention
-    as extensions to existing trust models.
+    \item Investigated calibration, measurement
+    repeatability and boundary effects to
+    understand their influence on reliable
+    robotic sensing.
 \end{itemize}
 
 \project
@@ -159,79 +175,89 @@ trustworthy robotic autonomy.
     {MSc Robotics | 2026}
 
 \begin{itemize}
-    \item Working with an Arduino-based mobile robot
-    equipped with infrared reflectance sensors
-    and wheel encoders.
-    \item Investigating line-following behaviour,
-    rotation accuracy, wheel drift and positioning
-    during raster-scanning experiments.
-    \item Using sensor measurements, motion control
-    and odometry to investigate practical robotic
-    navigation and repeatability.
+    \item Working with an Arduino-based mobile
+    robot equipped with infrared reflectance
+    sensors and wheel encoders.
+
+    \item Investigating line-following control,
+    rotation accuracy, wheel drift and
+    positioning during raster-scanning
+    experiments.
+
+    \item Using sensor measurements, motor
+    control and wheel odometry to evaluate
+    robot behaviour and operational
+    repeatability.
 \end{itemize}
-
-\vspace{3pt}
-
-\project
-    {Infrared Reflectance Sensor Characterisation}
-    {MSc Robotics | 2026}
-
-\begin{itemize}
-    \item Conducted experiments investigating
-    reflectance sensor responses to black and
-    white surfaces, strip width and boundary
-    effects.
-    \item Analysed measurements to investigate
-    sensor footprint and the implications of
-    calibration for reliable robot sensing.
-\end{itemize}
-
-\vspace{3pt}
 
 \project
     {Machine Vision Experiments}
     {MSc Robotics | 2026}
 
 \begin{itemize}
-    \item Practised image filtering, thresholding,
-    morphological operations and object detection
-    using Python and OpenCV.
+    \item Applied Python and OpenCV for image
+    filtering, thresholding, segmentation,
+    morphological operations and object detection.
+
     \item Worked with annotated image datasets
-    and investigated machine-learning approaches
-    to visual object and colour identification.
+    and explored approaches to visual object
+    and colour identification.
 \end{itemize}
 
+\project
+    {Beyond Binary Trust: Evidence-Aware
+    Decision-Making}
+    {Independent Research | 2026--Present}
+
+\begin{itemize}
+    \item Developed a synthetic multi-source
+    information benchmark to investigate
+    reliability and decision-making under
+    uncertainty.
+
+    \item Implemented and evaluated majority
+    voting, global reliability weighting
+    and domain-specific reliability weighting,
+    using separate calibration and test datasets.
+
+    \item Currently investigating evidence quality,
+    provenance, source dependence and justified
+    abstention in decision-making under uncertainty.
+\end{itemize}
 
 % ==================================================
 \section*{Technical Skills}
 % ==================================================
 
 \begin{tabularx}{\textwidth}{@{}l X@{}}
+
 \textbf{Programming:} &
 C++, C, Python, JavaScript \\[3pt]
 
-\textbf{Algorithms:} &
-Computational geometry, spatial data structures,
-planar graph traversal, closed-boundary detection,
-geometry processing \\[3pt]
-
-\textbf{Robotics:} &
+\textbf{Sensors and Robotics:} &
 Arduino-based robot experiments, infrared
-reflectance sensors, wheel odometry, motion
-control experiments \\[3pt]
+reflectance sensors, wheel encoders,
+odometry and motion control \\[3pt]
+
+\textbf{Experimental Work:} &
+Sensor characterisation, measurement analysis,
+calibration investigations, experimental
+repeatability and technical documentation \\[3pt]
 
 \textbf{Machine Vision:} &
-Python, OpenCV, image filtering, segmentation,
-thresholding, morphological operations \\[3pt]
+OpenCV, image filtering, thresholding,
+segmentation, morphological operations \\[3pt]
+
+\textbf{CAD and Engineering:} &
+ODA (Open Design Alliance), CAD systems,
+computational geometry, spatial data structures,
+interactive graphics and geometry processing \\[3pt]
 
 \textbf{Software Engineering:} &
 System architecture, performance optimisation,
-cross-platform development, debugging,
-code refactoring \\[3pt]
+debugging, cross-platform development
+and code refactoring
 
-\textbf{CAD and Graphics:} &
-ODA (Open Design Alliance), CAD systems,
-rendering, interactive graphics
 \end{tabularx}
 
 % ==================================================
@@ -239,9 +265,10 @@ rendering, interactive graphics
 % ==================================================
 
 % IMPORTANT:
-% Confirm current employment dates and designation.
-% The user reports continuing part-time work, but
-% formal contract details are still pending.
+% Verify current employment dates and job title
+% before submitting.
+% If still employed part-time, retain "Present".
+% Otherwise, insert the actual end date.
 
 \cventry
     {Arden Software}
@@ -254,45 +281,42 @@ rendering, interactive graphics
 
 \begin{itemize}
     \item Modernised a legacy desktop CAD
-    application through migration to a modern
-    engine, supporting feature parity across
-    web, desktop and cloud platforms.
-    \item Engineered quadtree-based spatial data
-    structures for polygon lookup,
-    point-in-polygon detection and nested
-    polygon-hierarchy resolution, improving
-    geometric query performance by approximately
+    application using a modern engine,
+    supporting functionality across web,
+    desktop and cloud platforms.
+
+    \item Engineered quadtree-based spatial
+    data structures for geometric queries
+    and polygon-hierarchy resolution,
+    improving performance by approximately
     35\%.
-    \item Collaborated across CAD, architecture
-    and UX teams while refactoring core modules
-    for maintainability.
+
+    \item Collaborated with engineering
+    and design teams on complex technical
+    problems, debugging and system improvements.
 \end{itemize}
 
 \textbf{Senior Software Developer}
 \hfill Oct 2021 -- Sep 2025
 
 \begin{itemize}
-    \item Architected a reusable CAD annotation
-    framework supporting dimensions, text,
-    callouts and leaders.
-    \item Implemented import/export support for
-    DXF, DWG, IPD and internal JSON formats.
-    \item Improved rendering pipelines and
-    geometry-processing functionality for
-    interactive CAD systems.
+    \item Designed reusable CAD annotation
+    frameworks and implemented geometry-processing
+    features for interactive CAD applications.
+
+    \item Developed support for engineering
+    drawing formats including DXF and DWG.
 \end{itemize}
 
 \textbf{Software Developer}
 \hfill Jan 2019 -- Oct 2021
 
 \begin{itemize}
-    \item Optimised HTML5 canvas rendering by
-    intercepting render calls, caching geometry
-    and batching draw operations, reducing
-    rendering latency by approximately 90\%.
+    \item Optimised HTML5 rendering pipelines
+    through geometry caching and batched
+    drawing operations, reducing rendering
+    latency by approximately 90\%.
 \end{itemize}
-
-\vspace{5pt}
 
 \cventry
     {Graebert GmbH}
@@ -300,25 +324,11 @@ rendering, interactive graphics
     {Software Engineering}
     {Noida, India}
 
-\textbf{Senior Software Engineer}
-\hfill Jan 2018 -- Jan 2019
-
 \begin{itemize}
-    \item Designed extensible plugin frameworks
-    and drawing-property systems for CAD
-    applications.
+    \item Developed CAD editing tools,
+    extensible plugin frameworks and
+    interactive drawing systems.
 \end{itemize}
-
-\textbf{Software Engineer}
-\hfill Feb 2016 -- Jan 2018
-
-\begin{itemize}
-    \item Developed custom CAD entities, view
-    systems and interactive editing tools for
-    a cloud-based CAD editor.
-\end{itemize}
-
-\vspace{5pt}
 
 \cventry
     {Sevya Multimedia Technology}
@@ -327,14 +337,11 @@ rendering, interactive graphics
     {Hyderabad, India}
 
 \begin{itemize}
-    \item Developed C/C++ automation tools for
-    enterprise clients, including
-    STMicroelectronics and Aristocrat.
-    \item Developed an embedded home-automation
-    prototype for customer demonstrations.
+    \item Developed C/C++ automation tools
+    for enterprise clients and an embedded
+    home-automation prototype for
+    customer demonstrations.
 \end{itemize}
-
-\vspace{5pt}
 
 \cventry
     {Electronics Corporation of India Limited}
@@ -343,15 +350,12 @@ rendering, interactive graphics
     {Dehradun, India}
 
 \begin{itemize}
-    \item Led a team of ten operators on a
-    National Population Register project,
-    coordinating daily processing and
-    data-protection procedures.
+    \item Coordinated a team of ten operators
+    on a National Population Register project.
 \end{itemize}
 
-% ==================================================
+
 \section*{Other Projects and Ventures}
-% ==================================================
 
 \project
     {Frido -- Productivity Application}
@@ -361,20 +365,27 @@ rendering, interactive graphics
     \item Co-owned and developed a productivity
     application for Apple's software ecosystem,
     collaborating with UI/UX designers.
-    \item Released the application publicly and
-    received recognition on Product Hunt.
+
+    \item Released the application publicly
+    and received recognition on Product Hunt.
 \end{itemize}
 
 % ==================================================
-\section*{Academic Achievements}
+\section*{Additional Projects and Achievements}
 % ==================================================
 
 \begin{itemize}
-    \item Silver Medalist (2nd Rank), B.Tech,
-    ICFAI University, 2012.
-    \item Merit Fellowship Recipient (50\%
-    tuition waiver), ICFAI University,
-    2008--2012.
+    \item Co-owned and developed Frido,
+    a publicly released productivity
+    application for Apple's software ecosystem
+    (2019--2022).
+
+    \item Silver Medalist (2nd Rank),
+    B.Tech, ICFAI University, 2012.
+
+    \item Merit Fellowship Recipient
+    (50\% tuition waiver),
+    ICFAI University, 2008--2012.
 \end{itemize}
 
 \end{document}
