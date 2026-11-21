@@ -9,6 +9,7 @@ robotics, and research. This is an initial version and a work in progress.
 - [now.md](now.md): current work and interests.
 - [notes/](notes/): Markdown notes, including nested folders.
 - [index.html](index.html): the website layout and reader.
+- [js/](js/): site scripts (`app.js` garden/home, `knowledge.js` private Drive reader, `reading-ux.js` shortcuts and progress bar).
 - [widgets/README.md](05%20Garden/widgets/README.md): reusable declarative experiments for notes.
 
 ## Publishing

@@ -1339,3 +1339,78 @@ body.garden-graph-open { overflow: hidden; }
   .teddy-chat-header {padding:10px;}
   .teddy-chat-input-bar {padding:8px;}
 }
+
+/* Knowledge uses the Garden's existing editorial and seasonal design. */
+.kr-integrated{max-width:1100px;width:100%;gap:16px}
+.kr-headline{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.kr-headline .hero-desc{margin-bottom:0}
+.kr-private-chip{font:10px var(--font-mono);padding:7px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-muted);background:var(--surface)}
+.kr-workspace{display:grid;grid-template-columns:minmax(220px,270px) minmax(0,1fr);border:1px solid var(--border);background:var(--card);border-radius:8px;overflow:hidden;min-height:440px}
+.kr-sidepanel{padding:22px 18px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:stretch;gap:10px}
+.kr-panel-label{font:10px var(--font-mono);letter-spacing:.08em;color:var(--accent)}
+.kr-sidepanel p{font-size:12px;color:var(--text-muted);line-height:1.65}
+.kr-sidepanel button{min-height:36px;justify-content:center}
+.kr-settings{margin-top:8px;padding:10px;border:1px solid var(--border);border-radius:6px;background:var(--card)}
+.kr-settings summary{font:11px var(--font-sans);cursor:pointer;color:var(--text)}
+.kr-settings label{display:block;margin:12px 0 5px;font:10px var(--font-mono)}
+.kr-settings input{width:100%;min-width:0;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px;color:var(--text);font:11px var(--font-mono)}
+.kr-settings p{margin-top:10px;font-size:10px}
+.kr-message{font:11px/1.6 var(--font-sans);padding:10px;border:1px solid var(--border);background:var(--card);border-radius:5px;color:var(--text-muted);overflow-wrap:anywhere}
+.kr-message[data-kind="error"]{border-color:#a65e4c}
+.kr-reading{min-width:0;padding:clamp(22px,4vw,48px);overflow-wrap:anywhere}
+.kr-note-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:12px;margin-bottom:24px;border-bottom:1px solid var(--border);font:10px var(--font-mono);color:var(--text-muted)}
+.kr-note-title{font:500 clamp(24px,3vw,34px)/1.2 var(--font-serif);margin-bottom:26px}
+.kr-note-body{font-family:var(--font-serif)}
+.kr-note-body pre{white-space:pre;overflow:auto}
+.kr-note-body table{display:block;overflow:auto;max-width:100%;border-collapse:collapse}
+.kr-note-body th,.kr-note-body td{padding:8px 10px;border:1px solid var(--border)}
+.kr-empty-state{text-align:center;margin:70px auto;max-width:360px;color:var(--text-muted)}
+.kr-empty-emblem{font-size:25px;color:var(--accent);margin-bottom:12px}
+.kr-empty-state h2{font:500 24px var(--font-serif);color:var(--text);margin-bottom:12px}
+.kr-empty-state p{font-size:13px;line-height:1.7}
+.kr-privacy-note{font:10px/1.7 var(--font-mono);color:var(--text-muted)}
+#view-knowledge[hidden],#tab-knowledge[hidden],#krNoteWrap[hidden],#krEmpty[hidden]{display:none!important}
+@media(max-width:760px){.kr-workspace{grid-template-columns:minmax(0,1fr)}.kr-sidepanel{border-right:0;border-bottom:1px solid var(--border)}.kr-reading{padding:24px 18px}.kr-empty-state{margin:36px auto}}
+
+/* Knowledge session list and reading utilities; no private index is bundled. */
+.kr-note-search-label,.kr-reader-tools label{font:10px var(--font-mono);color:var(--text-muted)}
+#krNoteSearch,#krFindInNote{width:100%;border:1px solid var(--border);border-radius:6px;padding:9px 10px;background:var(--card);color:var(--text);font:12px var(--font-sans)}
+.kr-recent-list{display:flex;flex-direction:column;gap:5px;max-height:220px;overflow:auto}
+.kr-recent-list p{font-size:11px;color:var(--text-muted);padding:4px}
+.kr-recent-button{font:12px/1.5 var(--font-sans);padding:9px 10px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:6px;cursor:pointer;text-align:left;overflow-wrap:anywhere}
+.kr-recent-button:hover,.kr-recent-button[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.kr-reader-tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:24px;padding:10px 0;border-block:1px solid var(--border)}
+.kr-reader-tools input{max-width:210px}
+.kr-reader-tools #krFindResult{font:10px var(--font-mono);color:var(--text-muted)}
+.kr-reader-tools button{margin-left:auto}
+.kr-note-body a[href^="#"]{color:var(--accent);text-decoration:underline}
+.kr-note-body :is(pre,table){max-width:100%;overflow:auto}
+
+
+/* Knowledge v2 — Garden-style three column private Drive reader. */
+.kr-integrated{max-width:none!important;padding:0!important;gap:0!important;height:calc(100dvh - 64px);min-height:480px}
+.kr-workspace-three{display:grid;grid-template-columns:245px minmax(0,1fr) 240px;min-height:0;height:100%;border:0;border-radius:0;background:var(--bg)}
+.kr-workspace-three .kr-sidepanel{background:var(--card);border-right:1px solid var(--border);min-height:0;overflow:auto;padding:19px 12px}
+.kr-workspace-three .kr-reading{background:var(--bg);overflow:auto;padding:36px clamp(22px,4vw,64px) 80px;min-width:0}
+.kr-workspace-three .kr-note-title{margin:10px 0 20px}
+.kr-workspace-three .kr-context{background:var(--card);border-left:1px solid var(--border);overflow:auto;padding:20px 14px;min-width:0}
+.kr-context h3{font:500 18px var(--font-serif);margin:20px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.kr-context-list{display:flex;flex-direction:column;gap:4px}
+.kr-context-list p,.kr-context-foot,.kr-side-foot{font:11px/1.65 var(--font-sans);color:var(--text-muted)}
+.kr-context-foot{margin-top:24px;border-top:1px solid var(--border);padding-top:12px}
+.kr-context-link{border:0;border-radius:5px;color:var(--text-muted);font:12px/1.6 var(--font-sans);text-align:left;background:transparent;padding:5px 7px;overflow-wrap:anywhere}
+button.kr-context-link{cursor:pointer;color:var(--text)}
+button.kr-context-link:hover{background:var(--accent-soft);color:var(--accent)}
+.kr-side-actions{display:flex;gap:7px}.kr-side-actions button{flex:1;font-size:10px;min-height:32px}
+.kr-tree{flex:1;min-height:130px;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:1px}
+.kr-tree-row{border:0;border-radius:5px;background:transparent;color:var(--text);text-align:left;font:12px/1.5 var(--font-sans);cursor:pointer;padding:7px 8px;overflow-wrap:anywhere;flex-shrink:0}
+.kr-tree-row:hover,.kr-tree-row[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
+.kr-integrated .kr-privacy-note{padding:5px 12px;margin:0;background:var(--surface);border-top:1px solid var(--border);font:9px/1.5 var(--font-mono)}
+.kr-integrated{height:auto;min-height:calc(100dvh - 64px)}
+.kr-workspace-three{min-height:calc(100dvh - 112px)}
+.kr-integrated .kr-reading .kr-note-body{max-width:790px;margin:auto}
+@media(max-width:1050px){.kr-workspace-three{grid-template-columns:230px minmax(0,1fr)}.kr-workspace-three .kr-context{display:none}}
+@media(max-width:700px){.kr-workspace-three{display:flex;flex-direction:column;min-height:0}.kr-workspace-three .kr-sidepanel{border-right:0;border-bottom:1px solid var(--border);max-height:44dvh}.kr-workspace-three .kr-reading{min-height:380px;overflow:visible;padding:24px 18px 70px}.kr-tree{max-height:200px}.kr-integrated{min-height:calc(100dvh - 120px)}}
+/* Keep Knowledge stacked inside the site's flex-based view router. */
+#view-knowledge.kr-integrated.active{display:flex!important;flex-direction:column;align-items:stretch}
+#view-knowledge .kr-workspace-three{width:100%;flex:1}
