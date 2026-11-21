@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dheeraj Karki (@itskarkid) — Software to Robotics & Digital Garden</title>
+  <meta name="description" content="Dheeraj Karki's Digital Garden: MSc Robotics studies at the University of Bristol, connected public notes, and reflections on autonomous systems and trustworthy AI.">
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,10 +20,10 @@
   <!-- ================= MASTHEAD ================= -->
   <header class="masthead">
     <div class="brand-group" onclick="switchView('home')">
-      <div class="brand-avatar">DK</div>
+      <div class="brand-avatar" title="Living Robotics Garden — plant and circuit"><svg viewBox="0 0 40 40" aria-hidden="true" fill="none"><path d="M20 31V17" stroke="currentColor" stroke-width="2"/><path d="M20 20Q8 19 8 9Q20 9 20 20ZM20 17Q32 16 32 7Q20 7 20 17Z" stroke="currentColor" stroke-width="1.7"/><path d="M20 31H8v-6M20 31h12v-7M20 31v5" stroke="#458b90" stroke-width="1.7"/><circle cx="8" cy="25" r="2.5" fill="#458b90"/><circle cx="32" cy="24" r="2.5" fill="#458b90"/><circle cx="20" cy="36" r="2.5" fill="#458b90"/></svg></div>
       <div>
         <span class="brand-title">Dheeraj Karki</span>
-        <span class="brand-handle">@itskarkid</span>
+        <span class="brand-handle">Living Robotics Garden · @itskarkid</span>
       </div>
     </div>
 
@@ -37,8 +38,8 @@
     <div class="actions-group">
       <!-- Search Modal (⌘K) -->
       <button onclick="openSearchModal()" class="btn-action" title="Search notes [⌘K]">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>
         <span>Search</span>
-        <span style="opacity:0.6;">⌘K</span>
       </button>
 
       <button onclick="openSyncModal()" class="btn-action" title="Obsidian to GitHub Sync Workflow" style="display:none;">
@@ -93,6 +94,7 @@
         <option value="summer">Summer</option>
         <option value="autumn">Autumn</option>
         <option value="winter">Winter</option>
+        <option value="monsoon">Monsoon (preview only)</option>
       </select>
     </label>
     <label class="preview-row" for="zonePreview">
@@ -110,16 +112,9 @@
   <section id="view-home" class="view-container home-wrapper active">
     
     <div class="bio-hero-container">
-      <!-- Profile Picture Frame with Line-Art Fallback -->
+      <!-- Animated seasonal portrait. LinkedIn photo falls back to SVG; local photo should be separately authorised. -->
       <div class="profile-avatar-frame" title="Dheeraj Karki (@itskarkid)">
-        <img 
-          src="https://media.licdn.com/dms/image/v2/D5603AQFn3GsmP9iZlg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718274640105?e=1735171200&v=beta&t=example" 
-          alt="Dheeraj Karki" 
-          id="profileImage"
-          style="width: 100%; height: 100%; object-fit: cover; display: block;"
-          onerror="this.onerror=null; this.style.display='none'; document.getElementById('avatarSvgFallback').style.display='block';"
-        />
-        <svg id="avatarSvgFallback" role="img" aria-label="Seasonal cartoon portrait of Dheeraj Karki" style="display:none; width:100%; height:100%;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg id="avatarSvgFallback" role="img" aria-label="Seasonal cartoon portrait of Dheeraj Karki" style="display:block; width:100%; height:100%;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="100" height="100" fill="var(--surface)"/>
           <line x1="0" y1="20" x2="100" y2="20" stroke="var(--border)" stroke-width="0.5"/>
           <line x1="0" y1="40" x2="100" y2="40" stroke="var(--border)" stroke-width="0.5"/>
@@ -185,6 +180,12 @@
             <path d="M43 72L39 93H49L54 74Z" fill="var(--accent)" stroke="var(--text)" stroke-width="1.2"/>
             <path d="M41 65L42 72M49 67V74M57 65L58 72M41 83H51M40 89H50" stroke="var(--bg)" stroke-width="2"/>
           </g>
+          <g class="season-accessory monsoon">
+            <path d="M17 86Q22 64 37 61Q50 70 63 61Q80 66 84 86L86 100H14Z" fill="#d1ba68" stroke="#7b734a" stroke-width="2"/>
+            <path d="M20 47Q18 15 50 13Q82 15 80 47L70 50Q68 28 50 28Q32 28 30 50Z" fill="#d1ba68" stroke="#7b734a" stroke-width="2"/>
+            <path d="M50 74V99" stroke="#89784a" stroke-width="2"/>
+            <path d="M6 18L3 28M94 14L91 24M11 68L8 78M90 69L87 79" stroke="#75b4c9" stroke-width="2" stroke-linecap="round"/>
+          </g>
           <g class="portrait-sleep">
             <rect width="100" height="100" fill="#192329"/>
             <path d="M19 6A7 7 0 1 0 25 18A8 8 0 0 1 19 6Z" fill="#82949e"/>
@@ -197,6 +198,7 @@
             <path d="M6 92H94" stroke="#61747d" stroke-width="3" stroke-linecap="round"/>
           </g>
         </svg>
+        <div class="portrait-sensor-companion" aria-hidden="true" title="Small sensor robot companion"><svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="35" cy="62" rx="28" ry="5" fill="currentColor" opacity=".09"/><rect x="9" y="18" width="52" height="38" rx="12" fill="#e2f1ea" stroke="#407c7e" stroke-width="3"/><path d="M35 18V8m-6 0h12" stroke="#407c7e" stroke-width="3" stroke-linecap="round"/><circle cx="25" cy="35" r="4" fill="#407c7e"/><circle cx="45" cy="35" r="4" fill="#407c7e"/><path d="M26 46q9 6 18 0" stroke="#407c7e" stroke-width="2.5" stroke-linecap="round"/><circle cx="35" cy="7" r="3" fill="#cba160"/><path d="M10 52 6 59M60 52l4 7" stroke="#407c7e" stroke-width="3" stroke-linecap="round"/></svg></div>
       </div>
 
       <div style="flex: 1;">
@@ -217,12 +219,9 @@
           <span class="brand-handle" id="homeHandle">@itskarkid</span>
         </div>
         <p style="font-family:var(--font-mono); font-size:12px; color:var(--text-muted);" id="homeRole">
-          Software Systems Engineer &rarr; Robotics Researcher
+          Software engineer · Exploring robotics research
         </p>
-      </div>
-    </div>
-
-    <!-- Length Toggle Bar with Optional Reload -->
+          <!-- Length Toggle Bar with Optional Reload -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
       <div class="bio-length-control">
         <span style="opacity:0.7;">Bio Length:</span>
@@ -240,7 +239,7 @@
     <div id="bioTextContainer" class="hero-desc"></div>
 
     <div style="display:flex; gap:10px; margin-bottom: 24px; flex-wrap:wrap;">
-      <button onclick="switchView('garden')" class="btn-action" style="background:var(--text); color:var(--bg); padding:8px 16px; font-weight:600;">
+      <button onclick="switchView('garden')" class="btn-action lrg-primary" style="padding:8px 16px; font-weight:600;">
         Open Digital Garden & Graph &rarr;
       </button>
       <a href="cv_dheeraj_karki.pdf" id="homeCvBtn" download="cv_dheeraj_karki.pdf" class="btn-action" style="padding:8px 16px; display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
@@ -260,33 +259,35 @@
         <span>🧸 Chat with Barnaby</span>
       </button>
     </div>
+      </div>
+    </div>
 
     <!-- NOW DISPATCH SNAPSHOT -->
     <div class="now-card">
       <div class="now-card-header">
-        <span style="font-weight:600; color:var(--text);">&#9679; CURRENT LAB FOCUS &middot; OCTOBER 2026</span>
+        <span style="font-weight:600; color:var(--text);">&#9679; CURRENT LEARNING &middot; MSc ROBOTICS</span>
         <span>Bristol Robotics Laboratory (BRL)</span>
       </div>
       <div class="now-card-grid" id="homeNowGrid">
         <div class="now-subitem">
-          <div class="now-subitem-title">State Determinism</div>
-          <p>ROS 2 managed lifecycle transitions under high CPU load on single-board computers.</p>
+          <div class="now-subitem-title">Robot raster scanning</div>
+          <p>Investigating movement, reflectance sensing and scanning accuracy in a group project.</p>
         </div>
         <div class="now-subitem">
-          <div class="now-subitem-title">State Estimation</div>
-          <p>Kalman filter covariance tuning to handle wheel odometry slippage on linoleum floors.</p>
+          <div class="now-subitem-title">Machine vision</div>
+          <p>Exploring segmentation, detection and colour classification through coursework.</p>
         </div>
         <div class="now-subitem">
-          <div class="now-subitem-title">Manipulator Kinematics</div>
-          <p>Jacobian velocities and singularity avoidance in multi-DOF serial arms.</p>
+          <div class="now-subitem-title">Research questions</div>
+          <p>Thinking about multi-agent decision-making, perception and information reliability.</p>
         </div>
       </div>
     </div>
 
     <!-- TOPIC CLUSTERS -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
-      <h2 style="font-family:var(--font-serif); font-size:18px;">Core Topic Clusters</h2>
-      <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Research interests</span>
+      <h2 style="font-family:var(--font-serif); font-size:18px;">Research interests & current learning</h2>
+      <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Observe · Learn · Connect · Grow</span>
     </div>
 
     <!-- Container is now completely empty in HTML; 100% generated dynamically from bio.md -->
@@ -298,10 +299,10 @@
   <section id="view-garden" class="view-container garden-layout">
     
     <!-- LEFT RAIL: INDEX & STAGE FILTER -->
-    <aside class="garden-sidebar">
+    <aside class="garden-sidebar" id="gardenNotesRail" aria-label="Garden notes index">
       <div style="padding:12px; border-bottom:1px solid var(--border);">
         <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-bottom:8px; display:flex; justify-content:space-between;">
-          <span>GROWTH STAGE</span>
+          <span>GROWTH STAGE · PUBLIC NOTES</span>
           <span style="cursor:pointer;" onclick="filterStage('all')">Reset</span>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
@@ -318,20 +319,22 @@
       <div id="sidebarNotesContainer" style="flex:1; overflow-y:auto; padding:8px;"></div>
 
       <div style="padding:10px; border-top:1px solid var(--border); font-family:var(--font-mono); font-size:10px; color:var(--text-muted); display:flex; justify-content:space-between;">
-        <span id="noteCountLabel">7 notes</span>
+        <span id="noteCountLabel">Loading public notes…</span>
         <span style="display:none; cursor:pointer;" onclick="openSyncModal()">Obsidian Sync</span>
       </div>
     </aside>
 
     <!-- CENTER CANVAS: READING PANE -->
-    <main class="garden-reader">
+    <main class="garden-reader" id="gardenReader">
       <div class="garden-reader-content">
         
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:20px; font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">
           <div>
             <span>notes / </span><span id="crumbFolder">robotics</span><span> / </span><span id="crumbFile">note.md</span>
           </div>
-          <div style="display:flex; gap:8px;">
+          <div class="garden-reader-actions" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" id="focusReadingBtn" onclick="toggleGardenReadingFocus()" class="btn-action" aria-pressed="false" title="Collapse note index and graph to focus on reading">Focus reading</button>
+            <button type="button" id="restoreRailsBtn" onclick="restoreGardenRails()" class="btn-action" hidden title="Restore side panels">Show panels</button>
             <button onclick="toggleRawView()" class="btn-action" style="padding:2px 6px;">
               <span id="rawToggleLabel">&lt;/&gt; Raw .md</span>
             </button>
@@ -363,20 +366,22 @@
     </main>
 
     <!-- RIGHT RAIL: GRAPH & BACKLINKS -->
-    <aside class="garden-rightpane">
+    <aside class="garden-rightpane" id="gardenGraphRail" aria-label="Graph and note links">
       <div style="padding:12px; border-bottom:1px solid var(--border);">
         <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-bottom:6px; display:flex; justify-content:space-between;">
-          <span>CONNECTION GRAPH</span>
-          <span>Click to Navigate</span>
+          <span>KNOWLEDGE NETWORK</span>
+          <button class="garden-graph-expand" type="button" onclick="expandGardenGraph()" aria-label="Expand knowledge graph" title="Expand graph to explore connections">Expand ↗</button>
         </div>
         <div style="border:1px solid var(--border); border-radius:4px; overflow:hidden;">
-          <canvas id="graphCanvas"></canvas>
+          <canvas id="graphCanvas" role="img" aria-label="Interactive public note graph; choose a note using the buttons below"></canvas>
         </div>
+        <div class="graph-stage-legend" aria-label="Note maturity colours"><span><i class="stage-dot seedling"></i>Seedling</span><span><i class="stage-dot budding"></i>Budding</span><span><i class="stage-dot evergreen"></i>Evergreen</span></div>
+        <p class="graph-sidebar-hint">Select a node, or expand the graph to browse all note titles.</p>
       </div>
 
       <div style="flex:1; overflow-y:auto; padding:14px;">
         <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-bottom:8px; display:flex; justify-content:space-between;">
-          <span>MENTIONED IN (BACKLINKS)</span>
+          <span>BACKLINKS</span>
           <span id="backlinksBadge">0</span>
         </div>
         <div id="backlinksContainer" style="display:flex; flex-direction:column; gap:6px;"></div>
@@ -391,13 +396,38 @@
 
   </section>
 
+  <!-- Full-screen graph explorer; the existing graph canvas moves here temporarily. -->
+  <div id="gardenGraphOverlay" class="garden-graph-overlay" role="dialog" aria-modal="true" aria-label="Expanded knowledge graph" hidden>
+    <div class="garden-graph-dialog">
+      <header class="garden-graph-dialog-header">
+        <div><strong>Knowledge graph</strong><p>Only published notes and their real wikilinks appear here.</p></div>
+        <button type="button" class="btn-action" onclick="closeGardenGraph()" id="closeExpandedGraph">Close ✕</button>
+      </header>
+      <div class="garden-graph-toolbar" role="toolbar" aria-label="Graph view controls">
+        <div class="garden-graph-toolbar-intro"><strong>Explore connections</strong><span>Scroll to zoom · drag to pan · pinch on touch</span></div>
+        <div class="garden-graph-controls">
+          <button type="button" class="btn-action" id="gardenGraphZoomOut" onclick="zoomGardenGraph(1/1.25)" aria-label="Zoom out" title="Zoom out">−</button>
+          <output id="gardenGraphZoomLabel" aria-live="off">100%</output>
+          <button type="button" class="btn-action" id="gardenGraphZoomIn" onclick="zoomGardenGraph(1.25)" aria-label="Zoom in" title="Zoom in">+</button>
+          <button type="button" class="btn-action" onclick="fitGardenGraph()" title="Fit all published notes to the view">Fit graph</button>
+          <button type="button" class="btn-action" onclick="resetGardenGraph()" title="Reset zoom and pan">Reset</button>
+        </div>
+      </div>
+      <div id="gardenGraphExpandedHost" class="garden-graph-expanded-host"></div>
+      <div class="garden-graph-explorer-footer">
+        <div class="graph-stage-legend graph-stage-legend-wide" aria-label="Note maturity colours"><span><i class="stage-dot seedling"></i>Seedling</span><span><i class="stage-dot budding"></i>Budding</span><span><i class="stage-dot evergreen"></i>Evergreen</span></div>
+        <div class="graph-navigation graph-navigation-expanded" id="expandedGraphNavigation" aria-label="Choose a published note"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= MOBILE GARDEN BOTTOM BAR ================= -->
   <div class="mobile-garden-bar" id="mobileGardenBar">
     <button onclick="openMobileDrawer('index')" class="btn-action" style="flex:1; justify-content:center; padding:8px 12px; margin-right:6px;">
-      📑 Notes Index
+      Notes index
     </button>
     <button onclick="openMobileDrawer('graph')" class="btn-action" style="flex:1; justify-content:center; padding:8px 12px; margin-left:6px;">
-      🕸 Knowledge Graph
+      Knowledge graph
     </button>
   </div>
 
@@ -421,8 +451,10 @@
 
       <!-- Mobile Graph View Content -->
       <div id="mobileDrawerGraphView" style="display:none;">
+        <button type="button" class="btn-action" onclick="closeMobileDrawer();expandGardenGraph()" style="margin-bottom:10px;width:100%;justify-content:center">Expand graph · zoom & pan ↗</button>
         <div style="border:1px solid var(--border); border-radius:6px; overflow:hidden;">
-          <canvas id="mobileGraphCanvas" style="width:100%; height:260px; display:block; background:var(--bg);"></canvas>
+          <canvas id="mobileGraphCanvas" role="img" aria-label="Published knowledge graph; use the note buttons below to navigate" style="width:100%; height:260px; display:block; background:var(--bg);"></canvas>
+        </div><div class="graph-stage-legend" aria-label="Note maturity colours"><span><i class="stage-dot seedling"></i>Seedling</span><span><i class="stage-dot budding"></i>Budding</span><span><i class="stage-dot evergreen"></i>Evergreen</span></div><div class="graph-navigation" id="mobileGraphNavigation" aria-label="Choose a published note"></div><div style="display:none">
         </div>
         <p style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); margin-top:8px; text-align:center;">
           Tap any node to jump to that entry.
@@ -435,7 +467,7 @@
   <section id="view-now" class="view-container home-wrapper">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
       <div>
-        <div class="hero-meta" id="nowMetaTag">/now &middot; Personal Laboratory Record</div>
+        <div class="hero-meta" id="nowMetaTag">/now &middot; Personal research workbench</div>
         <h1 class="hero-heading" id="nowHeaderTitle" style="margin-bottom:4px;">What I am doing now</h1>
         <p class="hero-desc" id="nowHeaderDesc" style="margin-bottom:0;">
           Bristol Robotics Laboratory &middot; University of Bristol &middot; Autumn 2026
@@ -485,7 +517,7 @@
   <div id="searchModal" class="modal-backdrop">
     <div class="modal-box">
       <div style="padding:12px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px;">
-        <input type="text" id="modalSearchInput" placeholder="Search notes, ROS 2, kinematics, Bristol..." style="flex:1; background:transparent; border:none; outline:none; font-family:var(--font-sans); font-size:13px; color:var(--text);">
+        <input type="text" id="modalSearchInput" placeholder="Search published Garden notes..." style="flex:1; background:transparent; border:none; outline:none; font-family:var(--font-sans); font-size:13px; color:var(--text);">
         <button onclick="closeSearchModal()" class="btn-action" style="padding:2px 6px;">ESC</button>
       </div>
       <div id="modalResults" style="max-height:300px; overflow-y:auto; padding:8px;"></div>
@@ -496,12 +528,12 @@
   <!-- Floating speech bubble teaser -->
   <div class="teddy-speech-bubble-hint" id="teddyHint">
     <span>🧸</span>
-    <span>Ask me anything about Dheeraj!</span>
+    <span>Explore Dheeraj's Garden</span>
     <span style="cursor:pointer; opacity:0.5; margin-left:4px;" onclick="dismissTeddyHint(event)">✕</span>
   </div>
 
   <!-- Floating Teddy Trigger Button -->
-  <button class="teddy-companion-btn" id="teddyBtn" onclick="toggleTeddyChat()" title="Chat with Barnaby, Dheeraj's teddy bear assistant" aria-label="Open Teddy Bear Chat">
+  <button class="teddy-companion-btn" id="teddyBtn" onclick="toggleTeddyChat()" aria-controls="teddyChatDrawer" aria-expanded="false" title="Chat with Barnaby, Dheeraj's teddy bear assistant" aria-label="Open Teddy Bear Chat">
     <span class="teddy-badge-dot"></span>
     <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="27" cy="28" r="14" fill="#a27b5c"/>
@@ -528,7 +560,7 @@
   </button>
 
   <!-- Teddy Interactive Chat Window -->
-  <div class="teddy-chat-drawer" id="teddyChatDrawer">
+  <section class="teddy-chat-drawer" id="teddyChatDrawer" role="dialog" aria-label="Barnaby, public Garden guide" aria-modal="false" aria-hidden="true">
     <div class="teddy-chat-header">
       <div class="teddy-chat-title-group">
         <div class="teddy-mini-avatar">
@@ -548,35 +580,36 @@
             <span id="companionSeason" style="font-size:9px; background:var(--card); border:1px solid var(--border); padding:1px 5px; border-radius:10px; font-family:var(--font-mono); color:var(--text-muted);">Companion</span>
           </div>
           <div style="font-size:10px; color:var(--text-muted); font-family:var(--font-mono);">
-            Dheeraj's Lab Bear &middot; Ask me about him!
+            Your guide to public notes · Scripted replies
           </div>
         </div>
       </div>
-      <button onclick="toggleTeddyChat()" class="btn-action" style="padding:2px 7px;">✕</button>
+      <button onclick="toggleTeddyChat()" class="btn-action teddy-close" type="button" aria-label="Close Barnaby chat">✕</button>
     </div>
 
     <!-- Message History -->
-    <div class="teddy-messages-list" id="teddyMessagesList">
+    <div class="teddy-messages-list" id="teddyMessagesList" role="log" aria-live="polite" aria-relevant="additions">
       <div class="teddy-msg companion">
-        Hello! I'm <strong>Barnaby</strong>, Dheeraj's companion here in the digital garden. 🧸🎀
+        Hello! I'm <strong>Barnaby</strong>. I can introduce Dheeraj’s robotics interests or help you find published Garden notes. My replies are scripted and based on public material.
       </div>
     </div>
 
     <!-- Quick Prompt Chips -->
-    <div class="teddy-quick-prompts">
-      <button class="teddy-chip" onclick="askTeddyPrompt('Tell me about Dheeraj\'s transition from Arden Software to Bristol.')">From Arden to Bristol</button>
-      <button class="teddy-chip" onclick="askTeddyPrompt('What is he researching at the Bristol Robotics Lab?')">Current Bristol research?</button>
-      <button class="teddy-chip" onclick="askTeddyPrompt('What are his favorite topics in the digital garden?')">Top garden topics?</button>
+    <div class="teddy-quick-prompts" aria-label="Suggested questions">
+      <button type="button" class="teddy-chip" onclick="askTeddyPrompt('Show published notes')">Published notes</button>
+      <button type="button" class="teddy-chip" onclick="askTeddyPrompt('What is Dheeraj exploring?')">Robotics interests</button>
+      <button type="button" class="teddy-chip" onclick="askTeddyPrompt('What do Seedling and Budding mean?')">Growth stages</button>
+      <button type="button" class="teddy-chip" onclick="askTeddyPrompt('What is Dheeraj doing now?')">Current work</button>
     </div>
 
     <!-- Input Bar -->
     <div class="teddy-chat-input-bar">
-      <input type="text" id="teddyInput" class="teddy-input" placeholder="Ask Barnaby about Dheeraj..." onkeydown="if(event.key==='Enter') sendTeddyMessage();">
+      <input type="text" id="teddyInput" class="teddy-input" maxlength="300" autocomplete="off" aria-label="Ask Barnaby" placeholder="Ask about public notes or robotics…" onkeydown="if(event.key==='Enter') sendTeddyMessage();">
       <button onclick="sendTeddyMessage()" class="btn-action highlight" style="padding:6px 12px; font-weight:600;">
         Send
       </button>
     </div>
-  </div>
+  </section>
 
   <!-- ================= OBSIDIAN SYNC MODAL ================= -->
   <div id="syncModal" class="modal-backdrop">
@@ -710,7 +743,10 @@
                 heading.textContent = title;
                 const description = document.createElement('div');
                 description.innerHTML = renderMarkdown(desc);
-                card.append(heading, description);
+                const emblem = document.createElement('span');
+                emblem.className = 'lrg-card-icon';
+                emblem.innerHTML = lrgIcon(lrgTopicIcon(title));
+                card.append(emblem, heading, description);
                 return card;
               }));
             }
@@ -728,6 +764,7 @@
                 const desc = boldMatch ? boldMatch[2] : raw;
                 return `
                   <div class="now-subitem">
+                    <span class="lrg-card-icon">${lrgIcon(lrgTopicIcon(title))}</span>
                     <div class="now-subitem-title">${title}</div>
                     <p>${parseWikilinks(desc)}</p>
                   </div>
@@ -889,6 +926,30 @@
 
     window.addEventListener('popstate', restorePageFromUrl);
 
+
+    // Consistent line icon system, shared by dynamic bio and /now cards.
+    const lrgIcons = {
+      network: '<circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M7 5h10M6 7l5 10M18 7l-5 10"/>',
+      eye: '<path d="M2 12c5-8 15-8 20 0-5 8-15 8-20 0Z"/><circle cx="12" cy="12" r="3"/>',
+      cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/><rect x="10" y="10" width="4" height="4"/>',
+      leaf: '<path d="M12 21v-8M12 16C5 16 3 11 4 6c5 0 8 4 8 10ZM12 13c0-6 3-9 8-9 0 6-2 9-8 9Z"/>',
+      shield: '<path d="M12 2 20 5v6c0 5-4 8-8 11-4-3-8-6-8-11V5Z"/><path d="m9 12 2 2 4-4"/>',
+      book: '<path d="M12 5C9 3 6 3 3 4v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1ZM12 5v15"/>'
+    };
+    function lrgIcon(kind) {
+      return '<svg class="lrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (lrgIcons[kind] || lrgIcons.leaf) + '</svg>';
+    }
+    function lrgTopicIcon(title) {
+      const name = String(title).toLowerCase();
+      if (/boundar|reading/.test(name)) return 'book';
+      if (/bridge|architectur/.test(name)) return 'cpu';
+      if (/laboratory|experiment|perception|vision|sensing/.test(name)) return 'eye';
+      if (/autonomous|multi-agent|coordination|focus/.test(name)) return 'network';
+      if (/trust|reliab|explain|privacy/.test(name)) return 'shield';
+      if (/robot|building|scanning|engineering/.test(name)) return 'cpu';
+      return 'leaf';
+    }
+
     // NOW MARKDOWN CARD PARSER & RENDERER
     function parseAndRenderNowMarkdown(md) {
       nowMarkdownSource = md;
@@ -919,31 +980,51 @@
         if (fm.updated && metaTag) metaTag.innerHTML = `/now &middot; Updated ${fm.updated} &middot; ${fm.location || 'Bristol Robotics Lab'}`;
       }
 
-      // 2. Split content into card sections by ## headings
+      // 2. Render compact source-derived summaries, expanding to unaltered full Markdown.
+      // The full text is always rendered from now.md, never copied into the HTML template.
       const sections = cleanMd.split(/(?=^##\s+)/gm);
-      let cardsHtml = '';
-
-      sections.forEach(section => {
+      const cards = [];
+      sections.forEach((section) => {
         const trimmed = section.trim();
-        if (!trimmed) return;
-
         const headingMatch = trimmed.match(/^##\s+(.+)$/m);
-        const cardTitle = headingMatch ? headingMatch[1].trim() : 'Laboratory Dispatch';
-        
-        // Remove heading line from body
-        const bodyContent = headingMatch ? trimmed.replace(/^##\s+.+$/m, '').trim() : trimmed;
-
-        cardsHtml += `
-          <div class="now-card" style="margin: 0;">
-            <h3 style="font-family:var(--font-serif); font-size:16px; margin-bottom:12px; color:var(--text);">${cardTitle}</h3>
-            <div class="prose" style="font-size:13px; color:var(--text-muted); line-height:1.7;">
-              ${renderMarkdown(bodyContent)}
-            </div>
-          </div>
-        `;
+        if (!headingMatch) return;
+        const cardTitle = headingMatch[1].trim();
+        const bodyContent = trimmed.replace(/^##\s+.+$/m, '').trim();
+        const items = bodyContent.split('\n').filter(line => /^\s*[-*]\s+/.test(line));
+        // Extract the first two actual statements from this section; do not invent summaries.
+        const summaryText = items.slice(0, 2).map(line => line
+          .replace(/^\s*[-*]\s+/, '')
+          .replace(/\*\*([^*]+)\*\*/g, '$1')
+          .replace(/^([^:]{1,70}):\s*/, '')
+          .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+          .trim()).join(' · ');
+        cards.push({ title:cardTitle, body:bodyContent, summary:summaryText });
       });
-
-      cardsContainer.innerHTML = cardsHtml;
+      const escapeNow = value => String(value).replace(/[&<>"']/g, char =>
+        ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      cardsContainer.replaceChildren(...cards.map((card, index) => {
+        const section = document.createElement('section');
+        section.className = 'now-card lrg-compact-card' + (index === 0 ? ' is-featured' : '') + (index === cards.length - 1 ? ' is-last' : '');
+        const heading = document.createElement('div');
+        heading.className = 'lrg-compact-heading';
+        heading.innerHTML = `<span class="lrg-card-icon">${lrgIcon(lrgTopicIcon(card.title))}</span>`;
+        const title = document.createElement('h3');
+        title.textContent = card.title;
+        heading.append(title);
+        const summary = document.createElement('p');
+        summary.className = 'lrg-compact-summary';
+        summary.textContent = card.summary || 'Open the full section below.';
+        const details = document.createElement('details');
+        details.className = 'lrg-now-details';
+        const toggle = document.createElement('summary');
+        toggle.textContent = 'Read details';
+        const body = document.createElement('div');
+        body.className = 'prose lrg-workbench-prose';
+        body.innerHTML = renderMarkdown(card.body);
+        details.append(toggle, body);
+        section.append(heading, summary, details);
+        return section;
+      }));
       setupHoverTooltips();
     }
 
@@ -977,17 +1058,21 @@
       }
     }
 
-    // TEDDY BEAR LOGIC
+    // BARNABY: public-only, deterministic navigation assistant.
+    // The published-note index is the sole source for note names and links.
+    let barnabyPreviousFocus = null;
     function toggleTeddyChat() {
       const drawer = document.getElementById('teddyChatDrawer');
-      const hint = document.getElementById('teddyHint');
-      if (drawer.classList.contains('open')) {
-        drawer.classList.remove('open');
+      const button = document.getElementById('teddyBtn');
+      const opened = drawer.classList.toggle('open');
+      drawer.setAttribute('aria-hidden', String(!opened));
+      button.setAttribute('aria-expanded', String(opened));
+      if (opened) {
+        barnabyPreviousFocus = document.activeElement;
+        dismissTeddyHint();
+        document.getElementById('teddyInput').focus();
       } else {
-        drawer.classList.add('open');
-        if (hint) hint.style.display = 'none';
-        const input = document.getElementById('teddyInput');
-        if (input) setTimeout(() => input.focus(), 80);
+        (barnabyPreviousFocus?.isConnected ? barnabyPreviousFocus : button).focus();
       }
     }
 
@@ -1002,41 +1087,88 @@
       sendTeddyMessage();
     }
 
+    function barnabyBubble(role, text) {
+      const bubble = document.createElement('div');
+      bubble.className = `teddy-msg ${role}`;
+      bubble.textContent = text;
+      document.getElementById('teddyMessagesList').appendChild(bubble);
+      return bubble;
+    }
+
+    function barnabyAction(parent, label, action) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'teddy-answer-action';
+      button.textContent = label;
+      button.addEventListener('click', () => {
+        const drawer = document.getElementById('teddyChatDrawer');
+        if (drawer.classList.contains('open')) toggleTeddyChat();
+        action();
+      });
+      parent.appendChild(button);
+    }
+
     function sendTeddyMessage() {
       const input = document.getElementById('teddyInput');
       const text = input.value.trim();
       if (!text) return;
-
-      const list = document.getElementById('teddyMessagesList');
-
-      // User message
-      const userBubble = document.createElement('div');
-      userBubble.className = 'teddy-msg user';
-      userBubble.textContent = text;
-      list.appendChild(userBubble);
       input.value = '';
-
-      // Companion response based on Dheeraj's real background
-      const companionBubble = document.createElement('div');
-      companionBubble.className = 'teddy-msg companion';
-      
+      barnabyBubble('user', text);
       const lower = text.toLowerCase();
-      let response = "";
-
-      if (lower.includes('arden') || lower.includes('transition') || lower.includes('switch') || lower.includes('why')) {
-        response = `Dheeraj spent a decade in India developing software, notably as a Staff Software Developer at <strong>Arden Software</strong> working on high-precision CAD/CAM geometry and packaging software, and building consumer products at <strong>Frido</strong>.<br><br>He chose the <strong>University of Bristol</strong> for his MSc in Robotics to take those spatial and geometric algorithms into physical actuators and autonomous machines! 🧸🎀`;
-      } else if (lower.includes('research') || lower.includes('bristol') || lower.includes('lab') || lower.includes('brl')) {
-        response = `At the <strong>Bristol Robotics Laboratory (BRL)</strong>, Dheeraj is currently investigating ROS 2 managed lifecycle determinism, Kalman filter covariance calibration under motor vibration, and robotic manipulator dynamics. You can check his [[bristol-robotics-lab-reflections]] note in the garden!`;
-      } else if (lower.includes('garden') || lower.includes('topic') || lower.includes('notes')) {
-        response = `His favorite clusters are <strong>From CAD/CAM to Arm Kinematics</strong> ([[cad-cam-to-robotics-kinematics]]), <strong>ROS 2 Lifecycles</strong> ([[ros2-lifecycle-nodes]]), and the reality gaps of physical robots ([[simulation-vs-physical-hardware]]). Have a wander through the graph! 🌿`;
+      const published = Object.values(vault).sort((a, b) => a.title.localeCompare(b.title));
+      let answer = '';
+      let actions = [];
+      if (/seedling|budding|evergreen|growth|matur/.test(lower)) {
+        answer = 'Seedling is an early idea, Budding is developing writing, and Evergreen is a more established note. These labels describe the maturity of published writing, not academic achievement.';
+        actions = [['Browse notes', () => switchView('garden')]];
+      } else if (/second thought|privacy|masking|personal information/.test(lower)) {
+        const note = published.find(n => n.title.toLowerCase().includes('second thought'));
+        answer = note ? `${note.title} explores human-controlled privacy and context-preserving masking in prompts to LLMs.` : 'I cannot find a published note on that topic in the current public index.';
+        if (note) actions = [[`Read ${note.title}`, () => openNoteInGarden(note.id)]];
+      } else if (/human singularity|singularity|creativity|discovery/.test(lower)) {
+        const note = published.find(n => n.title.toLowerCase().includes('human singularity'));
+        answer = note ? `${note.title} considers critical thinking and the value of discovery in a world increasingly shaped by AI.` : 'That note is not currently in the public Garden index.';
+        if (note) actions = [[`Read ${note.title}`, () => openNoteInGarden(note.id)]];
+      } else if (/notes|articles|garden|published|writing|read/.test(lower)) {
+        answer = published.length ? `There ${published.length === 1 ? 'is' : 'are'} ${published.length} published ${published.length === 1 ? 'note' : 'notes'} in the Garden. Choose one below.` : 'The public Garden index has not loaded any notes yet.';
+        actions = published.slice(0, 8).map(note => [note.title, () => openNoteInGarden(note.id)]);
+        if (published.length > 8) actions.push(['Browse all published notes', () => switchView('garden')]);
+      } else if (/now|current|doing|lab|experiment|project/.test(lower)) {
+        answer = 'The Now page describes current MSc Robotics learning, laboratory experiments and developing research questions. It should not be read as a list of completed research results.';
+        actions = [['Open /now', () => switchView('now')]];
+      } else if (/robot|reinforcement|multi.agent|aoi|perception|research|bristol|learning/.test(lower)) {
+        answer = 'Dheeraj is studying MSc Robotics at the University of Bristol. His developing interests include multi-agent autonomy, reinforcement learning, perception and the reliability of shared information.';
+        actions = [['Current work', () => switchView('now')]];
+      } else if (/about|bio|software|c\+\+|career|background|arden/.test(lower)) {
+        answer = 'Dheeraj brings over a decade of C++ software engineering and computational geometry experience to his present robotics studies. The biography explains this transition.';
+        actions = [['Read biography', () => switchView('home')]];
       } else {
-        response = `Dheeraj is currently in Bristol combining his 10 years of software engineering (Arden Software, Frido, BITS Pilani) with hands-on robotics at the University of Bristol. You can explore his full notes in the <strong>Digital Garden & Graph</strong> tab! 🧸`;
+        const titleMatch = published.find(n => lower.includes(n.title.toLowerCase()));
+        if (titleMatch) {
+          answer = `I found the public note “${titleMatch.title}”.`;
+          actions = [[`Read ${titleMatch.title}`, () => openNoteInGarden(titleMatch.id)]];
+        } else {
+          answer = 'I am a scripted Garden guide, not a live AI assistant. I can help you find published notes or explore Dheeraj’s biography, robotics interests and current work.';
+          actions = [['Browse published notes', () => switchView('garden')], ['Read /now', () => switchView('now')]];
+        }
       }
-
-      companionBubble.innerHTML = parseWikilinks(response);
-      list.appendChild(companionBubble);
+      const bubble = barnabyBubble('companion', answer);
+      if (actions.length) {
+        const row = document.createElement('div');
+        row.className = 'teddy-answer-actions';
+        actions.forEach(([label, action]) => barnabyAction(row, label, action));
+        bubble.appendChild(row);
+      }
+      const list = document.getElementById('teddyMessagesList');
       list.scrollTop = list.scrollHeight;
     }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.getElementById('teddyChatDrawer').classList.contains('open')) {
+        event.preventDefault();
+        toggleTeddyChat();
+      }
+    });
 
     const themeLocation = {
       name: '',
@@ -1133,12 +1265,13 @@
       const preview = document.getElementById('seasonPreview').value;
       const season = preview === 'auto' ? getSeason() : preview;
       document.documentElement.setAttribute('data-season', season);
-      const names = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter' };
+      const names = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter', monsoon: 'Monsoon' };
       const icons = {
         spring: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
         summer: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
         autumn: '<path class="season-leaf" d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
-        winter: '<line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/>'
+        winter: '<line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/>',
+        monsoon: '<path d="M5 12a7 7 0 0 1 14 0Z"/><path d="M12 12v6q0 3 3 1"/><path d="M5 17l-1 2M9 17l-1 2M19 17l-1 2"/>'
       };
       document.getElementById('seasonIcon').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${icons[season]}</svg>`;
       document.getElementById('companionSeason').textContent = names[season];
@@ -1328,7 +1461,10 @@
         accent: styles.getPropertyValue('--accent').trim(),
         detail: styles.getPropertyValue('--season-detail').trim(),
         muted: styles.getPropertyValue('--text-muted').trim(),
-        border: styles.getPropertyValue('--border-strong').trim()
+        border: styles.getPropertyValue('--border-strong').trim(),
+        seedling: styles.getPropertyValue('--graph-seedling').trim(),
+        budding: styles.getPropertyValue('--graph-budding').trim(),
+        evergreen: styles.getPropertyValue('--graph-evergreen').trim()
       };
     }
 
@@ -1336,7 +1472,7 @@
       const canvas = document.getElementById('mobileGraphCanvas');
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.width = Math.max(1, Math.round(rect.width * (window.devicePixelRatio || 1)));
       canvas.height = 260 * (window.devicePixelRatio || 1);
 
       const keys = Object.keys(vault);
@@ -1344,11 +1480,11 @@
       const h = canvas.height;
 
       const mNodes = keys.map((key, i) => {
-        const angle = (i / keys.length) * Math.PI * 2;
+        const angle = (i / Math.max(1, keys.length)) * Math.PI * 2;
         return {
           id: key,
           x: w / 2 + Math.cos(angle) * (w * 0.35),
-          y: h / 2 + Math.sin(angle) * (h * 0.35),
+          y: h / 2 + Math.sin(angle) * (h * 0.28),
           stage: vault[key].stage
         };
       });
@@ -1383,14 +1519,21 @@
         const isCurrent = n.id === activeNoteId;
         ctx.beginPath();
         ctx.arc(n.x, n.y, isCurrent ? 8 * (window.devicePixelRatio || 1) : 5 * (window.devicePixelRatio || 1), 0, Math.PI * 2);
-        ctx.fillStyle = isCurrent ? palette.detail : (n.stage === 'evergreen' ? palette.accent : palette.border);
+        ctx.fillStyle = palette[n.stage] || palette.border;
         ctx.fill();
+        if (isCurrent) {
+          ctx.lineWidth = 2.5 * (window.devicePixelRatio || 1);
+          ctx.strokeStyle = palette.accent;
+          ctx.stroke();
+        }
 
         ctx.font = `${Math.round(10 * (window.devicePixelRatio || 1))}px "JetBrains Mono"`;
-        ctx.fillStyle = palette.muted;
+        ctx.fillStyle = isCurrent ? palette.accent : palette.muted;
         ctx.textAlign = 'center';
-        const label = vault[n.id].title.length > 12 ? vault[n.id].title.slice(0, 10) + '…' : vault[n.id].title;
-        ctx.fillText(label, n.x, n.y + 14 * (window.devicePixelRatio || 1));
+        const title = vault[n.id].title;
+        const maxChars = 28;
+        const label = title.length > maxChars ? title.slice(0, maxChars - 1) + '…' : title;
+        ctx.fillText(label, n.x, n.y + 17 * (window.devicePixelRatio || 1));
       });
 
       canvas.onclick = (e) => {
@@ -1581,6 +1724,8 @@
       setupHoverTooltips();
       renderSidebarNotes();
       drawGraph();
+      renderGraphNavigation();
+      if (document.getElementById('mobileDrawerGraphView').style.display === 'block') initMobileGraph();
       if (document.getElementById('view-garden').classList.contains('active')) {
         document.title = `${note.title} | Dheeraj Karki`;
         if (updateUrl) writePageUrl('garden');
@@ -1647,102 +1792,228 @@
       });
     }
 
-    // 8. GRAPH CANVAS
-    let graphNodes = [];
-    function initGraph() {
-      const canvas = document.getElementById('graphCanvas');
-      if (!canvas || !canvas.parentElement) return;
 
-      const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width = rect.width * (window.devicePixelRatio || 1);
-      canvas.height = 220 * (window.devicePixelRatio || 1);
-
-      const keys = Object.keys(vault);
-      const w = canvas.width;
-      const h = canvas.height;
-
-      graphNodes = keys.map((key, i) => {
-        const angle = (i / keys.length) * Math.PI * 2;
-        return {
-          id: key,
-          x: w / 2 + Math.cos(angle) * (w * 0.35),
-          y: h / 2 + Math.sin(angle) * (h * 0.35),
-          stage: vault[key].stage
-        };
-      });
-
-      canvas.onclick = (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const clickX = (e.clientX - rect.left) * (window.devicePixelRatio || 1);
-        const clickY = (e.clientY - rect.top) * (window.devicePixelRatio || 1);
-
-        for (const n of graphNodes) {
-          const dist = Math.hypot(n.x - clickX, n.y - clickY);
-          if (dist < 15 * (window.devicePixelRatio || 1)) {
-            loadGardenNote(n.id);
-            break;
-          }
+    function renderGraphNavigation() {
+      const notes = Object.values(vault);
+      const containers = ['expandedGraphNavigation', 'mobileGraphNavigation'];
+      for (const id of containers) {
+        const host = document.getElementById(id);
+        if (!host) continue;
+        host.replaceChildren();
+        if (!notes.length) { host.textContent = 'No published notes available.'; continue; }
+        for (const note of notes) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'graph-note-link';
+          button.textContent = `${({seedling:'🌱',budding:'🌿',evergreen:'🌳'}[note.stage] || '•')} ${note.title}`;
+          button.setAttribute('aria-current', note.id === activeNoteId ? 'true' : 'false');
+          button.title = `Open ${note.title}`;
+          button.addEventListener('click', () => {
+            if (graphExpanded) closeGardenGraph();
+            closeMobileDrawer();
+            openNoteInGarden(note.id);
+          });
+          host.append(button);
         }
-      };
-
-      drawGraph();
+      }
     }
 
+    // Interactive graph explorer. Nodes and edges are always built from the public vault.
+    const graphCanvasHome = document.getElementById('graphCanvas').parentElement;
+    let graphExpanded = false;
+    let graphPreviousFocus = null;
+    let graphNodes = [];
+    const graphCamera = { scale: 1, x: 0, y: 0 };
+    let graphFitScale = 1;
+    const graphPointers = new Map();
+    let graphGesture = null;
+    let graphPointerMoved = false;
+    const graphCanvas = document.getElementById('graphCanvas');
+    function gardenIsMobile() { return window.matchMedia('(max-width: 900px)').matches; }
+    function setGardenReadingFocus(enabled) {
+      const garden = document.getElementById('view-garden');
+      garden.classList.toggle('reading-focus', enabled);
+      const button = document.getElementById('focusReadingBtn');
+      button.setAttribute('aria-pressed', String(enabled));
+      button.textContent = enabled ? 'Exit focus' : 'Focus reading';
+      document.getElementById('restoreRailsBtn').hidden = !enabled;
+      if (graphExpanded) closeGardenGraph();
+      if (!gardenIsMobile()) requestAnimationFrame(initGraph);
+    }
+    function toggleGardenReadingFocus() { setGardenReadingFocus(!document.getElementById('view-garden').classList.contains('reading-focus')); }
+    function restoreGardenRails() { setGardenReadingFocus(false); }
+    function expandedSize() { return { w: graphCanvas.clientWidth || 1, h: graphCanvas.clientHeight || 1 }; }
+    function graphToWorld(x, y) { return { x: (x - graphCamera.x) / graphCamera.scale, y: (y - graphCamera.y) / graphCamera.scale }; }
+    function updateGraphZoomLabel() {
+      const label = document.getElementById('gardenGraphZoomLabel');
+      if (label) label.textContent = `${Math.round(graphCamera.scale / graphFitScale * 100)}%`;
+    }
+    function fitGardenGraph() {
+      const { w, h } = expandedSize();
+      if (!graphNodes.length || !graphExpanded) return;
+      const xs = graphNodes.map(n => n.x), ys = graphNodes.map(n => n.y);
+      const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+      const spanX = Math.max(140, maxX - minX + 160), spanY = Math.max(110, maxY - minY + 100);
+      graphCamera.scale = Math.min(3, Math.max(.4, Math.min(w / spanX, h / spanY)));
+      graphFitScale = graphCamera.scale;
+      graphCamera.x = w / 2 - (minX + maxX) / 2 * graphCamera.scale;
+      graphCamera.y = h / 2 - (minY + maxY) / 2 * graphCamera.scale;
+      updateGraphZoomLabel(); drawGraph();
+    }
+    function resetGardenGraph() { fitGardenGraph(); }
+    function zoomGardenGraph(multiplier, atX, atY) {
+      if (!graphExpanded) return;
+      const { w, h } = expandedSize();
+      const px = atX ?? w / 2, py = atY ?? h / 2;
+      const world = graphToWorld(px, py);
+      graphCamera.scale = Math.min(graphFitScale * 4, Math.max(graphFitScale * .5, graphCamera.scale * multiplier));
+      graphCamera.x = px - world.x * graphCamera.scale;
+      graphCamera.y = py - world.y * graphCamera.scale;
+      updateGraphZoomLabel(); drawGraph();
+    }
+    function expandGardenGraph() {
+      if (graphExpanded) return;
+      graphPreviousFocus = document.activeElement;
+      const overlay = document.getElementById('gardenGraphOverlay');
+      overlay.hidden = false;
+      document.getElementById('gardenGraphExpandedHost').appendChild(graphCanvas);
+      graphExpanded = true;
+      document.body.classList.add('garden-graph-open');
+      requestAnimationFrame(() => { initGraph(); fitGardenGraph(); document.getElementById('gardenGraphZoomIn').focus(); });
+    }
+    function closeGardenGraph() {
+      if (!graphExpanded) return;
+      graphPointers.clear(); graphGesture = null;
+      graphCanvasHome.appendChild(graphCanvas);
+      document.getElementById('gardenGraphOverlay').hidden = true;
+      document.body.classList.remove('garden-graph-open');
+      graphExpanded = false;
+      requestAnimationFrame(initGraph);
+      if (graphPreviousFocus && graphPreviousFocus.isConnected) graphPreviousFocus.focus();
+    }
+    document.getElementById('gardenGraphOverlay').addEventListener('click', function (e) { if (e.target === this) closeGardenGraph(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && graphExpanded) { e.preventDefault(); closeGardenGraph(); }
+      if (!graphExpanded || e.key !== 'Tab') return;
+      const controls = Array.from(document.querySelectorAll('#gardenGraphOverlay button:not([disabled])'));
+      const i = controls.indexOf(document.activeElement);
+      e.preventDefault(); controls[e.shiftKey ? (i <= 0 ? controls.length - 1 : i - 1) : (i < 0 || i === controls.length - 1 ? 0 : i + 1)].focus();
+    });
+    function initGraph() {
+      if (!graphCanvas.parentElement) return;
+      const dpr = window.devicePixelRatio || 1;
+      const width = graphCanvas.clientWidth || graphCanvas.parentElement.clientWidth || 1;
+      const height = graphExpanded ? graphCanvas.clientHeight || 350 : 220;
+      graphCanvas.width = Math.max(1, Math.round(width * dpr));
+      graphCanvas.height = Math.max(1, Math.round(height * dpr));
+      const keys = Object.keys(vault);
+      // Stable model coordinates across sidebar and expanded view; never invent an edge.
+      graphNodes = keys.map((key, i) => {
+        const a = i * Math.PI * (3 - Math.sqrt(5));
+        const radius = keys.length <= 2 ? 115 : 55 * Math.sqrt(i);
+        return { id:key, x:Math.cos(a)*radius, y:Math.sin(a)*radius, stage:vault[key].stage };
+      });
+      if (!graphExpanded) {
+        graphCamera.scale = Math.min(1, width / 430);
+        graphCamera.x = width / 2;
+        graphCamera.y = height / 2;
+      }
+      drawGraph(); renderGraphNavigation();
+    }
     function drawGraph() {
-      const canvas = document.getElementById('graphCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const w = canvas.width;
-      const h = canvas.height;
-
+      if (!graphCanvas.width) return;
+      const ctx = graphCanvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const w = graphCanvas.width / dpr, h = graphCanvas.height / dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
-
       const palette = getGraphPalette();
-      const lineColor = palette.border;
-      const activeLineColor = palette.accent;
-
-      // Draw connections
+      // Faint dotted axes give panning/zooming an unobtrusive spatial reference.
+      if (graphExpanded) {
+        const step = 40 * graphCamera.scale;
+        if (step >= 12) {
+          ctx.fillStyle = palette.border;
+          for (let x = ((graphCamera.x % step) + step) % step; x < w; x += step)
+            for (let y = ((graphCamera.y % step) + step) % step; y < h; y += step)
+              ctx.fillRect(x, y, 1.2, 1.2);
+        }
+      }
+      ctx.save();
+      ctx.translate(graphCamera.x, graphCamera.y);
+      ctx.scale(graphCamera.scale, graphCamera.scale);
+      const byId = new Map(graphNodes.map(n => [n.id, n]));
       Object.keys(vault).forEach(sId => {
-        const sNode = graphNodes.find(n => n.id === sId);
-        if (!sNode) return;
+        const source = byId.get(sId);
+        if (!source) return;
         getOutgoingNoteIds(vault[sId].content).forEach(tId => {
-          const tNode = graphNodes.find(n => n.id === tId);
-          if (tNode) {
-            const isConn = sId === activeNoteId || tId === activeNoteId;
-            ctx.beginPath();
-            ctx.moveTo(sNode.x, sNode.y);
-            ctx.lineTo(tNode.x, tNode.y);
-            ctx.strokeStyle = isConn ? activeLineColor : lineColor;
-            ctx.lineWidth = isConn ? 1.5 : 1;
-            ctx.stroke();
-          }
+          const target = byId.get(tId);
+          if (!target) return;
+          const connected = sId === activeNoteId || tId === activeNoteId;
+          ctx.beginPath(); ctx.moveTo(source.x, source.y); ctx.lineTo(target.x, target.y);
+          ctx.strokeStyle = connected ? palette.accent : palette.border;
+          ctx.lineWidth = (connected ? 2 : 1.3) / graphCamera.scale; ctx.stroke();
         });
       });
-
-      // Draw nodes
       graphNodes.forEach(n => {
-        const isCurrent = n.id === activeNoteId;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, isCurrent ? 7 * (window.devicePixelRatio || 1) : 4 * (window.devicePixelRatio || 1), 0, Math.PI * 2);
-        
-        if (isCurrent) {
-          ctx.fillStyle = palette.detail;
-        } else if (n.stage === 'evergreen') {
-          ctx.fillStyle = palette.accent;
-        } else {
-          ctx.fillStyle = palette.border;
-        }
-        ctx.fill();
-
-        // Label
-        ctx.font = `${Math.round(9 * (window.devicePixelRatio || 1))}px "JetBrains Mono"`;
-        ctx.fillStyle = palette.muted;
-        ctx.textAlign = 'center';
-        const label = vault[n.id].title.length > 12 ? vault[n.id].title.slice(0, 10) + '…' : vault[n.id].title;
-        ctx.fillText(label, n.x, n.y + 12 * (window.devicePixelRatio || 1));
+        const current = n.id === activeNoteId;
+        const radius = (current ? 9 : 6) / graphCamera.scale;
+        ctx.beginPath(); ctx.arc(n.x, n.y, radius, 0, Math.PI*2);
+        ctx.fillStyle = palette[n.stage] || palette.border; ctx.fill();
+        if (current) { ctx.strokeStyle = palette.accent; ctx.lineWidth = 2.8 / graphCamera.scale; ctx.stroke(); }
+        ctx.font = `${(graphExpanded ? 12 : 10) / graphCamera.scale}px "JetBrains Mono", monospace`;
+        ctx.fillStyle = current ? palette.accent : palette.muted;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        const title = vault[n.id].title;
+        const maxChars = graphExpanded ? 55 : 20;
+        ctx.fillText(title.length > maxChars ? title.slice(0,maxChars-1)+'…' : title, n.x, n.y+15/graphCamera.scale);
       });
+      ctx.restore();
     }
-
+    function graphRelativePoint(e) { const r=graphCanvas.getBoundingClientRect(); return {x:e.clientX-r.left,y:e.clientY-r.top}; }
+    graphCanvas.addEventListener('wheel', e => {
+      if (!graphExpanded) return;
+      e.preventDefault();
+      const p=graphRelativePoint(e);
+      zoomGardenGraph(Math.exp(-e.deltaY*0.0015),p.x,p.y);
+    }, {passive:false});
+    graphCanvas.addEventListener('pointerdown', e => {
+      if (!graphExpanded) return;
+      e.preventDefault(); graphCanvas.setPointerCapture(e.pointerId);
+      graphPointers.set(e.pointerId,graphRelativePoint(e));
+      graphPointerMoved=false;
+      if(graphPointers.size===2){const [a,b]=[...graphPointers.values()];graphGesture={distance:Math.hypot(a.x-b.x,a.y-b.y),scale:graphCamera.scale,x:graphCamera.x,y:graphCamera.y,mid:{x:(a.x+b.x)/2,y:(a.y+b.y)/2}};}
+    });
+    graphCanvas.addEventListener('pointermove',e=>{
+      if(!graphExpanded||!graphPointers.has(e.pointerId))return;
+      const old=graphPointers.get(e.pointerId),p=graphRelativePoint(e);
+      graphPointers.set(e.pointerId,p);
+      if(Math.hypot(p.x-old.x,p.y-old.y)>1)graphPointerMoved=true;
+      if(graphPointers.size===2){
+        const [a,b]=[...graphPointers.values()],mid={x:(a.x+b.x)/2,y:(a.y+b.y)/2},distance=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+        if(!graphGesture)return;
+        const scale=Math.min(graphFitScale*4,Math.max(graphFitScale*.5,graphGesture.scale*distance/Math.max(1,graphGesture.distance)));
+        const worldX=(graphGesture.mid.x-graphGesture.x)/graphGesture.scale,worldY=(graphGesture.mid.y-graphGesture.y)/graphGesture.scale;
+        graphCamera.scale=scale;graphCamera.x=mid.x-worldX*scale;graphCamera.y=mid.y-worldY*scale;
+        graphPointerMoved=true;updateGraphZoomLabel();drawGraph();
+      }else if(graphPointers.size===1){graphCamera.x+=p.x-old.x;graphCamera.y+=p.y-old.y;drawGraph();}
+    });
+    function endGraphPointer(e){
+      if(!graphPointers.has(e.pointerId))return;
+      const p=graphRelativePoint(e),wasSingle=graphPointers.size===1;
+      graphPointers.delete(e.pointerId);
+      if(graphPointers.size<2)graphGesture=null;
+      if(!wasSingle||graphPointerMoved||e.type==='pointercancel')return;
+      const world=graphToWorld(p.x,p.y);
+      const node=graphNodes.find(n=>Math.hypot(n.x-world.x,n.y-world.y)<15/graphCamera.scale);
+      if(node){loadGardenNote(node.id);drawGraph();}
+    }
+    graphCanvas.addEventListener('pointerup',endGraphPointer);
+    graphCanvas.addEventListener('pointercancel',endGraphPointer);
+    graphCanvas.addEventListener('click',e=>{
+      if(graphExpanded)return;const p=graphRelativePoint(e),world=graphToWorld(p.x,p.y);
+      const n=graphNodes.find(n=>Math.hypot(n.x-world.x,n.y-world.y)<16/graphCamera.scale);
+      if(n)loadGardenNote(n.id);
+    });
     // 9. MODALS
     function openSearchModal() {
       document.getElementById('searchModal').classList.add('open');
@@ -1797,6 +2068,21 @@
         initGraph();
       }
     });
+    // Keep canvas drawing dimensions synchronised with responsive graph column.
+    if (typeof ResizeObserver !== 'undefined') {
+      const graphContainer = document.getElementById('graphCanvas');
+      if (graphContainer) {
+        let graphWidth = 0;
+        new ResizeObserver(entries => {
+          const width = Math.round(entries[0]?.contentRect.width || 0);
+          if (width > 0 && width !== graphWidth) {
+            graphWidth = width;
+            if (document.getElementById('view-garden')?.classList.contains('active')) initGraph();
+          }
+        }).observe(graphContainer);
+      }
+    }
+
 
     // Boot
     window.onload = async function() {
